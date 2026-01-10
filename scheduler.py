@@ -69,6 +69,10 @@ class DailyScheduler:
             successful = [r for r in results if r['success']]
             failed = [r for r in results if not r['success']]
             
+            # Check for new users
+            logger.info("Checking for new users...")
+            new_users = self.sender.discover_new_users_sync()
+            
             # Build report message in German
             report = f"📊 *Soul Aligned Oils - Versandbericht*\n\n"
             report += f"🕐 Zeit: {send_time.strftime('%d.%m.%Y um %H:%M Uhr')}\n"
@@ -95,6 +99,29 @@ class DailyScheduler:
                     report += f"    Fehler: {error_msg}\n"
             else:
                 report += f"✅ *Keine Fehler!*\n"
+            
+            # New users section
+            if new_users:
+                report += f"\n"
+                report += f"🆕 *Neue Benutzer gefunden: {len(new_users)}*\n"
+                report += f"(Diese Benutzer haben den Bot kontaktiert, sind aber noch nicht konfiguriert)\n\n"
+                
+                new_ids = []
+                for i, user in enumerate(new_users, 1):
+                    name = f"{user['first_name']} {user['last_name'] or ''}".strip()
+                    username = user.get('username', 'Nicht gesetzt')
+                    report += f"  {i}. *{name}*\n"
+                    report += f"     Chat ID: `{user['chat_id']}`\n"
+                    report += f"     Username: @{username}\n"
+                    report += f"     Typ: {user['type']}\n"
+                    new_ids.append(user['chat_id'])
+                
+                report += f"\n📋 *Zum Hinzufügen auf Railway:*\n"
+                report += f"`TELEGRAM_CHAT_IDS={','.join(Config.TELEGRAM_CHAT_IDS + new_ids)}`\n"
+                report += f"`CHAT_LANGUAGES={'de,' * (len(Config.TELEGRAM_CHAT_IDS) + len(new_ids))}`\n"
+                report += f"(Sprachen anpassen: de=Deutsch, en=Englisch)\n"
+            else:
+                report += f"\n✅ *Keine neuen Benutzer*\n"
             
             report += f"\n🌸 Soul Aligned Oils Bot"
             

@@ -221,6 +221,62 @@ class TelegramSender:
         
         return loop.run_until_complete(self.test_connection())
     
+    async def discover_new_users(self) -> List[Dict]:
+        """Check for new users who have messaged the bot but aren't in config.
+        
+        Returns:
+            List of dicts with user info for users not in current chat_ids
+        """
+        try:
+            logger.info("Checking for new users who have messaged the bot...")
+            
+            updates = await self.bot.get_updates()
+            
+            unique_users = {}
+            for update in updates:
+                if update.message and update.message.from_user:
+                    user = update.message.from_user
+                    chat_id = str(update.message.chat_id)
+                    
+                    if chat_id not in unique_users:
+                        unique_users[chat_id] = {
+                            "chat_id": chat_id,
+                            "first_name": user.first_name,
+                            "last_name": user.last_name,
+                            "username": user.username,
+                            "type": update.message.chat.type
+                        }
+            
+            # Filter out users already in config
+            new_users = [
+                user_info for chat_id, user_info in unique_users.items()
+                if chat_id not in self.chat_ids
+            ]
+            
+            if new_users:
+                logger.info(f"Found {len(new_users)} new user(s) not in config")
+            else:
+                logger.info("No new users found")
+            
+            return new_users
+            
+        except Exception as e:
+            logger.error(f"Error discovering new users: {e}", exc_info=True)
+            return []
+    
+    def discover_new_users_sync(self) -> List[Dict]:
+        """Synchronous wrapper for discovering new users."""
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.discover_new_users())
+    
     def send_message_sync_to_admin(self, chat_id: str, message: str) -> Dict:
         """Synchronous wrapper for sending a single message to admin."""
         try:
