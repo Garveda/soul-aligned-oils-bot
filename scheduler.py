@@ -41,11 +41,59 @@ class DailyScheduler:
             total = len(results)
             logger.info(f"Daily affirmation job completed: {successful}/{total} sent successfully")
             
+            # Send admin report to ID 5700477215
+            self._send_admin_report(results, current_time)
+            
             if successful < total:
                 logger.warning("Some messages failed to send. Check logs for details.")
             
         except Exception as e:
             logger.error(f"Error in daily affirmation job: {e}", exc_info=True)
+    
+    def _send_admin_report(self, results, send_time):
+        """Send delivery report to admin (ID 5700477215)."""
+        try:
+            admin_id = "5700477215"
+            
+            successful = [r for r in results if r['success']]
+            failed = [r for r in results if not r['success']]
+            
+            # Build report message in German
+            report = f"📊 *Soul Aligned Oils - Versandbericht*\n\n"
+            report += f"🕐 Zeit: {send_time.strftime('%d.%m.%Y um %H:%M Uhr')}\n"
+            report += f"📨 Gesamt: {len(results)} Nachrichten\n\n"
+            
+            # Successful deliveries
+            report += f"✅ *Erfolgreich: {len(successful)}*\n"
+            if successful:
+                for r in successful:
+                    language = r.get('language', 'de')
+                    report += f"  • {r['chat_id']} ({language})\n"
+            else:
+                report += "  Keine erfolgreichen Zusendungen\n"
+            
+            report += f"\n"
+            
+            # Failed deliveries
+            if failed:
+                report += f"❌ *Fehlgeschlagen: {len(failed)}*\n"
+                for r in failed:
+                    error_msg = r.get('error', 'Unbekannter Fehler')
+                    language = r.get('language', 'de')
+                    report += f"  • {r['chat_id']} ({language})\n"
+                    report += f"    Fehler: {error_msg}\n"
+            else:
+                report += f"✅ *Keine Fehler!*\n"
+            
+            report += f"\n🌸 Soul Aligned Oils Bot"
+            
+            # Send report to admin
+            logger.info(f"Sending admin report to {admin_id}")
+            self.sender.send_message_sync_to_admin(admin_id, report)
+            logger.info("Admin report sent successfully")
+            
+        except Exception as e:
+            logger.error(f"Failed to send admin report: {e}", exc_info=True)
     
     def schedule_daily_job(self):
         """Set up the daily scheduled job."""

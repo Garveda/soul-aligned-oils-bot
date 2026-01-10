@@ -197,4 +197,17 @@ class TelegramSender:
             asyncio.set_event_loop(loop)
         
         return loop.run_until_complete(self.test_connection())
+    
+    def send_message_sync_to_admin(self, chat_id: str, message: str) -> Dict:
+        """Synchronous wrapper for sending a single message to admin."""
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.send_message_to_chat(chat_id, message))
 
