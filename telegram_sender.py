@@ -83,16 +83,30 @@ class TelegramSender:
         
         return results
     
-    async def send_personalized_messages(self, generator) -> List[Dict]:
-        """Send personalized messages to each recipient in their preferred language."""
+    async def send_personalized_messages(self, generator, test_mode: bool = False) -> List[Dict]:
+        """Send personalized messages to each recipient in their preferred language.
+        
+        Args:
+            generator: AffirmationGenerator instance
+            test_mode: If True, only sends to admin ID 5700477215
+        """
         if not self.chat_ids:
             logger.error("No chat IDs configured for sending")
             return []
         
-        logger.info(f"Sending personalized messages to {len(self.chat_ids)} recipients")
+        # In test mode, only send to admin ID
+        if test_mode:
+            admin_id = "5700477215"
+            target_ids = [admin_id] if admin_id in self.chat_ids else [self.chat_ids[0]]
+            logger.warning(f"🧪 TEST MODE: Only sending to admin ID {target_ids[0]}")
+            logger.info(f"   (Other {len(self.chat_ids) - 1} user(s) will NOT receive test messages)")
+        else:
+            target_ids = self.chat_ids
+        
+        logger.info(f"Sending personalized messages to {len(target_ids)} recipients")
         
         results = []
-        for i, chat_id in enumerate(self.chat_ids):
+        for i, chat_id in enumerate(target_ids):
             try:
                 language = Config.get_language_for_chat(chat_id)
                 logger.info(f"Generating message for {chat_id} in {language}")
@@ -112,7 +126,7 @@ class TelegramSender:
                     result['language'] = language
                     results.append(result)
                     
-                    if i < len(self.chat_ids) - 1:
+                    if i < len(target_ids) - 1:
                         await asyncio.sleep(0.5)
                 
             except Exception as e:
@@ -121,7 +135,11 @@ class TelegramSender:
         
         successful = sum(1 for r in results if r['success'])
         failed = len(results) - successful
-        logger.info(f"Personalized message delivery: {successful} successful, {failed} failed")
+        
+        if test_mode:
+            logger.info(f"🧪 TEST delivery: {successful} successful, {failed} failed (admin only)")
+        else:
+            logger.info(f"Personalized message delivery: {successful} successful, {failed} failed")
         
         return results
     
@@ -138,8 +156,13 @@ class TelegramSender:
         
         return loop.run_until_complete(self.send_message_to_all(message))
     
-    def send_personalized_messages_sync(self, generator) -> List[Dict]:
-        """Synchronous wrapper for sending personalized messages."""
+    def send_personalized_messages_sync(self, generator, test_mode: bool = False) -> List[Dict]:
+        """Synchronous wrapper for sending personalized messages.
+        
+        Args:
+            generator: AffirmationGenerator instance
+            test_mode: If True, only sends to admin ID 5700477215
+        """
         try:
             loop = asyncio.get_event_loop()
             if loop.is_closed():
@@ -149,7 +172,7 @@ class TelegramSender:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
         
-        return loop.run_until_complete(self.send_personalized_messages(generator))
+        return loop.run_until_complete(self.send_personalized_messages(generator, test_mode))
     
     async def test_connection(self) -> bool:
         """Test the bot connection and validate chat IDs."""

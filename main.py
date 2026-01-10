@@ -63,11 +63,12 @@ def print_menu():
     print("Main Menu")
     print("="*60)
     print("\n1. Start Scheduler (Run continuously)")
-    print("2. Send Now (One-time manual send)")
-    print("3. Test Configuration")
-    print("4. Test Telegram Connection")
-    print("5. Generate Test Message (no send)")
-    print("6. Exit")
+    print("2. Send Now (ALL users - Production)")
+    print("3. 🧪 Test Send (Admin ONLY - 5700477215)")
+    print("4. Test Configuration")
+    print("5. Test Telegram Connection")
+    print("6. Generate Test Message (no send)")
+    print("7. Exit")
     print()
 
 
@@ -160,11 +161,11 @@ def generate_test_message():
 
 
 def send_now():
-    """Send affirmation immediately."""
+    """Send affirmation immediately to ALL users."""
     logger = logging.getLogger(__name__)
     
     print("\n" + "="*60)
-    print("Sending Affirmation Now")
+    print("Sending Affirmation Now (ALL USERS)")
     print("="*60 + "\n")
     
     if not Config.validate():
@@ -181,6 +182,30 @@ def send_now():
     except Exception as e:
         print(f"\n✗ Error: {e}")
         logger.error(f"Error during manual send: {e}", exc_info=True)
+
+
+def send_test():
+    """Send test affirmation ONLY to admin (ID 5700477215)."""
+    logger = logging.getLogger(__name__)
+    
+    print("\n" + "="*60)
+    print("🧪 TEST MODE: Sending to Admin Only (5700477215)")
+    print("="*60 + "\n")
+    
+    if not Config.validate():
+        print("✗ Configuration validation failed. Please check your settings.")
+        return
+    
+    try:
+        scheduler = DailyScheduler()
+        scheduler.run_immediately(test_mode=True)
+        
+        print("\n✓ Test message sent to admin only!")
+        logger.info("Test send completed successfully (admin only)")
+        
+    except Exception as e:
+        print(f"\n✗ Error: {e}")
+        logger.error(f"Error during test send: {e}", exc_info=True)
 
 
 def start_scheduler():
@@ -240,7 +265,7 @@ def main():
     while True:
         try:
             print_menu()
-            choice = input("Select option (1-6): ").strip()
+            choice = input("Select option (1-7): ").strip()
             
             if choice == "1":
                 start_scheduler()
@@ -248,20 +273,23 @@ def main():
                 send_now()
                 input("\nPress Enter to continue...")
             elif choice == "3":
-                test_configuration()
+                send_test()
                 input("\nPress Enter to continue...")
             elif choice == "4":
-                test_telegram_connection()
+                test_configuration()
                 input("\nPress Enter to continue...")
             elif choice == "5":
-                generate_test_message()
+                test_telegram_connection()
                 input("\nPress Enter to continue...")
             elif choice == "6":
+                generate_test_message()
+                input("\nPress Enter to continue...")
+            elif choice == "7":
                 print("\nGoodbye! May your day be filled with light. 💜\n")
                 logger.info("Application exited by user")
                 break
             else:
-                print("\n✗ Invalid option. Please select 1-6.")
+                print("\n✗ Invalid option. Please select 1-7.")
                 
         except KeyboardInterrupt:
             print("\n\nExiting...")

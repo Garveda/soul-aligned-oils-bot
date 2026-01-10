@@ -28,21 +28,32 @@ class DailyScheduler:
         self.timezone = pytz.timezone(Config.TIMEZONE)
         logger.info(f"Scheduler initialized with timezone: {Config.TIMEZONE}")
     
-    def send_daily_affirmation(self):
-        """Generate and send the daily affirmation."""
+    def send_daily_affirmation(self, test_mode: bool = False):
+        """Generate and send the daily affirmation.
+        
+        Args:
+            test_mode: If True, only sends to admin ID 5700477215
+        """
         try:
-            logger.info("Starting daily affirmation job")
+            if test_mode:
+                logger.info("🧪 Starting TEST MODE affirmation job (admin only)")
+            else:
+                logger.info("Starting daily affirmation job")
+            
             current_time = datetime.now(self.timezone)
             logger.info(f"Generating affirmations for {current_time.strftime('%A, %B %d, %Y at %H:%M %Z')}")
             
-            results = self.sender.send_personalized_messages_sync(self.generator)
+            results = self.sender.send_personalized_messages_sync(self.generator, test_mode)
             
             successful = sum(1 for r in results if r['success'])
             total = len(results)
-            logger.info(f"Daily affirmation job completed: {successful}/{total} sent successfully")
             
-            # Send admin report to ID 5700477215
-            self._send_admin_report(results, current_time)
+            if test_mode:
+                logger.info(f"🧪 TEST job completed: {successful}/{total} sent to admin")
+            else:
+                logger.info(f"Daily affirmation job completed: {successful}/{total} sent successfully")
+                # Only send admin report in production mode, not test mode
+                self._send_admin_report(results, current_time)
             
             if successful < total:
                 logger.warning("Some messages failed to send. Check logs for details.")
@@ -113,10 +124,17 @@ class DailyScheduler:
         
         logger.info(f"Daily job configured successfully")
     
-    def run_immediately(self):
-        """Run the daily affirmation job immediately (for testing)."""
-        logger.info("Manual execution triggered")
-        self.send_daily_affirmation()
+    def run_immediately(self, test_mode: bool = False):
+        """Run the daily affirmation job immediately.
+        
+        Args:
+            test_mode: If True, only sends to admin ID 5700477215
+        """
+        if test_mode:
+            logger.info("🧪 Manual TEST execution triggered (admin only)")
+        else:
+            logger.info("Manual execution triggered")
+        self.send_daily_affirmation(test_mode)
     
     def start(self):
         """Start the scheduler."""
