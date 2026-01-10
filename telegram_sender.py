@@ -127,11 +127,29 @@ class TelegramSender:
     
     def send_message_sync(self, message: str) -> List[Dict]:
         """Synchronous wrapper for sending messages."""
-        return asyncio.run(self.send_message_to_all(message))
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.send_message_to_all(message))
     
     def send_personalized_messages_sync(self, generator) -> List[Dict]:
         """Synchronous wrapper for sending personalized messages."""
-        return asyncio.run(self.send_personalized_messages(generator))
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.send_personalized_messages(generator))
     
     async def test_connection(self) -> bool:
         """Test the bot connection and validate chat IDs."""
@@ -169,5 +187,14 @@ class TelegramSender:
     
     def test_connection_sync(self) -> bool:
         """Synchronous wrapper for testing connection."""
-        return asyncio.run(self.test_connection())
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.test_connection())
 
