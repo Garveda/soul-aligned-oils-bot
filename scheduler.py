@@ -39,6 +39,9 @@ class DailyScheduler:
         # Populate lunar calendar for next 90 days
         self._populate_lunar_calendar()
         
+        # Populate oils database on first run (if empty)
+        self._populate_oils_database_if_needed()
+        
         logger.info(f"Scheduler initialized with timezone: {Config.TIMEZONE}")
     
     def _populate_lunar_calendar(self):
@@ -50,6 +53,21 @@ class DailyScheduler:
             logger.info(f"Lunar calendar populated for {start_date} to {end_date}")
         except Exception as e:
             logger.error(f"Error populating lunar calendar: {e}")
+    
+    def _populate_oils_database_if_needed(self):
+        """Populate oils database on first run if empty."""
+        try:
+            # Check if database has any oils
+            test_oil = self.db.get_oil("Lavender")
+            if not test_oil:
+                logger.info("Oils database is empty, populating from JSON...")
+                from populate_oils_database import populate_oils
+                count = populate_oils()
+                logger.info(f"✅ Populated {count} oils in database")
+            else:
+                logger.info("Oils database already populated")
+        except Exception as e:
+            logger.warning(f"Could not populate oils database: {e} (Info command may not work)")
     
     def send_daily_affirmation(self, test_mode: bool = False):
         """Generate and send the daily affirmation.
