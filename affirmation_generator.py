@@ -19,15 +19,50 @@ logger = logging.getLogger(__name__)
 class AffirmationGenerator:
     """Generates AI-powered affirmations with essential oil recommendations."""
     
-    # Day energy characteristics
+    # Weekday Planetary Energy Characteristics
     DAY_ENERGY = {
-        'Monday': 'New beginnings, fresh starts, intention setting, new chapter',
-        'Tuesday': 'Action, momentum, courage, forward movement, determination',
-        'Wednesday': 'Balance, reflection, midpoint recalibration, harmony, wisdom',
-        'Thursday': 'Expansion, growth, gratitude, abundance, manifestation',
-        'Friday': 'Release, completion, celebration, freedom, joy',
-        'Saturday': 'Rest, self-care, rejuvenation, play, personal nourishment',
-        'Sunday': 'Reflection, spiritual connection, preparation, inner peace, renewal'
+        'Monday': {
+            'planet': 'Moon',
+            'theme': 'Emotions, deep feeling, intuition, premonition',
+            'focus': 'Connect with yourself, emotions, inner intuition',
+            'activities': 'Journaling, mindfulness exercises, feeling'
+        },
+        'Tuesday': {
+            'planet': 'Mars',
+            'theme': 'Action, drive, courage, bringing fire back',
+            'focus': 'Acting, taking initiative, moving forward with clarity',
+            'activities': 'Making decisions, speaking clearly, freeing energy, taking action on projects'
+        },
+        'Wednesday': {
+            'planet': 'Mercury',
+            'theme': 'Communication, friendship, siblings',
+            'focus': 'Lighter energy, sorting thoughts, exchanging ideas',
+            'activities': 'Workshops, Q&As, content creation, reflecting on decisions, clarifying conversations'
+        },
+        'Thursday': {
+            'planet': 'Jupiter',
+            'theme': 'Growth, expansion, vision',
+            'focus': 'Looking beyond the horizon, expansion through trust, manifestation',
+            'activities': 'Vision boarding, investing in yourself, financial conversations'
+        },
+        'Friday': {
+            'planet': 'Venus',
+            'theme': 'Letting go well, self-love, love, meaning, relaxation',
+            'focus': 'Enjoyment, social connections, opening your heart',
+            'activities': 'Dates, enjoying time with others and yourself, speaking beautifully about yourself'
+        },
+        'Saturday': {
+            'planet': 'Saturn',
+            'theme': 'Structure, responsibility, order, setting boundaries',
+            'focus': 'Maturity of the week, organizing, cleaning out',
+            'activities': 'Sorting, decluttering, clarifying'
+        },
+        'Sunday': {
+            'planet': 'Sun',
+            'theme': 'Active day, yang energy, feeling into what you liked',
+            'focus': 'Returning to yourself, noticing what worked',
+            'activities': 'Doing what you enjoy'
+        }
     }
     
     # Month themes and focus areas
@@ -127,7 +162,12 @@ class AffirmationGenerator:
         day_name = now.strftime('%A')
         month_name = now.strftime('%B')
         date_string = now.strftime('%B %d, %Y')
-        day_energy = self.DAY_ENERGY.get(day_name, 'Balance and presence')
+        day_energy = self.DAY_ENERGY.get(day_name, {
+            'planet': 'Balance',
+            'theme': 'Balance and presence',
+            'focus': 'Centering yourself',
+            'activities': 'Mindfulness'
+        })
         month_info = self.MONTH_THEMES.get(month_name, {
             'theme': 'Balance & Presence',
             'focus': 'mindfulness, presence, balance',
@@ -145,64 +185,53 @@ class AffirmationGenerator:
         else:
             return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list)
     
-    def _create_english_prompt(self, day_name: str, month_name: str, date_string: str, day_energy: str, month_info: dict, oil_list: str) -> str:
-        """Create English version of the prompt."""
-        return f"""You are a holistic wellness guide specializing in essential oils and positive mindset coaching.
+    def _create_english_prompt(self, day_name: str, month_name: str, date_string: str, day_energy: dict, month_info: dict, oil_list: str) -> str:
+        """Create English version of the prompt - SHORT and PRACTICAL."""
+        return f"""You are a holistic wellness guide. Create a SHORT, PRACTICAL daily message.
 
-Today is {day_name}, {date_string}.
+TODAY: {day_name} ({day_energy['planet']} Energy) - {date_string}
+Weekday Theme: {day_energy['theme']}
+Weekday Focus: {day_energy['focus']}
 
-MONTHLY THEME - {month_name}: {month_info['theme']}
-Monthly Focus: {month_info['focus']}
-Monthly Energy: {month_info['energy']}
+MONTH: {month_name} - {month_info['theme']}
 
-DAILY ENERGY - {day_name}:
-{day_energy}
+CRITICAL REQUIREMENTS:
+1. KEEP IT SHORT - Maximum 3-4 brief paragraphs
+2. PRACTICAL - Must fit into daily life
+3. TWO OILS - Primary + Alternative recommendation
+4. SIMPLE RITUAL - 1-2 sentences maximum
 
-IMPORTANT: Create an affirmation that weaves together BOTH the monthly theme of {month_name} ({month_info['theme']}) AND the daily energy of {day_name}. The affirmation should feel aligned with where we are in the year and what this specific day of the week brings.
+STRUCTURE (follow EXACTLY):
 
-Generate a daily message with three components:
+🌙 Guten Morgen
 
-1. AFFIRMATION: Create a powerful, personal affirmation (2-3 sentences) that INTEGRATES:
-   - The monthly theme of {month_name} ({month_info['theme']})
-   - The daily energy of {day_name} ({day_energy})
-   Make it feel intimate, supportive, and emotionally resonant. Use "I" statements to make it personal.
+[2-3 sentence affirmation connected to {day_name}'s {day_energy['planet']} energy theme: {day_energy['theme']}]
 
-2. OIL RECOMMENDATION: Select ONE doTerra essential oil from the provided list that energetically supports BOTH the monthly theme AND today's daily intention. Explain briefly (1-2 sentences) why this oil is perfect for this specific {day_name} in {month_name}.
+🌿 Deine Öl-Begleiter für heute:
+- [Primary Oil Name]: [ONE sentence benefit for today's energy]
+- Alternativ: [Alternative Oil Name]: [ONE sentence benefit]
 
-3. USAGE RITUAL: Provide a specific, mindful application method that honors this moment in time. Make it feel like a sacred ritual aligned with the season and day.
+✨ Dein Ritual:
+[1-2 sentences with simple, actionable instruction]
 
-Format the response as a cohesive, flowing message that feels like a caring friend reaching out. Use the following structure:
-
-🌅 Good Morning, Beautiful Soul
-
-[Opening sentence that mentions it's {day_name} in {month_name} and weaves together the monthly and daily themes]
-
-"[Personal affirmation in first person that combines monthly + daily energy, 2-3 sentences]"
-
-✨ Your Oil Companion: [Oil Name]
-[Brief explanation of why this oil matches BOTH the {month_name} theme and {day_name} energy]
-
-🌿 Your Ritual:
-[Specific application instructions that feel mindful and intentional]
-
-With love and light,
+Mit Liebe,
 Soul Aligned Oils 💜
 
-Available oils:
+AVAILABLE OILS:
 {oil_list}
 
-Important: 
-- Seamlessly blend the monthly theme with the daily energy
-- Keep the tone warm, personal, and uplifting
-- Make the affirmation feel powerful and believable
-- Ensure the oil selection genuinely matches BOTH themes
-- Make the ritual instructions specific and actionable
-- Reference the time of year naturally in your message
-- Use emojis sparingly but meaningfully (only the ones shown in the structure)
+IMPORTANT:
+- Maximum 3-4 short paragraphs total
+- Affirmation: 2-3 sentences, aligned with {day_name}'s {day_energy['planet']} energy
+- TWO oils that match {day_name}'s theme: {day_energy['theme']}
+- Oil benefits: ONE sentence each
+- Ritual: 1-2 sentences, simple and doable
+- Use emojis ONLY as shown in structure
+- Keep tone warm but CONCISE
 """
     
-    def _create_german_prompt(self, day_name: str, month_name: str, date_string: str, day_energy: str, month_info: dict, oil_list: str) -> str:
-        """Create German version of the prompt."""
+    def _create_german_prompt(self, day_name: str, month_name: str, date_string: str, day_energy: dict, month_info: dict, oil_list: str) -> str:
+        """Create German version of the prompt - SHORT and PRACTICAL."""
         day_names_de = {
             'Monday': 'Montag', 'Tuesday': 'Dienstag', 'Wednesday': 'Mittwoch',
             'Thursday': 'Donnerstag', 'Friday': 'Freitag', 'Saturday': 'Samstag', 'Sunday': 'Sonntag'
@@ -212,63 +241,60 @@ Important:
             'May': 'Mai', 'June': 'Juni', 'July': 'Juli', 'August': 'August',
             'September': 'September', 'October': 'Oktober', 'November': 'November', 'December': 'Dezember'
         }
+        planet_names_de = {
+            'Moon': 'Mond', 'Mars': 'Mars', 'Mercury': 'Merkur', 'Jupiter': 'Jupiter',
+            'Venus': 'Venus', 'Saturn': 'Saturn', 'Sun': 'Sonne'
+        }
+        
         day_name_de = day_names_de.get(day_name, day_name)
         month_name_de = month_names_de.get(month_name, month_name)
+        planet_de = planet_names_de.get(day_energy['planet'], day_energy['planet'])
         
-        return f"""WICHTIG: Antworte AUSSCHLIESSLICH auf DEUTSCH! Die GESAMTE Nachricht muss auf Deutsch sein!
+        return f"""WICHTIG: Antworte AUSSCHLIESSLICH auf DEUTSCH! KURZ und PRAKTISCH!
 
-Du bist ein ganzheitlicher Wellness-Guide, spezialisiert auf ätherische Öle und positive Lebenseinstellung.
+Du bist ein ganzheitlicher Wellness-Guide. Erstelle eine KURZE, PRAKTISCHE Nachricht auf DEUTSCH.
 
-Heute ist {day_name_de}, {date_string}.
+HEUTE: {day_name_de} ({planet_de}-Energie) - {date_string}
+Wochentag-Thema: {day_energy['theme']}
+Wochentag-Fokus: {day_energy['focus']}
 
-MONATS-THEMA - {month_name_de}: {month_info['theme']}
-Monatlicher Fokus: {month_info['focus']}
-Monatliche Energie: {month_info['energy']}
+MONAT: {month_name_de} - {month_info['theme']}
 
-TAGES-ENERGIE - {day_name_de}:
-{day_energy}
+KRITISCHE ANFORDERUNGEN:
+1. KURZ HALTEN - Maximal 3-4 kurze Absätze
+2. PRAKTISCH - Muss in den Alltag passen
+3. ZWEI ÖLE - Haupt + Alternative Empfehlung
+4. EINFACHES RITUAL - Maximal 1-2 Sätze
 
-WICHTIG: Erstelle eine Affirmation, die SOWOHL das Monatsthema des {month_name_de} ({month_info['theme']}) ALS AUCH die Tagesenergie des {day_name_de} miteinander verwebt. Die Affirmation soll sich stimmig anfühlen mit der Jahreszeit und diesem spezifischen Wochentag.
+STRUKTUR (EXAKT befolgen, komplett auf DEUTSCH):
 
-Erstelle eine tägliche Nachricht VOLLSTÄNDIG AUF DEUTSCH mit drei Komponenten:
+🌙 Guten Morgen
 
-1. AFFIRMATION: Erstelle eine kraftvolle, persönliche Affirmation (2-3 Sätze) auf DEUTSCH, die INTEGRIERT:
-   - Das Monatsthema des {month_name_de} ({month_info['theme']})
-   - Die Tagesenergie des {day_name_de} ({day_energy})
-   Sie soll intim, unterstützend und emotional berührend sein. Verwende "Ich"-Aussagen.
+[2-3 Sätze Affirmation verbunden mit der {day_name_de}-{planet_de}-Energie: {day_energy['theme']}]
 
-2. ÖL-EMPFEHLUNG: Wähle EIN doTerra ätherisches Öl aus der Liste, das energetisch SOWOHL das Monatsthema ALS AUCH die heutige Tages-Intention unterstützt. Erkläre auf DEUTSCH kurz (1-2 Sätze), warum dieses Öl perfekt für diesen {day_name_de} im {month_name_de} ist.
+🌿 Deine Öl-Begleiter für heute:
+- [Haupt-Öl Name]: [EIN Satz Nutzen für die heutige Energie]
+- Alternativ: [Alternatives Öl Name]: [EIN Satz Nutzen]
 
-3. ANWENDUNGS-RITUAL: Gebe auf DEUTSCH eine spezifische, achtsame Anwendungsmethode, die diesen Moment im Jahr ehrt. Lass es sich wie ein heiliges Ritual anfühlen, das zur Jahreszeit und zum Wochentag passt.
+✨ Dein Ritual:
+[1-2 Sätze mit einfacher, umsetzbarer Anleitung]
 
-Verwende EXAKT diese Struktur (alles auf Deutsch):
-
-🌅 Guten Morgen, Wunderschöne Seele
-
-[Einleitungssatz auf Deutsch, der erwähnt dass es {day_name_de} im {month_name_de} ist und die Monats- und Tages-Themen miteinander verwebt]
-
-"[Persönliche Affirmation auf Deutsch in Ich-Form, die monatliche + tägliche Energie kombiniert, 2-3 Sätze]"
-
-✨ Dein Öl-Begleiter: [Öl-Name]
-[Kurze Erklärung auf Deutsch, warum dieses Öl SOWOHL zum {month_name_de}-Thema ALS AUCH zur {day_name_de}-Energie passt]
-
-🌿 Dein Ritual:
-[Spezifische Anwendungsanweisungen auf Deutsch]
-
-Mit Liebe und Licht,
+Mit Liebe,
 Soul Aligned Oils 💜
 
-Verfügbare Öle:
+VERFÜGBARE ÖLE:
 {oil_list}
 
-KRITISCH WICHTIG: 
-- Verwebe nahtlos das Monatsthema mit der Tagesenergie
-- Die GESAMTE Nachricht MUSS auf Deutsch sein
-- KEINE englischen Wörter außer "Soul Aligned Oils" in der Signatur
-- Halte den Ton warm, persönlich und erhebend
-- Verwende natürliches, fließendes Deutsch
-- Die Affirmation in Ich-Form auf Deutsch
-- Beziehe die Jahreszeit natürlich in deine Nachricht ein
+WICHTIG:
+- Maximal 3-4 kurze Absätze insgesamt
+- Affirmation: 2-3 Sätze, abgestimmt auf {day_name_de}s {planet_de}-Energie
+- ZWEI Öle die zum {day_name_de}-Thema passen: {day_energy['theme']}
+- Öl-Nutzen: JE EIN Satz
+- Ritual: 1-2 Sätze, einfach und machbar
+- Emojis NUR wie in der Struktur gezeigt
+- Ton warm aber PRÄGNANT
+- Die GESAMTE Nachricht auf DEUTSCH
+- KEINE englischen Wörter außer "Soul Aligned Oils"
 """
     
     def generate_daily_message(self, language: str = 'en') -> Optional[str]:
@@ -279,9 +305,9 @@ KRITISCH WICHTIG:
             
             # Customize system message based on language
             if language == 'de':
-                system_content = "Du bist ein mitfühlender Wellness-Guide, der bedeutungsvolle tägliche Affirmationen erstellt, die mit ätherischen Ölempfehlungen kombiniert werden. WICHTIG: Antworte IMMER auf DEUTSCH. Schreibe die GESAMTE Nachricht auf Deutsch."
+                system_content = "Du bist ein mitfühlender Wellness-Guide, der KURZE, PRAKTISCHE tägliche Affirmationen erstellt. WICHTIG: Antworte IMMER auf DEUTSCH. Halte die Nachricht KURZ und PRÄGNANT (maximal 3-4 Absätze). Schreibe die GESAMTE Nachricht auf Deutsch."
             else:
-                system_content = "You are a compassionate wellness guide who creates meaningful daily affirmations paired with essential oil recommendations."
+                system_content = "You are a compassionate wellness guide who creates SHORT, PRACTICAL daily affirmations. Keep messages BRIEF and CONCISE (maximum 3-4 paragraphs)."
             
             response = self.client.chat.completions.create(
                 model=Config.OPENAI_MODEL,
@@ -290,7 +316,7 @@ KRITISCH WICHTIG:
                     {"role": "user", "content": prompt}
                 ],
                 temperature=0.8,
-                max_tokens=800
+                max_tokens=600
             )
             
             message = response.choices[0].message.content.strip()
