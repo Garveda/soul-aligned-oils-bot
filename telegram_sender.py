@@ -5,7 +5,7 @@ Handles sending messages via Telegram Bot API to multiple recipients.
 
 import logging
 import asyncio
-from typing import List, Dict
+from typing import List, Dict, Optional
 from telegram import Bot
 from telegram.error import TelegramError
 from telegram.constants import ParseMode
@@ -19,10 +19,16 @@ logger = logging.getLogger(__name__)
 class TelegramSender:
     """Handles sending messages via Telegram Bot."""
     
-    def __init__(self):
-        """Initialize the Telegram sender."""
+    def __init__(self, command_handler=None):
+        """Initialize the Telegram sender.
+        
+        Args:
+            command_handler: Optional CommandHandler instance for processing user commands
+        """
         self.bot = Bot(token=Config.TELEGRAM_BOT_TOKEN)
         self.chat_ids = [cid.strip() for cid in Config.TELEGRAM_CHAT_IDS if cid.strip()]
+        self.command_handler = command_handler
+        self.application = None
         
         if not self.chat_ids:
             logger.warning("No chat IDs configured")
@@ -83,7 +89,7 @@ class TelegramSender:
         
         return results
     
-    async def send_personalized_messages(self, generator, test_mode: bool = False) -> List[Dict]:
+    async def send_personalized_messages(self, generator, test_mode: bool = False, special_day_info: Dict = None) -> List[Dict]:
         """Send personalized messages to each recipient in their preferred language.
         
         Args:
@@ -111,7 +117,7 @@ class TelegramSender:
                 language = Config.get_language_for_chat(chat_id)
                 logger.info(f"Generating message for {chat_id} in {language}")
                 
-                message = generator.generate_daily_message(language)
+                message = generator.generate_daily_message(language, special_day_info=special_day_info)
                 
                 if not message:
                     logger.error(f"Failed to generate message for {chat_id}")
@@ -120,10 +126,11 @@ class TelegramSender:
                 
                 if Config.TESTING_MODE:
                     logger.info(f"TESTING MODE: Would send to {chat_id} ({language})")
-                    results.append({'chat_id': chat_id, 'success': True, 'error': None, 'language': language, 'testing_mode': True})
+                    results.append({'chat_id': chat_id, 'success': True, 'error': None, 'language': language, 'testing_mode': True, 'message': message})
                 else:
                     result = await self.send_message_to_chat(chat_id, message)
                     result['language'] = language
+                    result['message'] = message  # Store message for database
                     results.append(result)
                     
                     if i < len(target_ids) - 1:
@@ -156,12 +163,13 @@ class TelegramSender:
         
         return loop.run_until_complete(self.send_message_to_all(message))
     
-    def send_personalized_messages_sync(self, generator, test_mode: bool = False) -> List[Dict]:
+    def send_personalized_messages_sync(self, generator, test_mode: bool = False, special_day_info: Dict = None) -> List[Dict]:
         """Synchronous wrapper for sending personalized messages.
         
         Args:
             generator: AffirmationGenerator instance
             test_mode: If True, only sends to admin ID 5700477215
+            special_day_info: Optional dict with special day information (lunar/portal)
         """
         try:
             loop = asyncio.get_event_loop()
@@ -172,7 +180,7 @@ class TelegramSender:
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)
         
-        return loop.run_until_complete(self.send_personalized_messages(generator, test_mode))
+        return loop.run_until_complete(self.send_personalized_messages(generator, test_mode, special_day_info))
     
     async def test_connection(self) -> bool:
         """Test the bot connection and validate chat IDs."""
@@ -289,4 +297,76 @@ class TelegramSender:
             asyncio.set_event_loop(loop)
         
         return loop.run_until_complete(self.send_message_to_chat(chat_id, message))
+    
+    async def check_and_process_messages(self) -> List[Dict]:
+        """Check for new incoming messages and process commands/reactions.
+        
+        Returns:
+            List of processed message results
+        """
+        if not self.command_handler:
+            return []
+        
+        results = []
+        last_update_id = 0
+        
+        try:
+            # Get all pending updates (offset=0 means get all pending)
+            # Telegram will only send each update once if we acknowledge it
+            updates = await self.bot.get_updates(offset=0, timeout=1, allowed_updates=['message'])
+            
+            if not updates:
+                return results
+            
+            # Process each update
+            for update in updates:
+                last_update_id = update.update_id
+                
+                if update.message and update.message.text:
+                    user_id = str(update.message.from_user.id)
+                    text = update.message.text
+                    
+                    logger.info(f"Processing command from user {user_id}: {text}")
+                    
+                    # Get user's language preference
+                    language = Config.get_language_for_chat(user_id)
+                    
+                    # Process command
+                    response = self.command_handler.process_command(user_id, text, language)
+                    
+                    if response:
+                        # Send response
+                        try:
+                            await self.send_message_to_chat(user_id, response)
+                            results.append({'user_id': user_id, 'command': text, 'success': True})
+                            logger.info(f"Successfully processed command '{text}' from user {user_id}")
+                        except Exception as e:
+                            logger.error(f"Error sending command response: {e}")
+                            results.append({'user_id': user_id, 'command': text, 'success': False, 'error': str(e)})
+                    else:
+                        logger.warning(f"Command '{text}' from user {user_id} not recognized")
+            
+            # Acknowledge updates by requesting next batch with offset
+            if last_update_id > 0:
+                # This acknowledges all processed updates
+                await self.bot.get_updates(offset=last_update_id + 1, timeout=0, allowed_updates=[])
+            
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error checking messages: {e}", exc_info=True)
+            return results
+    
+    def check_and_process_messages_sync(self) -> List[Dict]:
+        """Synchronous wrapper for checking and processing messages."""
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        
+        return loop.run_until_complete(self.check_and_process_messages())
 

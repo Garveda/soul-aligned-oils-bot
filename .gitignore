@@ -56,3 +56,9 @@ htmlcov/
 *.bak
 *.swp
 .cache/
+
+# Database files (generated locally, Railway creates its own)
+data/*.db
+*.db
+*.sqlite
+*.sqlite3

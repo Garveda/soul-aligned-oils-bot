@@ -4,14 +4,18 @@ Handles daily scheduling of affirmation messages.
 """
 
 import logging
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import pytz
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.cron import CronTrigger
+from apscheduler.triggers.interval import IntervalTrigger
 
 from config import Config
 from affirmation_generator import AffirmationGenerator
 from telegram_sender import TelegramSender
+from database import Database
+from lunar_calendar import LunarCalendar
+from command_handler import CommandHandler
 
 # Set up logging
 logger = logging.getLogger(__name__)
@@ -23,10 +27,29 @@ class DailyScheduler:
     def __init__(self):
         """Initialize the scheduler."""
         self.scheduler = BlockingScheduler(timezone=pytz.timezone(Config.TIMEZONE))
-        self.generator = AffirmationGenerator()
-        self.sender = TelegramSender()
         self.timezone = pytz.timezone(Config.TIMEZONE)
+        
+        # Initialize database and related modules
+        self.db = Database()
+        self.lunar_calendar = LunarCalendar(self.db)
+        self.generator = AffirmationGenerator(db=self.db, lunar_calendar=self.lunar_calendar)
+        self.command_handler = CommandHandler(self.db, self.generator)
+        self.sender = TelegramSender(command_handler=self.command_handler)
+        
+        # Populate lunar calendar for next 90 days
+        self._populate_lunar_calendar()
+        
         logger.info(f"Scheduler initialized with timezone: {Config.TIMEZONE}")
+    
+    def _populate_lunar_calendar(self):
+        """Populate lunar calendar for the next 90 days."""
+        try:
+            start_date = date.today()
+            end_date = start_date + timedelta(days=90)
+            self.lunar_calendar.populate_lunar_calendar(start_date, end_date)
+            logger.info(f"Lunar calendar populated for {start_date} to {end_date}")
+        except Exception as e:
+            logger.error(f"Error populating lunar calendar: {e}")
     
     def send_daily_affirmation(self, test_mode: bool = False):
         """Generate and send the daily affirmation.
@@ -41,9 +64,34 @@ class DailyScheduler:
                 logger.info("Starting daily affirmation job")
             
             current_time = datetime.now(self.timezone)
-            logger.info(f"Generating affirmations for {current_time.strftime('%A, %B %d, %Y at %H:%M %Z')}")
+            today = current_time.date()
             
-            results = self.sender.send_personalized_messages_sync(self.generator, test_mode)
+            # Check for special days
+            special_day_info = self.lunar_calendar.get_special_day_info(today)
+            message_type = special_day_info.get('message_type', 'regular')
+            logger.info(f"Generating affirmations for {current_time.strftime('%A, %B %d, %Y at %H:%M %Z')} (Type: {message_type})")
+            
+            # Generate and send messages
+            results = self.sender.send_personalized_messages_sync(self.generator, test_mode, special_day_info)
+            
+            # Save messages to database and extract oil names
+            for result in results:
+                if result.get('success') and result.get('message'):
+                    user_id = result['chat_id']
+                    message = result['message']
+                    
+                    # Extract oil names
+                    primary_oil, alternative_oil = self.generator._extract_oil_names(message)
+                    
+                    # Save to database
+                    self.db.save_daily_message(
+                        user_id=user_id,
+                        message_date=today,
+                        message_text=message,
+                        primary_oil=primary_oil,
+                        alternative_oil=alternative_oil,
+                        message_type=message_type
+                    )
             
             successful = sum(1 for r in results if r['success'])
             total = len(results)
@@ -133,6 +181,51 @@ class DailyScheduler:
         except Exception as e:
             logger.error(f"Failed to send admin report: {e}", exc_info=True)
     
+    def process_scheduled_repeats(self):
+        """Process and send any pending scheduled repeat messages."""
+        try:
+            now = datetime.now(self.timezone)
+            pending_repeats = self.db.get_pending_repeats(now)
+            
+            if not pending_repeats:
+                return
+            
+            logger.info(f"Processing {len(pending_repeats)} pending repeat message(s)")
+            
+            for repeat in pending_repeats:
+                user_id = repeat['user_id']
+                message_date = date.fromisoformat(repeat['message_date'])
+                
+                # Get the saved daily message
+                daily_msg = self.db.get_daily_message(user_id, message_date)
+                
+                if daily_msg:
+                    message_text = daily_msg['message_text']
+                    
+                    # Send the message
+                    result = self.sender.send_message_sync_to_admin(user_id, message_text)
+                    
+                    if result.get('success'):
+                        self.db.mark_repeat_sent(repeat['id'])
+                        logger.info(f"Sent repeat message to {user_id} at {repeat['repeat_time']}")
+                    else:
+                        logger.error(f"Failed to send repeat message to {user_id}: {result.get('error')}")
+                else:
+                    logger.warning(f"No daily message found for user {user_id} on {message_date}")
+                    self.db.mark_repeat_sent(repeat['id'])  # Mark as sent to avoid retrying
+                    
+        except Exception as e:
+            logger.error(f"Error processing scheduled repeats: {e}", exc_info=True)
+    
+    def process_user_commands(self):
+        """Check for and process incoming user commands."""
+        try:
+            results = self.sender.check_and_process_messages_sync()
+            if results:
+                logger.info(f"Processed {len(results)} user command(s)")
+        except Exception as e:
+            logger.error(f"Error processing user commands: {e}", exc_info=True)
+    
     def schedule_daily_job(self):
         """Set up the daily scheduled job."""
         hour, minute = Config.get_send_hour_minute()
@@ -149,7 +242,25 @@ class DailyScheduler:
             misfire_grace_time=3600
         )
         
-        logger.info(f"Daily job configured successfully")
+        # Schedule repeat message processing (every minute)
+        self.scheduler.add_job(
+            func=self.process_scheduled_repeats,
+            trigger=IntervalTrigger(minutes=1, timezone=self.timezone),
+            id='process_repeats',
+            name='Process Scheduled Repeats',
+            replace_existing=True
+        )
+        
+        # Schedule command processing (every 5 minutes)
+        self.scheduler.add_job(
+            func=self.process_user_commands,
+            trigger=IntervalTrigger(minutes=5, timezone=self.timezone),
+            id='process_commands',
+            name='Process User Commands',
+            replace_existing=True
+        )
+        
+        logger.info(f"Daily job and periodic jobs configured successfully")
     
     def run_immediately(self, test_mode: bool = False):
         """Run the daily affirmation job immediately.
