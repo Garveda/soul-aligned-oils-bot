@@ -1,126 +1,5597 @@
 {
   "oils": [
-    {"name": "Arborvitae", "properties": ["grounding", "protection", "peace", "connection to nature", "spiritual strength"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet for grounding. Diffuse for peaceful meditation and protection."},
-    {"name": "Basil", "properties": ["focus", "mental clarity", "nervous tension relief", "alertness", "restoration"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to temples and back of neck. Diffuse for mental alertness. Add to recipes."},
-    {"name": "Bergamot", "properties": ["confidence", "self-love", "emotional release", "optimism", "acceptance"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to heart center and solar plexus. Diffuse to promote self-acceptance."},
-    {"name": "Birch", "properties": ["soothing", "warmth", "muscle comfort", "circulation", "renewal"], "usage_methods": ["topical"], "common_applications": "Massage into muscles and joints. Apply after exercise for soothing comfort."},
-    {"name": "Black Pepper", "properties": ["motivation", "endurance", "courage", "circulation", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Inhale for motivation. Add to food for flavor and wellness."},
-    {"name": "Blue Tansy", "properties": ["calm", "emotional release", "soothing", "peaceful", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest and pulse points. Diffuse for emotional calm and release."},
-    {"name": "Cardamom", "properties": ["digestive support", "respiratory health", "clarity", "warmth", "comfort"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Diffuse for respiratory support. Add to tea."},
-    {"name": "Cassia", "properties": ["warmth", "immune support", "circulation", "vitality", "protection"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Dilute and apply to chest. Diffuse for immune support. Add to warm drinks."},
-    {"name": "Cedarwood", "properties": ["grounding", "stability", "confidence", "connection", "strength"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet for grounding. Diffuse during yoga or meditation."},
-    {"name": "Celery Seed", "properties": ["detoxification", "healthy digestion", "liver support", "cleansing", "purifying"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Diffuse for purifying. Add to water for cleansing."},
-    {"name": "Cilantro", "properties": ["cleansing", "detox", "digestive support", "purifying", "freshness"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Add to food. Diffuse for cleansing properties."},
-    {"name": "Cinnamon Bark", "properties": ["warmth", "immune support", "circulation", "vitality", "abundance"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Dilute heavily before topical use. Diffuse for immune support. Add to recipes."},
-    {"name": "Clary Sage", "properties": ["clarity", "vision", "hormonal balance", "intuition", "insight"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to pulse points and abdomen. Diffuse for clarity and hormonal support."},
-    {"name": "Clove", "properties": ["immune support", "warmth", "protection", "dental health", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Dilute and apply topically. Diffuse for immune support. Add to recipes sparingly."},
-    {"name": "Copaiba", "properties": ["soothing", "inner peace", "anxiety relief", "cellular health", "calm"], "usage_methods": ["topical", "internal"], "common_applications": "Apply to pulse points for calm. Take internally for overall wellness support."},
-    {"name": "Coriander", "properties": ["digestive support", "soothing", "emotional balance", "comfort", "warmth"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Diffuse for calm. Add to cooking for flavor."},
-    {"name": "Cypress", "properties": ["flow", "transition", "letting go", "movement", "change"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest during times of transition. Diffuse to support emotional flow."},
-    {"name": "Dill", "properties": ["digestive comfort", "calm", "soothing", "relaxation", "gentle"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Diffuse for calming. Add to food for digestive support."},
-    {"name": "Douglas Fir", "properties": ["grounding", "focus", "purifying", "clarity", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest for clarity. Diffuse for focus and grounding energy."},
-    {"name": "Eucalyptus", "properties": ["clarity", "breathing", "renewal", "freshness", "mental clarity"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest for respiratory support. Diffuse for mental clarity and fresh energy."},
-    {"name": "Fennel", "properties": ["digestive support", "metabolism", "hormonal balance", "healthy weight", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Add to water. Diffuse for metabolic support."},
-    {"name": "Frankincense", "properties": ["spiritual", "grounding", "meditation", "cellular health", "wisdom", "sacred"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to wrists and heart center. Diffuse during meditation or prayer."},
-    {"name": "Geranium", "properties": ["emotional balance", "trust", "love", "skin health", "harmony"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and over liver area. Diffuse for emotional balance."},
-    {"name": "Ginger", "properties": ["digestive support", "nausea relief", "warmth", "circulation", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Inhale for nausea. Add to tea for digestive comfort."},
-    {"name": "Grapefruit", "properties": ["metabolism", "body love", "confidence", "lightness", "gratitude"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to areas of concern. Add to water. Diffuse to uplift and inspire gratitude."},
-    {"name": "Hawaiian Sandalwood", "properties": ["meditation", "spiritual connection", "clarity", "sacred", "inner peace"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to third eye and crown. Diffuse during meditation for spiritual connection."},
-    {"name": "Helichrysum", "properties": ["healing", "renewal", "skin health", "emotional release", "regeneration"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to skin for regeneration. Diffuse for emotional healing and release."},
-    {"name": "Hinoki", "properties": ["relaxation", "grounding", "meditation", "peace", "tranquility"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to pulse points. Diffuse for deep relaxation and meditation."},
-    {"name": "Jasmine", "properties": ["romance", "confidence", "joy", "feminine energy", "self-love"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and heart. Diffuse for romantic atmosphere and confidence."},
-    {"name": "Juniper Berry", "properties": ["purifying", "cleansing", "grounding", "emotional detox", "renewal"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to kidney area. Diffuse for purification. Add to water for cleansing."},
-    {"name": "Lavender", "properties": ["calming", "sleep", "relaxation", "peace", "balance", "emotional healing"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to temples, wrists, and bottom of feet. Diffuse before sleep or during meditation."},
-    {"name": "Lemon", "properties": ["cleansing", "clarity", "freshness", "detox", "mental clarity", "optimism"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Add to water for detox support. Diffuse for mental clarity. Apply to chest for uplifting energy."},
-    {"name": "Lemongrass", "properties": ["purifying", "clarity", "awareness", "cleansing", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to muscles. Diffuse for awareness. Add to tea for cleansing support."},
-    {"name": "Lime", "properties": ["energy", "joy", "clarity", "uplifting", "refreshing"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to pulse points. Add to water. Diffuse for joyful energy."},
-    {"name": "Litsea", "properties": ["uplifting", "cleansing", "clarity", "focus", "positivity"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest. Diffuse for uplifting focus and clarity."},
-    {"name": "Magnolia", "properties": ["peace", "emotional balance", "calm", "centeredness", "serenity"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart. Diffuse for peaceful calm and emotional balance."},
-    {"name": "Manuka", "properties": ["immune support", "skin health", "purifying", "protection", "vitality"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to skin. Diffuse for immune and emotional support."},
-    {"name": "Marjoram", "properties": ["comfort", "muscle relaxation", "calm", "nervous tension relief", "warmth"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to neck and muscles. Diffuse for calm. Add to cooking."},
-    {"name": "Melissa (Lemon Balm)", "properties": ["calm", "emotional support", "peace", "nervous system support", "uplifting"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to wrists and temples. Diffuse for calm and emotional support."},
-    {"name": "Myrrh", "properties": ["spiritual healing", "mother energy", "nurturing", "protection", "ancient wisdom"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart and womb area. Diffuse for spiritual healing and protection."},
-    {"name": "Neroli", "properties": ["confidence", "emotional strength", "joy", "peace", "heart healing"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart. Diffuse for confidence and emotional peace."},
-    {"name": "Oregano", "properties": ["immune support", "vitality", "protection", "strength", "power"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Dilute heavily before topical use. Take internally for immune support. Diffuse sparingly."},
-    {"name": "Patchouli", "properties": ["grounding", "confidence", "physicality", "abundance", "sensuality"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to lower abdomen and feet. Diffuse for grounding and confidence."},
-    {"name": "Peppermint", "properties": ["energy", "focus", "clarity", "digestion", "alertness", "cooling"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to neck and temples for focus. Inhale directly for alertness. Add to water for digestive support."},
-    {"name": "Petitgrain", "properties": ["calm", "sleep", "nervous tension relief", "peace", "relaxation"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and neck. Diffuse before bed for restful sleep."},
-    {"name": "Pink Pepper", "properties": ["vitality", "courage", "strength", "emotional support", "empowerment"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest for courage. Diffuse for empowerment and vitality."},
-    {"name": "Roman Chamomile", "properties": ["calm", "peace", "sleep", "soothing", "emotional comfort"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to wrists and temples. Diffuse for peaceful sleep and calm."},
-    {"name": "Rose", "properties": ["love", "compassion", "divine feminine", "heart healing", "grace"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart center. Inhale for emotional healing and self-love."},
-    {"name": "Rosemary", "properties": ["memory", "focus", "clarity", "mental sharpness", "alertness"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to temples. Diffuse while studying. Add to cooking."},
-    {"name": "Spikenard", "properties": ["spiritual connection", "grounding", "meditation", "devotion", "ancient wisdom"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to crown and feet. Diffuse during prayer and meditation."},
-    {"name": "Spearmint", "properties": ["digestive comfort", "uplifting", "focus", "gentle energy", "joy"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Add to water. Diffuse for gentle uplifting energy."},
-    {"name": "Star Anise", "properties": ["digestive support", "respiratory health", "immune support", "comfort", "warmth"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Diffuse for respiratory support. Add to tea."},
-    {"name": "Tangerine", "properties": ["joy", "creativity", "playfulness", "inner child", "happiness"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to chest. Add to water. Diffuse for joyful creative energy."},
-    {"name": "Tea Tree (Melaleuca)", "properties": ["purifying", "cleansing", "protection", "immune support", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to skin for purification. Diffuse to cleanse air and energy."},
-    {"name": "Thyme", "properties": ["immune support", "strength", "courage", "vitality", "protection"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Dilute before topical use. Diffuse for immune support. Add to cooking."},
-    {"name": "Turmeric", "properties": ["inflammation support", "cellular health", "vitality", "cleansing", "renewal"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to areas of concern. Take internally for wellness. Add to smoothies."},
-    {"name": "Vetiver", "properties": ["grounding", "focus", "calm", "stability", "emotional anchoring"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet and back of neck. Diffuse for grounding and focus."},
-    {"name": "White Fir", "properties": ["grounding", "focus", "respiratory support", "clarity", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest. Diffuse for focus and respiratory support."},
-    {"name": "Wild Orange", "properties": ["uplifting", "joy", "creativity", "abundance", "positive", "energizing"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Diffuse to uplift mood. Apply to pulse points. Add to water for refreshing drink."},
-    {"name": "Wintergreen", "properties": ["soothing", "cooling", "muscle comfort", "relief", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Massage into muscles and joints. Apply after physical activity."},
-    {"name": "Yarrow", "properties": ["emotional balance", "boundaries", "protection", "renewal", "strength"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart and solar plexus. Diffuse for emotional boundaries."},
-    {"name": "Ylang Ylang", "properties": ["self-love", "confidence", "sensuality", "emotional healing", "heart opening"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and behind ears. Diffuse to promote self-love and release tension."},
-    {"name": "Yuzu", "properties": ["joy", "uplifting", "positivity", "refreshing", "lightness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to pulse points. Diffuse for joyful uplifting energy."},
-    
-    {"name": "AromaTouch", "properties": ["massage", "relaxation", "stress relief", "comfort", "soothing"], "usage_methods": ["topical"], "common_applications": "Use during massage for ultimate relaxation and stress relief."},
-    {"name": "Balance (Grounding Blend)", "properties": ["grounding", "stability", "calm", "centering", "emotional balance"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet morning and night. Inhale deeply for grounding."},
-    {"name": "Breathe (Respiratory Blend)", "properties": ["breathing", "clarity", "openness", "respiratory support", "freedom"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest and throat. Inhale deeply for respiratory support."},
-    {"name": "Cheer (Uplifting Blend)", "properties": ["happiness", "optimism", "cheerfulness", "positivity", "joy"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart and pulse points. Diffuse for cheerful atmosphere."},
-    {"name": "Citrus Bliss (Invigorating Blend)", "properties": ["energizing", "creativity", "joy", "positivity", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Diffuse for energizing atmosphere. Apply to pulse points. Add to water."},
-    {"name": "ClaryCalm (Monthly Blend)", "properties": ["hormonal balance", "calm", "comfort", "feminine support", "soothing"], "usage_methods": ["topical"], "common_applications": "Apply to abdomen and back of neck during monthly cycle."},
-    {"name": "Console (Comforting Blend)", "properties": ["comfort", "grief support", "emotional healing", "hope", "solace"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart during times of loss. Inhale for emotional comfort and healing."},
-    {"name": "DDR Prime (Cellular Complex)", "properties": ["cellular health", "vitality", "longevity", "protection", "wellness"], "usage_methods": ["internal"], "common_applications": "Take daily for cellular health and antioxidant support."},
-    {"name": "Deep Blue (Soothing Blend)", "properties": ["soothing", "comfort", "relief", "recovery", "physical ease"], "usage_methods": ["topical"], "common_applications": "Massage into muscles and joints after activity or for comfort."},
-    {"name": "DigestZen (Digestive Blend)", "properties": ["digestive support", "comfort", "soothing", "nausea relief", "wellness"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen. Inhale for nausea relief. Take internally for digestive support."},
-    {"name": "Elevation (Joyful Blend)", "properties": ["joy", "happiness", "uplift", "motivation", "positive energy"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart and to pulse points. Inhale for instant mood boost."},
-    {"name": "Forgive (Renewing Blend)", "properties": ["forgiveness", "release", "letting go", "freedom", "renewal"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart. Inhale during meditation to support forgiveness and release."},
-    {"name": "HD Clear (Skin Clearing Blend)", "properties": ["clear skin", "confidence", "purifying", "balance", "renewal"], "usage_methods": ["topical"], "common_applications": "Apply to affected areas for clear, healthy-looking skin."},
-    {"name": "Immortelle (Anti-Aging Blend)", "properties": ["youthful skin", "renewal", "radiance", "beauty", "vitality"], "usage_methods": ["topical"], "common_applications": "Apply to face and neck for youthful, radiant skin."},
-    {"name": "InTune (Focus Blend)", "properties": ["focus", "concentration", "clarity", "attention", "mental sharpness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to temples and wrists. Inhale when needing focus and clarity."},
-    {"name": "Motivate (Encouraging Blend)", "properties": ["motivation", "courage", "confidence", "momentum", "action"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to pulse points in morning. Inhale before important tasks for courage."},
-    {"name": "On Guard (Protective Blend)", "properties": ["protection", "immune support", "strength", "defense", "vitality"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to bottom of feet daily. Diffuse to protect environment. Take internally for immune support."},
-    {"name": "PastTense (Tension Blend)", "properties": ["tension relief", "calm", "comfort", "ease", "relaxation"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to neck, shoulders, and temples for tension relief."},
-    {"name": "Peace (Reassuring Blend)", "properties": ["peace", "reassurance", "calm", "contentment", "tranquility"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and heart. Inhale for peaceful reassurance."},
-    {"name": "Passion (Inspiring Blend)", "properties": ["passion", "excitement", "creativity", "inspiration", "vitality"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart and pulse points. Diffuse to ignite passion and creativity."},
-    {"name": "PurifyMe (Cleansing Blend)", "properties": ["purifying", "cleansing", "fresh", "renewal", "clarity"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to skin. Diffuse for purifying atmosphere."},
-    {"name": "Rescuer (Soothing Blend)", "properties": ["comfort", "soothing", "relief", "recovery", "care"], "usage_methods": ["topical"], "common_applications": "Apply to muscles and joints for soothing comfort and relief."},
-    {"name": "Serenity (Restful Blend)", "properties": ["relaxation", "sleep", "peace", "tranquility", "rest"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to neck and wrists before bed. Diffuse in bedroom for restful sleep."},
-    {"name": "Stronger (Protective Blend)", "properties": ["immune support", "strength", "vitality", "protection", "resilience"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet and spine. Diffuse for protective support."},
-    {"name": "TerraShield (Outdoor Blend)", "properties": ["outdoor protection", "freshness", "comfort", "shield", "natural"], "usage_methods": ["topical"], "common_applications": "Apply to exposed skin before outdoor activities."},
-    {"name": "Thinker (Focus Blend)", "properties": ["focus", "clarity", "concentration", "mental clarity", "alertness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to temples and wrists when studying or needing mental clarity."},
-    {"name": "Whisper (Blend for Women)", "properties": ["feminine energy", "confidence", "beauty", "allure", "self-love"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and neck as natural perfume. Diffuse for feminine confidence."},
-    {"name": "Yarrow|Pom", "properties": ["cellular health", "radiance", "vitality", "antioxidant", "beauty"], "usage_methods": ["topical"], "common_applications": "Apply to face and body for radiant, healthy-looking skin."},
-    {"name": "Zendocrine (Detoxification Blend)", "properties": ["detox", "cleansing", "purifying", "liver support", "renewal"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to liver area. Take internally for detox support. Diffuse for cleansing."},
-    {"name": "ZenGest (Digestive Blend)", "properties": ["digestive comfort", "soothing", "calm stomach", "wellness", "balance"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to abdomen in clockwise motion. Take internally for digestive wellness."},
-    
-    {"name": "Adaptiv (Calming Blend)", "properties": ["adaptability", "stress relief", "calm", "balance", "resilience"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and neck during stressful times. Inhale to promote adaptability."},
-    {"name": "Air-X (Respiratory Blend)", "properties": ["clear breathing", "respiratory support", "freshness", "vitality", "openness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest. Diffuse for respiratory clarity and support."},
-    {"name": "Align (Centering Blend)", "properties": ["alignment", "centering", "balance", "harmony", "flow"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply along spine. Diffuse during yoga or alignment practices."},
-    {"name": "Anchor (Steadying Blend)", "properties": ["stability", "grounding", "strength", "steadiness", "foundation"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet and base of spine. Diffuse for grounding."},
-    {"name": "Arise (Enlightening Blend)", "properties": ["awakening", "clarity", "enlightenment", "awareness", "vitality"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to pulse points in morning. Diffuse for awakening energy."},
-    {"name": "Brave (Courage Blend)", "properties": ["courage", "strength", "confidence", "bravery", "empowerment"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart before challenges. Inhale for courage and strength."},
-    {"name": "Calmer (Restful Blend)", "properties": ["calm", "peace", "rest", "tranquility", "soothing"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to wrists and back of neck. Diffuse for peaceful calm."},
-    {"name": "Coconut Oil (Fractionated)", "properties": ["carrier oil", "moisturizing", "dilution", "nourishing", "gentle"], "usage_methods": ["topical"], "common_applications": "Use as carrier oil for diluting essential oils. Apply for moisturizing."},
-    {"name": "Correct-X (Soothing Ointment)", "properties": ["skin soothing", "protective", "comfort", "healing support", "care"], "usage_methods": ["topical"], "common_applications": "Apply to skin for soothing support and protection."},
-    {"name": "Easy Air", "properties": ["easy breathing", "respiratory comfort", "openness", "clarity", "freshness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to chest and throat. Diffuse for respiratory ease."},
-    {"name": "Enroll", "properties": ["focus", "mental clarity", "learning support", "concentration", "alertness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply before studying or learning. Diffuse for focus and concentration."},
-    {"name": "Ginger Touch", "properties": ["digestive comfort", "warmth", "soothing", "nausea relief", "vitality"], "usage_methods": ["topical"], "common_applications": "Roll on abdomen for digestive support. Apply to wrists for nausea relief."},
-    {"name": "Guardian", "properties": ["protection", "immune support", "strength", "vitality", "defense"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet and chest. Diffuse for protective support."},
-    {"name": "Holiday Joy", "properties": ["joy", "celebration", "warmth", "togetherness", "festive"], "usage_methods": ["topical", "aromatic"], "common_applications": "Diffuse during holidays for warm, joyful atmosphere. Apply to pulse points."},
-    {"name": "Hope Touch", "properties": ["hope", "optimism", "encouragement", "uplift", "light"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply over heart. Inhale for hopeful, uplifting feelings."},
-    {"name": "Lavender Touch", "properties": ["calming", "peace", "relaxation", "soothing", "comfort"], "usage_methods": ["topical"], "common_applications": "Roll on wrists, temples, and neck for instant calm and relaxation."},
-    {"name": "MetaPWR (Metabolic Blend)", "properties": ["metabolism support", "energy", "vitality", "wellness", "balance"], "usage_methods": ["topical", "aromatic", "internal"], "common_applications": "Apply to pulse points. Add to water. Diffuse for metabolic support."},
-    {"name": "Northern Escape", "properties": ["escape", "freshness", "clarity", "renewal", "invigoration"], "usage_methods": ["topical", "aromatic"], "common_applications": "Diffuse for fresh, invigorating atmosphere. Apply to pulse points."},
-    {"name": "Oregano Touch", "properties": ["immune support", "vitality", "strength", "protection", "wellness"], "usage_methods": ["topical"], "common_applications": "Roll on bottom of feet for immune support. Pre-diluted for safe use."},
-    {"name": "Peppermint Touch", "properties": ["energy", "focus", "cooling", "alertness", "clarity"], "usage_methods": ["topical"], "common_applications": "Roll on temples and neck for instant energy and focus."},
-    {"name": "Steady (Grounding Blend)", "properties": ["steady", "grounding", "calm", "balance", "centered"], "usage_methods": ["topical", "aromatic"], "common_applications": "Apply to bottom of feet and pulse points. Diffuse for grounding."},
-    {"name": "Stronger Touch", "properties": ["immune strength", "vitality", "protection", "wellness", "resilience"], "usage_methods": ["topical"], "common_applications": "Roll on spine and feet for immune support. Pre-diluted for kids."},
-    {"name": "Sunny Citrus", "properties": ["sunny", "cheerful", "uplifting", "joy", "brightness"], "usage_methods": ["topical", "aromatic"], "common_applications": "Diffuse for cheerful atmosphere. Apply to pulse points for instant uplift."},
-    {"name": "Tamer (Digestive Blend)", "properties": ["digestive comfort", "soothing", "calm stomach", "gentle", "ease"], "usage_methods": ["topical"], "common_applications": "Roll on abdomen for gentle digestive support. Safe for kids."},
-    {"name": "Tea Tree Touch", "properties": ["cleansing", "purifying", "skin health", "protection", "renewal"], "usage_methods": ["topical"], "common_applications": "Roll on skin for purifying support. Pre-diluted for easy application."},
-    {"name": "Thinker Touch", "properties": ["focus", "clarity", "concentration", "alertness", "mental support"], "usage_methods": ["topical"], "common_applications": "Roll on temples and wrists for focus. Great for study sessions."},
-    {"name": "ZenGest Touch", "properties": ["digestive ease", "comfort", "soothing", "calm", "wellness"], "usage_methods": ["topical"], "common_applications": "Roll on abdomen in clockwise motion for digestive comfort."}
+    {
+      "name": "Arborvitae",
+      "properties": [
+        "grounding",
+        "protection",
+        "peace",
+        "connection to nature",
+        "spiritual strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet for grounding. Diffuse for peaceful meditation and protection."
+    },
+    {
+      "name": "Basil",
+      "properties": [
+        "focus",
+        "mental clarity",
+        "nervous tension relief",
+        "alertness",
+        "restoration"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to temples and back of neck. Diffuse for mental alertness. Add to recipes."
+    },
+    {
+      "name": "Bergamot",
+      "properties": [
+        "confidence",
+        "self-love",
+        "emotional release",
+        "optimism",
+        "acceptance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to heart center and solar plexus. Diffuse to promote self-acceptance."
+    },
+    {
+      "name": "Birch",
+      "properties": [
+        "soothing",
+        "warmth",
+        "muscle comfort",
+        "circulation",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Massage into muscles and joints. Apply after exercise for soothing comfort."
+    },
+    {
+      "name": "Black Pepper",
+      "properties": [
+        "motivation",
+        "endurance",
+        "courage",
+        "circulation",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Inhale for motivation. Add to food for flavor and wellness."
+    },
+    {
+      "name": "Blue Tansy",
+      "properties": [
+        "calm",
+        "emotional release",
+        "soothing",
+        "peaceful",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and pulse points. Diffuse for emotional calm and release."
+    },
+    {
+      "name": "Cardamom",
+      "properties": [
+        "digestive support",
+        "respiratory health",
+        "clarity",
+        "warmth",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for respiratory support. Add to tea."
+    },
+    {
+      "name": "Cassia",
+      "properties": [
+        "warmth",
+        "immune support",
+        "circulation",
+        "vitality",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute and apply to chest. Diffuse for immune support. Add to warm drinks."
+    },
+    {
+      "name": "Cedarwood",
+      "properties": [
+        "grounding",
+        "stability",
+        "confidence",
+        "connection",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet for grounding. Diffuse during yoga or meditation."
+    },
+    {
+      "name": "Celery Seed",
+      "properties": [
+        "detoxification",
+        "healthy digestion",
+        "liver support",
+        "cleansing",
+        "purifying"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for purifying. Add to water for cleansing."
+    },
+    {
+      "name": "Cilantro",
+      "properties": [
+        "cleansing",
+        "detox",
+        "digestive support",
+        "purifying",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food. Diffuse for cleansing properties."
+    },
+    {
+      "name": "Cinnamon Bark",
+      "properties": [
+        "warmth",
+        "immune support",
+        "circulation",
+        "vitality",
+        "abundance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute heavily before topical use. Diffuse for immune support. Add to recipes."
+    },
+    {
+      "name": "Clary Sage",
+      "properties": [
+        "clarity",
+        "vision",
+        "hormonal balance",
+        "intuition",
+        "insight"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points and abdomen. Diffuse for clarity and hormonal support."
+    },
+    {
+      "name": "Clove",
+      "properties": [
+        "immune support",
+        "warmth",
+        "protection",
+        "dental health",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute and apply topically. Diffuse for immune support. Add to recipes sparingly."
+    },
+    {
+      "name": "Copaiba",
+      "properties": [
+        "soothing",
+        "inner peace",
+        "anxiety relief",
+        "cellular health",
+        "calm"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points for calm. Take internally for overall wellness support."
+    },
+    {
+      "name": "Coriander",
+      "properties": [
+        "digestive support",
+        "soothing",
+        "emotional balance",
+        "comfort",
+        "warmth"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for calm. Add to cooking for flavor."
+    },
+    {
+      "name": "Cypress",
+      "properties": [
+        "flow",
+        "transition",
+        "letting go",
+        "movement",
+        "change"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest during times of transition. Diffuse to support emotional flow."
+    },
+    {
+      "name": "Dill",
+      "properties": [
+        "digestive comfort",
+        "calm",
+        "soothing",
+        "relaxation",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for calming. Add to food for digestive support."
+    },
+    {
+      "name": "Douglas Fir",
+      "properties": [
+        "grounding",
+        "focus",
+        "purifying",
+        "clarity",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest for clarity. Diffuse for focus and grounding energy."
+    },
+    {
+      "name": "Eucalyptus",
+      "properties": [
+        "clarity",
+        "breathing",
+        "renewal",
+        "freshness",
+        "mental clarity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest for respiratory support. Diffuse for mental clarity and fresh energy."
+    },
+    {
+      "name": "Fennel",
+      "properties": [
+        "digestive support",
+        "metabolism",
+        "hormonal balance",
+        "healthy weight",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to water. Diffuse for metabolic support."
+    },
+    {
+      "name": "Frankincense",
+      "properties": [
+        "spiritual",
+        "grounding",
+        "meditation",
+        "cellular health",
+        "wisdom",
+        "sacred"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to wrists and heart center. Diffuse during meditation or prayer."
+    },
+    {
+      "name": "Geranium",
+      "properties": [
+        "emotional balance",
+        "trust",
+        "love",
+        "skin health",
+        "harmony"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and over liver area. Diffuse for emotional balance."
+    },
+    {
+      "name": "Ginger",
+      "properties": [
+        "digestive support",
+        "nausea relief",
+        "warmth",
+        "circulation",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Inhale for nausea. Add to tea for digestive comfort."
+    },
+    {
+      "name": "Grapefruit",
+      "properties": [
+        "metabolism",
+        "body love",
+        "confidence",
+        "lightness",
+        "gratitude"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to areas of concern. Add to water. Diffuse to uplift and inspire gratitude."
+    },
+    {
+      "name": "Hawaiian Sandalwood",
+      "properties": [
+        "meditation",
+        "spiritual connection",
+        "clarity",
+        "sacred",
+        "inner peace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye and crown. Diffuse during meditation for spiritual connection."
+    },
+    {
+      "name": "Helichrysum",
+      "properties": [
+        "healing",
+        "renewal",
+        "skin health",
+        "emotional release",
+        "regeneration"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin for regeneration. Diffuse for emotional healing and release."
+    },
+    {
+      "name": "Hinoki",
+      "properties": [
+        "relaxation",
+        "grounding",
+        "meditation",
+        "peace",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for deep relaxation and meditation."
+    },
+    {
+      "name": "Jasmine",
+      "properties": [
+        "romance",
+        "confidence",
+        "joy",
+        "feminine energy",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and heart. Diffuse for romantic atmosphere and confidence."
+    },
+    {
+      "name": "Juniper Berry",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "grounding",
+        "emotional detox",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to kidney area. Diffuse for purification. Add to water for cleansing."
+    },
+    {
+      "name": "Lavender",
+      "properties": [
+        "calming",
+        "sleep",
+        "relaxation",
+        "peace",
+        "balance",
+        "emotional healing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to temples, wrists, and bottom of feet. Diffuse before sleep or during meditation."
+    },
+    {
+      "name": "Lemon",
+      "properties": [
+        "cleansing",
+        "clarity",
+        "freshness",
+        "detox",
+        "mental clarity",
+        "optimism"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Add to water for detox support. Diffuse for mental clarity. Apply to chest for uplifting energy."
+    },
+    {
+      "name": "Lemongrass",
+      "properties": [
+        "purifying",
+        "clarity",
+        "awareness",
+        "cleansing",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to muscles. Diffuse for awareness. Add to tea for cleansing support."
+    },
+    {
+      "name": "Lime",
+      "properties": [
+        "energy",
+        "joy",
+        "clarity",
+        "uplifting",
+        "refreshing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points. Add to water. Diffuse for joyful energy."
+    },
+    {
+      "name": "Litsea",
+      "properties": [
+        "uplifting",
+        "cleansing",
+        "clarity",
+        "focus",
+        "positivity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for uplifting focus and clarity."
+    },
+    {
+      "name": "Magnolia",
+      "properties": [
+        "peace",
+        "emotional balance",
+        "calm",
+        "centeredness",
+        "serenity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for peaceful calm and emotional balance."
+    },
+    {
+      "name": "Manuka",
+      "properties": [
+        "immune support",
+        "skin health",
+        "purifying",
+        "protection",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for immune and emotional support."
+    },
+    {
+      "name": "Marjoram",
+      "properties": [
+        "comfort",
+        "muscle relaxation",
+        "calm",
+        "nervous tension relief",
+        "warmth"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to neck and muscles. Diffuse for calm. Add to cooking."
+    },
+    {
+      "name": "Melissa (Lemon Balm)",
+      "properties": [
+        "calm",
+        "emotional support",
+        "peace",
+        "nervous system support",
+        "uplifting"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to wrists and temples. Diffuse for calm and emotional support."
+    },
+    {
+      "name": "Myrrh",
+      "properties": [
+        "spiritual healing",
+        "mother energy",
+        "nurturing",
+        "protection",
+        "ancient wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart and womb area. Diffuse for spiritual healing and protection."
+    },
+    {
+      "name": "Neroli",
+      "properties": [
+        "confidence",
+        "emotional strength",
+        "joy",
+        "peace",
+        "heart healing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for confidence and emotional peace."
+    },
+    {
+      "name": "Oregano",
+      "properties": [
+        "immune support",
+        "vitality",
+        "protection",
+        "strength",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute heavily before topical use. Take internally for immune support. Diffuse sparingly."
+    },
+    {
+      "name": "Patchouli",
+      "properties": [
+        "grounding",
+        "confidence",
+        "physicality",
+        "abundance",
+        "sensuality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to lower abdomen and feet. Diffuse for grounding and confidence."
+    },
+    {
+      "name": "Peppermint",
+      "properties": [
+        "energy",
+        "focus",
+        "clarity",
+        "digestion",
+        "alertness",
+        "cooling"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to neck and temples for focus. Inhale directly for alertness. Add to water for digestive support."
+    },
+    {
+      "name": "Petitgrain",
+      "properties": [
+        "calm",
+        "sleep",
+        "nervous tension relief",
+        "peace",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse before bed for restful sleep."
+    },
+    {
+      "name": "Pink Pepper",
+      "properties": [
+        "vitality",
+        "courage",
+        "strength",
+        "emotional support",
+        "empowerment"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest for courage. Diffuse for empowerment and vitality."
+    },
+    {
+      "name": "Roman Chamomile",
+      "properties": [
+        "calm",
+        "peace",
+        "sleep",
+        "soothing",
+        "emotional comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to wrists and temples. Diffuse for peaceful sleep and calm."
+    },
+    {
+      "name": "Rose",
+      "properties": [
+        "love",
+        "compassion",
+        "divine feminine",
+        "heart healing",
+        "grace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart center. Inhale for emotional healing and self-love."
+    },
+    {
+      "name": "Rosemary",
+      "properties": [
+        "memory",
+        "focus",
+        "clarity",
+        "mental sharpness",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to temples. Diffuse while studying. Add to cooking."
+    },
+    {
+      "name": "Spikenard",
+      "properties": [
+        "spiritual connection",
+        "grounding",
+        "meditation",
+        "devotion",
+        "ancient wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to crown and feet. Diffuse during prayer and meditation."
+    },
+    {
+      "name": "Spearmint",
+      "properties": [
+        "digestive comfort",
+        "uplifting",
+        "focus",
+        "gentle energy",
+        "joy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to water. Diffuse for gentle uplifting energy."
+    },
+    {
+      "name": "Star Anise",
+      "properties": [
+        "digestive support",
+        "respiratory health",
+        "immune support",
+        "comfort",
+        "warmth"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for respiratory support. Add to tea."
+    },
+    {
+      "name": "Tangerine",
+      "properties": [
+        "joy",
+        "creativity",
+        "playfulness",
+        "inner child",
+        "happiness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to chest. Add to water. Diffuse for joyful creative energy."
+    },
+    {
+      "name": "Tea Tree (Melaleuca)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "immune support",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin for purification. Diffuse to cleanse air and energy."
+    },
+    {
+      "name": "Thyme",
+      "properties": [
+        "immune support",
+        "strength",
+        "courage",
+        "vitality",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute before topical use. Diffuse for immune support. Add to cooking."
+    },
+    {
+      "name": "Turmeric",
+      "properties": [
+        "inflammation support",
+        "cellular health",
+        "vitality",
+        "cleansing",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to areas of concern. Take internally for wellness. Add to smoothies."
+    },
+    {
+      "name": "Vetiver",
+      "properties": [
+        "grounding",
+        "focus",
+        "calm",
+        "stability",
+        "emotional anchoring"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet and back of neck. Diffuse for grounding and focus."
+    },
+    {
+      "name": "White Fir",
+      "properties": [
+        "grounding",
+        "focus",
+        "respiratory support",
+        "clarity",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for focus and respiratory support."
+    },
+    {
+      "name": "Wild Orange",
+      "properties": [
+        "uplifting",
+        "joy",
+        "creativity",
+        "abundance",
+        "positive",
+        "energizing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse to uplift mood. Apply to pulse points. Add to water for refreshing drink."
+    },
+    {
+      "name": "Wintergreen",
+      "properties": [
+        "soothing",
+        "cooling",
+        "muscle comfort",
+        "relief",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Massage into muscles and joints. Apply after physical activity."
+    },
+    {
+      "name": "Yarrow",
+      "properties": [
+        "emotional balance",
+        "boundaries",
+        "protection",
+        "renewal",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart and solar plexus. Diffuse for emotional boundaries."
+    },
+    {
+      "name": "Ylang Ylang",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and behind ears. Diffuse to promote self-love and release tension."
+    },
+    {
+      "name": "Yuzu",
+      "properties": [
+        "joy",
+        "uplifting",
+        "positivity",
+        "refreshing",
+        "lightness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for joyful uplifting energy."
+    },
+    {
+      "name": "AromaTouch",
+      "properties": [
+        "massage",
+        "relaxation",
+        "stress relief",
+        "comfort",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use during massage for ultimate relaxation and stress relief."
+    },
+    {
+      "name": "Balance (Grounding Blend)",
+      "properties": [
+        "grounding",
+        "stability",
+        "calm",
+        "centering",
+        "emotional balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet morning and night. Inhale deeply for grounding."
+    },
+    {
+      "name": "Breathe (Respiratory Blend)",
+      "properties": [
+        "breathing",
+        "clarity",
+        "openness",
+        "respiratory support",
+        "freedom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and throat. Inhale deeply for respiratory support."
+    },
+    {
+      "name": "Cheer (Uplifting Blend)",
+      "properties": [
+        "happiness",
+        "optimism",
+        "cheerfulness",
+        "positivity",
+        "joy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart and pulse points. Diffuse for cheerful atmosphere."
+    },
+    {
+      "name": "Citrus Bliss (Invigorating Blend)",
+      "properties": [
+        "energizing",
+        "creativity",
+        "joy",
+        "positivity",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for energizing atmosphere. Apply to pulse points. Add to water."
+    },
+    {
+      "name": "ClaryCalm (Monthly Blend)",
+      "properties": [
+        "hormonal balance",
+        "calm",
+        "comfort",
+        "feminine support",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to abdomen and back of neck during monthly cycle."
+    },
+    {
+      "name": "Console (Comforting Blend)",
+      "properties": [
+        "comfort",
+        "grief support",
+        "emotional healing",
+        "hope",
+        "solace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart during times of loss. Inhale for emotional comfort and healing."
+    },
+    {
+      "name": "DDR Prime (Cellular Complex)",
+      "properties": [
+        "cellular health",
+        "vitality",
+        "longevity",
+        "protection",
+        "wellness"
+      ],
+      "usage_methods": [
+        "internal"
+      ],
+      "common_applications": "Take daily for cellular health and antioxidant support."
+    },
+    {
+      "name": "Deep Blue (Soothing Blend)",
+      "properties": [
+        "soothing",
+        "comfort",
+        "relief",
+        "recovery",
+        "physical ease"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Massage into muscles and joints after activity or for comfort."
+    },
+    {
+      "name": "DigestZen (Digestive Blend)",
+      "properties": [
+        "digestive support",
+        "comfort",
+        "soothing",
+        "nausea relief",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Inhale for nausea relief. Take internally for digestive support."
+    },
+    {
+      "name": "Elevation (Joyful Blend)",
+      "properties": [
+        "joy",
+        "happiness",
+        "uplift",
+        "motivation",
+        "positive energy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart and to pulse points. Inhale for instant mood boost."
+    },
+    {
+      "name": "Forgive (Renewing Blend)",
+      "properties": [
+        "forgiveness",
+        "release",
+        "letting go",
+        "freedom",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale during meditation to support forgiveness and release."
+    },
+    {
+      "name": "HD Clear (Skin Clearing Blend)",
+      "properties": [
+        "clear skin",
+        "confidence",
+        "purifying",
+        "balance",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to affected areas for clear, healthy-looking skin."
+    },
+    {
+      "name": "Immortelle (Anti-Aging Blend)",
+      "properties": [
+        "youthful skin",
+        "renewal",
+        "radiance",
+        "beauty",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to face and neck for youthful, radiant skin."
+    },
+    {
+      "name": "InTune (Focus Blend)",
+      "properties": [
+        "focus",
+        "concentration",
+        "clarity",
+        "attention",
+        "mental sharpness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples and wrists. Inhale when needing focus and clarity."
+    },
+    {
+      "name": "Motivate (Encouraging Blend)",
+      "properties": [
+        "motivation",
+        "courage",
+        "confidence",
+        "momentum",
+        "action"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points in morning. Inhale before important tasks for courage."
+    },
+    {
+      "name": "On Guard (Protective Blend)",
+      "properties": [
+        "protection",
+        "immune support",
+        "strength",
+        "defense",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to bottom of feet daily. Diffuse to protect environment. Take internally for immune support."
+    },
+    {
+      "name": "PastTense (Tension Blend)",
+      "properties": [
+        "tension relief",
+        "calm",
+        "comfort",
+        "ease",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to neck, shoulders, and temples for tension relief."
+    },
+    {
+      "name": "Peace (Reassuring Blend)",
+      "properties": [
+        "peace",
+        "reassurance",
+        "calm",
+        "contentment",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and heart. Inhale for peaceful reassurance."
+    },
+    {
+      "name": "Passion (Inspiring Blend)",
+      "properties": [
+        "passion",
+        "excitement",
+        "creativity",
+        "inspiration",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart and pulse points. Diffuse to ignite passion and creativity."
+    },
+    {
+      "name": "PurifyMe (Cleansing Blend)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "fresh",
+        "renewal",
+        "clarity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying atmosphere."
+    },
+    {
+      "name": "Rescuer (Soothing Blend)",
+      "properties": [
+        "comfort",
+        "soothing",
+        "relief",
+        "recovery",
+        "care"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to muscles and joints for soothing comfort and relief."
+    },
+    {
+      "name": "Serenity (Restful Blend)",
+      "properties": [
+        "relaxation",
+        "sleep",
+        "peace",
+        "tranquility",
+        "rest"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to neck and wrists before bed. Diffuse in bedroom for restful sleep."
+    },
+    {
+      "name": "Stronger (Protective Blend)",
+      "properties": [
+        "immune support",
+        "strength",
+        "vitality",
+        "protection",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet and spine. Diffuse for protective support."
+    },
+    {
+      "name": "TerraShield (Outdoor Blend)",
+      "properties": [
+        "outdoor protection",
+        "freshness",
+        "comfort",
+        "shield",
+        "natural"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to exposed skin before outdoor activities."
+    },
+    {
+      "name": "Thinker (Focus Blend)",
+      "properties": [
+        "focus",
+        "clarity",
+        "concentration",
+        "mental clarity",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples and wrists when studying or needing mental clarity."
+    },
+    {
+      "name": "Whisper (Blend for Women)",
+      "properties": [
+        "feminine energy",
+        "confidence",
+        "beauty",
+        "allure",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck as natural perfume. Diffuse for feminine confidence."
+    },
+    {
+      "name": "Yarrow|Pom",
+      "properties": [
+        "cellular health",
+        "radiance",
+        "vitality",
+        "antioxidant",
+        "beauty"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to face and body for radiant, healthy-looking skin."
+    },
+    {
+      "name": "Zendocrine (Detoxification Blend)",
+      "properties": [
+        "detox",
+        "cleansing",
+        "purifying",
+        "liver support",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to liver area. Take internally for detox support. Diffuse for cleansing."
+    },
+    {
+      "name": "ZenGest (Digestive Blend)",
+      "properties": [
+        "digestive comfort",
+        "soothing",
+        "calm stomach",
+        "wellness",
+        "balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen in clockwise motion. Take internally for digestive wellness."
+    },
+    {
+      "name": "Adaptiv (Calming Blend)",
+      "properties": [
+        "adaptability",
+        "stress relief",
+        "calm",
+        "balance",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck during stressful times. Inhale to promote adaptability."
+    },
+    {
+      "name": "Air-X (Respiratory Blend)",
+      "properties": [
+        "clear breathing",
+        "respiratory support",
+        "freshness",
+        "vitality",
+        "openness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory clarity and support."
+    },
+    {
+      "name": "Align (Centering Blend)",
+      "properties": [
+        "alignment",
+        "centering",
+        "balance",
+        "harmony",
+        "flow"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply along spine. Diffuse during yoga or alignment practices."
+    },
+    {
+      "name": "Anchor (Steadying Blend)",
+      "properties": [
+        "stability",
+        "grounding",
+        "strength",
+        "steadiness",
+        "foundation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet and base of spine. Diffuse for grounding."
+    },
+    {
+      "name": "Arise (Enlightening Blend)",
+      "properties": [
+        "awakening",
+        "clarity",
+        "enlightenment",
+        "awareness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points in morning. Diffuse for awakening energy."
+    },
+    {
+      "name": "Brave (Courage Blend)",
+      "properties": [
+        "courage",
+        "strength",
+        "confidence",
+        "bravery",
+        "empowerment"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart before challenges. Inhale for courage and strength."
+    },
+    {
+      "name": "Calmer (Restful Blend)",
+      "properties": [
+        "calm",
+        "peace",
+        "rest",
+        "tranquility",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and back of neck. Diffuse for peaceful calm."
+    },
+    {
+      "name": "Coconut Oil (Fractionated)",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "dilution",
+        "nourishing",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil for diluting essential oils. Apply for moisturizing."
+    },
+    {
+      "name": "Correct-X (Soothing Ointment)",
+      "properties": [
+        "skin soothing",
+        "protective",
+        "comfort",
+        "healing support",
+        "care"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to skin for soothing support and protection."
+    },
+    {
+      "name": "Easy Air",
+      "properties": [
+        "easy breathing",
+        "respiratory comfort",
+        "openness",
+        "clarity",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and throat. Diffuse for respiratory ease."
+    },
+    {
+      "name": "Enroll",
+      "properties": [
+        "focus",
+        "mental clarity",
+        "learning support",
+        "concentration",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply before studying or learning. Diffuse for focus and concentration."
+    },
+    {
+      "name": "Ginger Touch",
+      "properties": [
+        "digestive comfort",
+        "warmth",
+        "soothing",
+        "nausea relief",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on abdomen for digestive support. Apply to wrists for nausea relief."
+    },
+    {
+      "name": "Guardian",
+      "properties": [
+        "protection",
+        "immune support",
+        "strength",
+        "vitality",
+        "defense"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet and chest. Diffuse for protective support."
+    },
+    {
+      "name": "Holiday Joy",
+      "properties": [
+        "joy",
+        "celebration",
+        "warmth",
+        "togetherness",
+        "festive"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse during holidays for warm, joyful atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Hope Touch",
+      "properties": [
+        "hope",
+        "optimism",
+        "encouragement",
+        "uplift",
+        "light"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for hopeful, uplifting feelings."
+    },
+    {
+      "name": "Lavender Touch",
+      "properties": [
+        "calming",
+        "peace",
+        "relaxation",
+        "soothing",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on wrists, temples, and neck for instant calm and relaxation."
+    },
+    {
+      "name": "MetaPWR (Metabolic Blend)",
+      "properties": [
+        "metabolism support",
+        "energy",
+        "vitality",
+        "wellness",
+        "balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points. Add to water. Diffuse for metabolic support."
+    },
+    {
+      "name": "Northern Escape",
+      "properties": [
+        "escape",
+        "freshness",
+        "clarity",
+        "renewal",
+        "invigoration"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, invigorating atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Oregano Touch",
+      "properties": [
+        "immune support",
+        "vitality",
+        "strength",
+        "protection",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on bottom of feet for immune support. Pre-diluted for safe use."
+    },
+    {
+      "name": "Peppermint Touch",
+      "properties": [
+        "energy",
+        "focus",
+        "cooling",
+        "alertness",
+        "clarity"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on temples and neck for instant energy and focus."
+    },
+    {
+      "name": "Steady (Grounding Blend)",
+      "properties": [
+        "steady",
+        "grounding",
+        "calm",
+        "balance",
+        "centered"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet and pulse points. Diffuse for grounding."
+    },
+    {
+      "name": "Stronger Touch",
+      "properties": [
+        "immune strength",
+        "vitality",
+        "protection",
+        "wellness",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on spine and feet for immune support. Pre-diluted for kids."
+    },
+    {
+      "name": "Sunny Citrus",
+      "properties": [
+        "sunny",
+        "cheerful",
+        "uplifting",
+        "joy",
+        "brightness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for cheerful atmosphere. Apply to pulse points for instant uplift."
+    },
+    {
+      "name": "Tamer (Digestive Blend)",
+      "properties": [
+        "digestive comfort",
+        "soothing",
+        "calm stomach",
+        "gentle",
+        "ease"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on abdomen for gentle digestive support. Safe for kids."
+    },
+    {
+      "name": "Tea Tree Touch",
+      "properties": [
+        "cleansing",
+        "purifying",
+        "skin health",
+        "protection",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on skin for purifying support. Pre-diluted for easy application."
+    },
+    {
+      "name": "Thinker Touch",
+      "properties": [
+        "focus",
+        "clarity",
+        "concentration",
+        "alertness",
+        "mental support"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on temples and wrists for focus. Great for study sessions."
+    },
+    {
+      "name": "ZenGest Touch",
+      "properties": [
+        "digestive ease",
+        "comfort",
+        "soothing",
+        "calm",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Roll on abdomen in clockwise motion for digestive comfort."
+    },
+    {
+      "name": "Blood Orange",
+      "properties": [
+        "uplifting",
+        "joy",
+        "creativity",
+        "vitality",
+        "positivity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for uplifting atmosphere. Add to water. Apply to pulse points."
+    },
+    {
+      "name": "Clementine",
+      "properties": [
+        "happiness",
+        "playfulness",
+        "lightness",
+        "joy",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for cheerful energy. Add to water. Apply to chest."
+    },
+    {
+      "name": "Mandarin",
+      "properties": [
+        "calm",
+        "peace",
+        "gentle",
+        "soothing",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for gentle calm. Safe for children. Add to water."
+    },
+    {
+      "name": "Red Mandarin",
+      "properties": [
+        "joy",
+        "uplifting",
+        "creativity",
+        "happiness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for joyful atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Anise",
+      "properties": [
+        "digestive support",
+        "respiratory health",
+        "comfort",
+        "warmth",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for respiratory support. Add to tea."
+    },
+    {
+      "name": "Caraway",
+      "properties": [
+        "digestive support",
+        "comfort",
+        "warmth",
+        "soothing",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food. Diffuse for digestive comfort."
+    },
+    {
+      "name": "Carrot Seed",
+      "properties": [
+        "skin health",
+        "radiance",
+        "renewal",
+        "vitality",
+        "beauty"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to face for radiant skin. Diffuse for renewal."
+    },
+    {
+      "name": "Catnip",
+      "properties": [
+        "calm",
+        "relaxation",
+        "peace",
+        "soothing",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points for relaxation."
+    },
+    {
+      "name": "Chamomile (German)",
+      "properties": [
+        "calming",
+        "skin soothing",
+        "peace",
+        "relaxation",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to skin. Diffuse for peaceful sleep. Add to tea."
+    },
+    {
+      "name": "Cumin",
+      "properties": [
+        "digestive support",
+        "warmth",
+        "circulation",
+        "vitality",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to cooking. Diffuse sparingly."
+    },
+    {
+      "name": "Hyssop",
+      "properties": [
+        "purifying",
+        "respiratory support",
+        "cleansing",
+        "renewal",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory and emotional support."
+    },
+    {
+      "name": "Mugwort",
+      "properties": [
+        "dream support",
+        "intuition",
+        "spiritual connection",
+        "vision",
+        "insight"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye before sleep. Diffuse for dream support."
+    },
+    {
+      "name": "Sage",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "wisdom",
+        "protection",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for purifying atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Tarragon",
+      "properties": [
+        "digestive support",
+        "calm",
+        "soothing",
+        "comfort",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food. Diffuse for calm."
+    },
+    {
+      "name": "Valerian",
+      "properties": [
+        "deep sleep",
+        "relaxation",
+        "calm",
+        "peace",
+        "rest"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse before bed for deep sleep. Apply to feet."
+    },
+    {
+      "name": "Wormwood",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for purifying. Use with caution, dilute heavily."
+    },
+    {
+      "name": "Champaca",
+      "properties": [
+        "romance",
+        "sensuality",
+        "confidence",
+        "beauty",
+        "allure"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for romantic atmosphere."
+    },
+    {
+      "name": "Frangipani",
+      "properties": [
+        "love",
+        "beauty",
+        "feminine energy",
+        "grace",
+        "elegance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply as natural perfume. Diffuse for loving atmosphere."
+    },
+    {
+      "name": "Gardenia",
+      "properties": [
+        "love",
+        "peace",
+        "harmony",
+        "beauty",
+        "serenity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for peaceful love."
+    },
+    {
+      "name": "Heliotrope",
+      "properties": [
+        "peace",
+        "calm",
+        "serenity",
+        "gentle",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for peaceful calm. Apply to pulse points."
+    },
+    {
+      "name": "Lotus",
+      "properties": [
+        "spiritual connection",
+        "enlightenment",
+        "purity",
+        "meditation",
+        "sacred"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to crown chakra. Diffuse during meditation."
+    },
+    {
+      "name": "Osmanthus",
+      "properties": [
+        "joy",
+        "uplifting",
+        "beauty",
+        "confidence",
+        "happiness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for joyful atmosphere."
+    },
+    {
+      "name": "Tuberose",
+      "properties": [
+        "sensuality",
+        "confidence",
+        "beauty",
+        "allure",
+        "feminine energy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply as natural perfume. Diffuse for sensual atmosphere."
+    },
+    {
+      "name": "Amyris",
+      "properties": [
+        "grounding",
+        "calm",
+        "meditation",
+        "peace",
+        "stability"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet for grounding. Diffuse for meditation."
+    },
+    {
+      "name": "Atlas Cedarwood",
+      "properties": [
+        "grounding",
+        "confidence",
+        "strength",
+        "stability",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet and spine. Diffuse for grounding."
+    },
+    {
+      "name": "Balsam Fir",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "focus"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy. Apply to chest."
+    },
+    {
+      "name": "Black Spruce",
+      "properties": [
+        "grounding",
+        "strength",
+        "stability",
+        "protection",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet and spine. Diffuse for strength."
+    },
+    {
+      "name": "Blue Cypress",
+      "properties": [
+        "calm",
+        "peace",
+        "emotional balance",
+        "soothing",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points."
+    },
+    {
+      "name": "Cajeput",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "vitality",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Cistus (Rock Rose)",
+      "properties": [
+        "emotional healing",
+        "protection",
+        "renewal",
+        "strength",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for emotional healing."
+    },
+    {
+      "name": "Elemi",
+      "properties": [
+        "renewal",
+        "clarity",
+        "focus",
+        "vitality",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for clarity. Apply to temples for focus."
+    },
+    {
+      "name": "Guaiacwood",
+      "properties": [
+        "grounding",
+        "calm",
+        "meditation",
+        "peace",
+        "centering"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for meditation."
+    },
+    {
+      "name": "Ho Wood",
+      "properties": [
+        "calm",
+        "relaxation",
+        "peace",
+        "soothing",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points."
+    },
+    {
+      "name": "Kanuka",
+      "properties": [
+        "skin health",
+        "purifying",
+        "renewal",
+        "vitality",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying."
+    },
+    {
+      "name": "Larch",
+      "properties": [
+        "strength",
+        "courage",
+        "confidence",
+        "resilience",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for strength and courage."
+    },
+    {
+      "name": "Niaouli",
+      "properties": [
+        "respiratory support",
+        "purifying",
+        "clarity",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Pine",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy. Apply to chest."
+    },
+    {
+      "name": "Ravensara",
+      "properties": [
+        "respiratory support",
+        "immune support",
+        "protection",
+        "vitality",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and feet. Diffuse for respiratory support."
+    },
+    {
+      "name": "Siberian Fir",
+      "properties": [
+        "grounding",
+        "focus",
+        "clarity",
+        "renewal",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for focus. Apply to chest for clarity."
+    },
+    {
+      "name": "Spruce",
+      "properties": [
+        "grounding",
+        "strength",
+        "stability",
+        "protection",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding."
+    },
+    {
+      "name": "Tea Tree (Narrow Leaf)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying."
+    },
+    {
+      "name": "Ylang Ylang Complete",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for self-love."
+    },
+    {
+      "name": "Allspice",
+      "properties": [
+        "warmth",
+        "comfort",
+        "circulation",
+        "vitality",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to recipes. Diffuse for warmth."
+    },
+    {
+      "name": "Bay Laurel",
+      "properties": [
+        "clarity",
+        "focus",
+        "wisdom",
+        "protection",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples. Diffuse for clarity and focus."
+    },
+    {
+      "name": "Caraway Seed",
+      "properties": [
+        "digestive support",
+        "comfort",
+        "warmth",
+        "soothing",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food. Diffuse for digestive comfort."
+    },
+    {
+      "name": "Celery",
+      "properties": [
+        "detoxification",
+        "liver support",
+        "cleansing",
+        "purifying",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to liver area. Add to water. Diffuse for cleansing."
+    },
+    {
+      "name": "Fenugreek",
+      "properties": [
+        "digestive support",
+        "comfort",
+        "warmth",
+        "soothing",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food. Diffuse for digestive support."
+    },
+    {
+      "name": "Galangal",
+      "properties": [
+        "digestive support",
+        "warmth",
+        "circulation",
+        "vitality",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to recipes. Diffuse for warmth."
+    },
+    {
+      "name": "Ginger (Wild)",
+      "properties": [
+        "digestive support",
+        "warmth",
+        "circulation",
+        "vitality",
+        "nausea relief"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Inhale for nausea. Add to tea."
+    },
+    {
+      "name": "Grains of Paradise",
+      "properties": [
+        "digestive support",
+        "warmth",
+        "circulation",
+        "vitality",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to recipes. Diffuse for warmth."
+    },
+    {
+      "name": "Nutmeg",
+      "properties": [
+        "warmth",
+        "comfort",
+        "circulation",
+        "vitality",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to recipes. Diffuse for warmth."
+    },
+    {
+      "name": "Pimento Berry",
+      "properties": [
+        "warmth",
+        "comfort",
+        "circulation",
+        "vitality",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to recipes. Diffuse for warmth."
+    },
+    {
+      "name": "Vanilla",
+      "properties": [
+        "comfort",
+        "warmth",
+        "calm",
+        "soothing",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for comforting atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Agarwood (Oud)",
+      "properties": [
+        "spiritual connection",
+        "meditation",
+        "sacred",
+        "grounding",
+        "wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse during meditation."
+    },
+    {
+      "name": "Ambrette Seed",
+      "properties": [
+        "sensuality",
+        "confidence",
+        "beauty",
+        "allure",
+        "feminine energy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply as natural perfume. Diffuse for sensual atmosphere."
+    },
+    {
+      "name": "Angelica Root",
+      "properties": [
+        "protection",
+        "spiritual connection",
+        "grounding",
+        "strength",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for protection."
+    },
+    {
+      "name": "Balsam Poplar",
+      "properties": [
+        "soothing",
+        "comfort",
+        "warmth",
+        "calm",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to muscles. Diffuse for soothing comfort."
+    },
+    {
+      "name": "Balsam Peru",
+      "properties": [
+        "warmth",
+        "comfort",
+        "soothing",
+        "calm",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for warm, comforting atmosphere."
+    },
+    {
+      "name": "Balsam Tolu",
+      "properties": [
+        "warmth",
+        "comfort",
+        "respiratory support",
+        "soothing",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory comfort."
+    },
+    {
+      "name": "Benzoin",
+      "properties": [
+        "warmth",
+        "comfort",
+        "soothing",
+        "calm",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for warm, comforting atmosphere."
+    },
+    {
+      "name": "Black Cumin",
+      "properties": [
+        "immune support",
+        "vitality",
+        "protection",
+        "strength",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to feet. Take internally for immune support."
+    },
+    {
+      "name": "Blue Chamomile",
+      "properties": [
+        "skin soothing",
+        "calming",
+        "peace",
+        "relaxation",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for peaceful calm."
+    },
+    {
+      "name": "Buchu",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "renewal",
+        "vitality",
+        "detoxification"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to kidney area. Diffuse for purifying."
+    },
+    {
+      "name": "Calamus",
+      "properties": [
+        "focus",
+        "clarity",
+        "mental sharpness",
+        "alertness",
+        "concentration"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples. Diffuse for focus."
+    },
+    {
+      "name": "Calendula",
+      "properties": [
+        "skin health",
+        "healing",
+        "soothing",
+        "comfort",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to skin for healing support."
+    },
+    {
+      "name": "Carrot",
+      "properties": [
+        "skin health",
+        "radiance",
+        "renewal",
+        "vitality",
+        "beauty"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to face for radiant skin."
+    },
+    {
+      "name": "Cistus",
+      "properties": [
+        "emotional healing",
+        "protection",
+        "renewal",
+        "strength",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for emotional healing."
+    },
+    {
+      "name": "Copaiba (Wild)",
+      "properties": [
+        "soothing",
+        "inner peace",
+        "anxiety relief",
+        "cellular health",
+        "calm"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points. Take internally for wellness."
+    },
+    {
+      "name": "Cypress (Blue)",
+      "properties": [
+        "calm",
+        "peace",
+        "emotional balance",
+        "soothing",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points."
+    },
+    {
+      "name": "Davana",
+      "properties": [
+        "spiritual connection",
+        "meditation",
+        "sacred",
+        "grounding",
+        "wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse during meditation."
+    },
+    {
+      "name": "Elecampane",
+      "properties": [
+        "respiratory support",
+        "comfort",
+        "warmth",
+        "soothing",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Eucalyptus (Blue Gum)",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Eucalyptus (Lemon)",
+      "properties": [
+        "clarity",
+        "freshness",
+        "uplifting",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, uplifting energy."
+    },
+    {
+      "name": "Eucalyptus (Radiata)",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Eucalyptus (Smithii)",
+      "properties": [
+        "respiratory support",
+        "gentle",
+        "soothing",
+        "comfort",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Safe for children. Diffuse for respiratory support."
+    },
+    {
+      "name": "Fir (Balsam)",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "focus"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy."
+    },
+    {
+      "name": "Fir (Silver)",
+      "properties": [
+        "grounding",
+        "focus",
+        "clarity",
+        "renewal",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for focus. Apply to chest."
+    },
+    {
+      "name": "Galbanum",
+      "properties": [
+        "grounding",
+        "protection",
+        "strength",
+        "stability",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding and protection."
+    },
+    {
+      "name": "Ginger (Wild)",
+      "properties": [
+        "digestive support",
+        "warmth",
+        "circulation",
+        "vitality",
+        "nausea relief"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Inhale for nausea."
+    },
+    {
+      "name": "Goldenrod",
+      "properties": [
+        "respiratory support",
+        "comfort",
+        "soothing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Gurjun Balsam",
+      "properties": [
+        "respiratory support",
+        "comfort",
+        "warmth",
+        "soothing",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory comfort."
+    },
+    {
+      "name": "Hinoki (Japanese Cypress)",
+      "properties": [
+        "relaxation",
+        "grounding",
+        "meditation",
+        "peace",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for deep relaxation."
+    },
+    {
+      "name": "Ho Leaf",
+      "properties": [
+        "calm",
+        "relaxation",
+        "peace",
+        "soothing",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points."
+    },
+    {
+      "name": "Hyssop (Decumbens)",
+      "properties": [
+        "purifying",
+        "respiratory support",
+        "cleansing",
+        "renewal",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Immortelle (Helichrysum)",
+      "properties": [
+        "healing",
+        "renewal",
+        "skin health",
+        "emotional release",
+        "regeneration"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin for regeneration."
+    },
+    {
+      "name": "Inula",
+      "properties": [
+        "respiratory support",
+        "comfort",
+        "soothing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Jasmine (Absolute)",
+      "properties": [
+        "romance",
+        "confidence",
+        "joy",
+        "feminine energy",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and heart. Diffuse for romantic atmosphere."
+    },
+    {
+      "name": "Jasmine (Sambac)",
+      "properties": [
+        "romance",
+        "confidence",
+        "joy",
+        "feminine energy",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for romantic atmosphere."
+    },
+    {
+      "name": "Juniper (Cade)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "grounding",
+        "emotional detox",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to kidney area. Diffuse for purification."
+    },
+    {
+      "name": "Labdanum",
+      "properties": [
+        "grounding",
+        "protection",
+        "strength",
+        "stability",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding."
+    },
+    {
+      "name": "Lavender (Spike)",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Lavender (Stoechas)",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Ledum",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying."
+    },
+    {
+      "name": "Lemon (Petitgrain)",
+      "properties": [
+        "calm",
+        "sleep",
+        "nervous tension relief",
+        "peace",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse before bed."
+    },
+    {
+      "name": "Lemon Myrtle",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, purifying atmosphere."
+    },
+    {
+      "name": "Linden Blossom",
+      "properties": [
+        "calm",
+        "peace",
+        "relaxation",
+        "soothing",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for calm. Apply to pulse points."
+    },
+    {
+      "name": "Mastic",
+      "properties": [
+        "digestive support",
+        "comfort",
+        "soothing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for digestive support."
+    },
+    {
+      "name": "Mimosa",
+      "properties": [
+        "emotional healing",
+        "comfort",
+        "soothing",
+        "peace",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for emotional healing."
+    },
+    {
+      "name": "Monarda",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying."
+    },
+    {
+      "name": "Mountain Savory",
+      "properties": [
+        "immune support",
+        "vitality",
+        "protection",
+        "strength",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute before use. Take internally for immune support."
+    },
+    {
+      "name": "Myrtle",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Safe for children. Diffuse for respiratory support."
+    },
+    {
+      "name": "Neroli (Bigarade)",
+      "properties": [
+        "confidence",
+        "emotional strength",
+        "joy",
+        "peace",
+        "heart healing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for confidence."
+    },
+    {
+      "name": "Oakmoss",
+      "properties": [
+        "grounding",
+        "stability",
+        "confidence",
+        "connection",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding."
+    },
+    {
+      "name": "Opoponax",
+      "properties": [
+        "grounding",
+        "protection",
+        "strength",
+        "stability",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding."
+    },
+    {
+      "name": "Palmarosa",
+      "properties": [
+        "skin health",
+        "emotional balance",
+        "harmony",
+        "renewal",
+        "beauty"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for emotional balance."
+    },
+    {
+      "name": "Palo Santo",
+      "properties": [
+        "spiritual connection",
+        "purifying",
+        "protection",
+        "meditation",
+        "sacred"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse during meditation."
+    },
+    {
+      "name": "Patchouli (Dark)",
+      "properties": [
+        "grounding",
+        "confidence",
+        "physicality",
+        "abundance",
+        "sensuality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to lower abdomen. Diffuse for grounding."
+    },
+    {
+      "name": "Patchouli (Light)",
+      "properties": [
+        "grounding",
+        "confidence",
+        "physicality",
+        "abundance",
+        "sensuality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to lower abdomen. Diffuse for grounding."
+    },
+    {
+      "name": "Pennyroyal",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Use with caution. Diffuse sparingly for purifying."
+    },
+    {
+      "name": "Peru Balsam",
+      "properties": [
+        "warmth",
+        "comfort",
+        "soothing",
+        "calm",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for warm, comforting atmosphere."
+    },
+    {
+      "name": "Pine (Scots)",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy."
+    },
+    {
+      "name": "Pine (Siberian)",
+      "properties": [
+        "grounding",
+        "focus",
+        "clarity",
+        "renewal",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for focus. Apply to chest."
+    },
+    {
+      "name": "Pine Needle",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy."
+    },
+    {
+      "name": "Pink Grapefruit",
+      "properties": [
+        "metabolism",
+        "body love",
+        "confidence",
+        "lightness",
+        "gratitude"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to areas of concern. Add to water."
+    },
+    {
+      "name": "Ravensara (Aromatica)",
+      "properties": [
+        "respiratory support",
+        "immune support",
+        "protection",
+        "vitality",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Rose (Bulgarian)",
+      "properties": [
+        "love",
+        "compassion",
+        "divine feminine",
+        "heart healing",
+        "grace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for emotional healing."
+    },
+    {
+      "name": "Rose (Damask)",
+      "properties": [
+        "love",
+        "compassion",
+        "divine feminine",
+        "heart healing",
+        "grace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for emotional healing."
+    },
+    {
+      "name": "Rose (Moroccan)",
+      "properties": [
+        "love",
+        "compassion",
+        "divine feminine",
+        "heart healing",
+        "grace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for emotional healing."
+    },
+    {
+      "name": "Rose (Otto)",
+      "properties": [
+        "love",
+        "compassion",
+        "divine feminine",
+        "heart healing",
+        "grace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for emotional healing."
+    },
+    {
+      "name": "Rosemary (Cineole)",
+      "properties": [
+        "memory",
+        "focus",
+        "clarity",
+        "mental sharpness",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to temples. Diffuse while studying."
+    },
+    {
+      "name": "Rosemary (Verbenone)",
+      "properties": [
+        "memory",
+        "focus",
+        "clarity",
+        "mental sharpness",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to temples. Diffuse while studying."
+    },
+    {
+      "name": "Sage (Clary)",
+      "properties": [
+        "clarity",
+        "vision",
+        "hormonal balance",
+        "intuition",
+        "insight"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for clarity."
+    },
+    {
+      "name": "Sage (Spanish)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "wisdom",
+        "protection",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for purifying atmosphere."
+    },
+    {
+      "name": "Sandalwood (Australian)",
+      "properties": [
+        "meditation",
+        "spiritual connection",
+        "clarity",
+        "sacred",
+        "inner peace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye. Diffuse during meditation."
+    },
+    {
+      "name": "Sandalwood (Indian)",
+      "properties": [
+        "meditation",
+        "spiritual connection",
+        "clarity",
+        "sacred",
+        "inner peace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye. Diffuse during meditation."
+    },
+    {
+      "name": "Sandalwood (New Caledonian)",
+      "properties": [
+        "meditation",
+        "spiritual connection",
+        "clarity",
+        "sacred",
+        "inner peace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye. Diffuse during meditation."
+    },
+    {
+      "name": "Sassafras",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Use with caution. Diffuse sparingly."
+    },
+    {
+      "name": "Savory (Summer)",
+      "properties": [
+        "immune support",
+        "vitality",
+        "protection",
+        "strength",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute before use. Take internally for immune support."
+    },
+    {
+      "name": "Schisandra",
+      "properties": [
+        "vitality",
+        "energy",
+        "wellness",
+        "strength",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Take internally for vitality. Apply to pulse points."
+    },
+    {
+      "name": "Spikenard (Himalayan)",
+      "properties": [
+        "spiritual connection",
+        "grounding",
+        "meditation",
+        "devotion",
+        "ancient wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to crown. Diffuse during prayer."
+    },
+    {
+      "name": "Styrax",
+      "properties": [
+        "grounding",
+        "protection",
+        "strength",
+        "stability",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet. Diffuse for grounding."
+    },
+    {
+      "name": "Tagetes",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Use with caution. Diffuse sparingly."
+    },
+    {
+      "name": "Tansy (Blue)",
+      "properties": [
+        "calm",
+        "emotional release",
+        "soothing",
+        "peaceful",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for emotional calm."
+    },
+    {
+      "name": "Tansy (Common)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Use with caution. Diffuse sparingly."
+    },
+    {
+      "name": "Tarragon (Russian)",
+      "properties": [
+        "digestive support",
+        "calm",
+        "soothing",
+        "comfort",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to abdomen. Add to food."
+    },
+    {
+      "name": "Tea Tree (Lemon Scented)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for fresh, purifying atmosphere."
+    },
+    {
+      "name": "Thyme (Linalool)",
+      "properties": [
+        "immune support",
+        "gentle",
+        "soothing",
+        "comfort",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to chest. Safe for children. Diffuse for immune support."
+    },
+    {
+      "name": "Thyme (Thymol)",
+      "properties": [
+        "immune support",
+        "strength",
+        "courage",
+        "vitality",
+        "protection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute before use. Take internally for immune support."
+    },
+    {
+      "name": "Tolu Balsam",
+      "properties": [
+        "warmth",
+        "comfort",
+        "respiratory support",
+        "soothing",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory comfort."
+    },
+    {
+      "name": "Tonka Bean",
+      "properties": [
+        "comfort",
+        "warmth",
+        "calm",
+        "soothing",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for comforting atmosphere."
+    },
+    {
+      "name": "Turmeric (Curcuma)",
+      "properties": [
+        "inflammation support",
+        "cellular health",
+        "vitality",
+        "cleansing",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to areas of concern. Take internally for wellness."
+    },
+    {
+      "name": "Valerian (Root)",
+      "properties": [
+        "deep sleep",
+        "relaxation",
+        "calm",
+        "peace",
+        "rest"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse before bed for deep sleep. Apply to feet."
+    },
+    {
+      "name": "Vanilla (Absolute)",
+      "properties": [
+        "comfort",
+        "warmth",
+        "calm",
+        "soothing",
+        "coziness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for comforting atmosphere. Apply to pulse points."
+    },
+    {
+      "name": "Verbena (Lemon)",
+      "properties": [
+        "uplifting",
+        "clarity",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for uplifting, fresh energy."
+    },
+    {
+      "name": "Vetiver (Haitian)",
+      "properties": [
+        "grounding",
+        "focus",
+        "calm",
+        "stability",
+        "emotional anchoring"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet. Diffuse for grounding."
+    },
+    {
+      "name": "Vetiver (Indian)",
+      "properties": [
+        "grounding",
+        "focus",
+        "calm",
+        "stability",
+        "emotional anchoring"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet. Diffuse for grounding."
+    },
+    {
+      "name": "Vitex",
+      "properties": [
+        "hormonal balance",
+        "calm",
+        "comfort",
+        "feminine support",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to abdomen. Diffuse for hormonal support."
+    },
+    {
+      "name": "Winter Savory",
+      "properties": [
+        "immune support",
+        "vitality",
+        "protection",
+        "strength",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Dilute before use. Take internally for immune support."
+    },
+    {
+      "name": "Wormwood (Common)",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "protection",
+        "renewal",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Use with caution. Dilute heavily. Diffuse sparingly."
+    },
+    {
+      "name": "Yarrow (Blue)",
+      "properties": [
+        "emotional balance",
+        "boundaries",
+        "protection",
+        "renewal",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for emotional boundaries."
+    },
+    {
+      "name": "Ylang Ylang (Extra)",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for self-love."
+    },
+    {
+      "name": "Ylang Ylang (I)",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for self-love."
+    },
+    {
+      "name": "Ylang Ylang (II)",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for self-love."
+    },
+    {
+      "name": "Ylang Ylang (III)",
+      "properties": [
+        "self-love",
+        "confidence",
+        "sensuality",
+        "emotional healing",
+        "heart opening"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for self-love."
+    },
+    {
+      "name": "Abundance (Prosperity Blend)",
+      "properties": [
+        "abundance",
+        "prosperity",
+        "gratitude",
+        "manifestation",
+        "wealth consciousness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for abundance mindset."
+    },
+    {
+      "name": "AromaTouch Technique",
+      "properties": [
+        "massage",
+        "relaxation",
+        "stress relief",
+        "comfort",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use during massage for ultimate relaxation."
+    },
+    {
+      "name": "Awaken (Energizing Blend)",
+      "properties": [
+        "energy",
+        "awakening",
+        "vitality",
+        "alertness",
+        "motivation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points in morning. Diffuse for awakening energy."
+    },
+    {
+      "name": "Breathe (Easy Air)",
+      "properties": [
+        "easy breathing",
+        "respiratory comfort",
+        "openness",
+        "clarity",
+        "freshness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and throat. Diffuse for respiratory ease."
+    },
+    {
+      "name": "Calm (Peaceful Blend)",
+      "properties": [
+        "calm",
+        "peace",
+        "tranquility",
+        "soothing",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for peaceful calm."
+    },
+    {
+      "name": "Cheer Up (Uplifting Blend)",
+      "properties": [
+        "happiness",
+        "optimism",
+        "cheerfulness",
+        "positivity",
+        "joy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for cheerful atmosphere."
+    },
+    {
+      "name": "Citrus Fresh",
+      "properties": [
+        "energizing",
+        "creativity",
+        "joy",
+        "positivity",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Diffuse for energizing atmosphere. Add to water."
+    },
+    {
+      "name": "Clarity (Focus Blend)",
+      "properties": [
+        "focus",
+        "clarity",
+        "concentration",
+        "mental sharpness",
+        "alertness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples. Diffuse for focus and clarity."
+    },
+    {
+      "name": "Dream Catcher",
+      "properties": [
+        "dream support",
+        "sleep",
+        "peace",
+        "relaxation",
+        "rest"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to feet before bed. Diffuse for dream support."
+    },
+    {
+      "name": "EndoFlex",
+      "properties": [
+        "metabolism support",
+        "energy",
+        "vitality",
+        "wellness",
+        "balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for metabolic support."
+    },
+    {
+      "name": "En-R-Gee",
+      "properties": [
+        "energy",
+        "vitality",
+        "alertness",
+        "motivation",
+        "strength"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for energy boost."
+    },
+    {
+      "name": "Evergreen Essence",
+      "properties": [
+        "grounding",
+        "freshness",
+        "clarity",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse for fresh, grounding energy."
+    },
+    {
+      "name": "Exodus II",
+      "properties": [
+        "spiritual connection",
+        "protection",
+        "strength",
+        "grounding",
+        "wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for spiritual protection."
+    },
+    {
+      "name": "Forgiveness",
+      "properties": [
+        "forgiveness",
+        "release",
+        "letting go",
+        "freedom",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale during meditation."
+    },
+    {
+      "name": "Gathering",
+      "properties": [
+        "togetherness",
+        "warmth",
+        "connection",
+        "harmony",
+        "unity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse during gatherings. Apply to pulse points."
+    },
+    {
+      "name": "Gentle Baby",
+      "properties": [
+        "gentle",
+        "soothing",
+        "calm",
+        "peace",
+        "comfort"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to baby's feet. Diffuse for gentle calm."
+    },
+    {
+      "name": "Golden Touch",
+      "properties": [
+        "radiance",
+        "beauty",
+        "vitality",
+        "renewal",
+        "glow"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Apply to face and body for radiant skin."
+    },
+    {
+      "name": "Gratitude",
+      "properties": [
+        "gratitude",
+        "appreciation",
+        "abundance",
+        "joy",
+        "thankfulness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for gratitude practice."
+    },
+    {
+      "name": "Grounding (Balance)",
+      "properties": [
+        "grounding",
+        "stability",
+        "calm",
+        "centering",
+        "emotional balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to bottom of feet. Inhale deeply for grounding."
+    },
+    {
+      "name": "Harmony (Balance)",
+      "properties": [
+        "harmony",
+        "balance",
+        "peace",
+        "unity",
+        "wholeness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for harmony."
+    },
+    {
+      "name": "Highest Potential",
+      "properties": [
+        "motivation",
+        "courage",
+        "confidence",
+        "manifestation",
+        "success"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for motivation."
+    },
+    {
+      "name": "Hope (Encouraging Blend)",
+      "properties": [
+        "hope",
+        "optimism",
+        "encouragement",
+        "uplift",
+        "light"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for hopeful feelings."
+    },
+    {
+      "name": "Humility",
+      "properties": [
+        "humility",
+        "grace",
+        "peace",
+        "acceptance",
+        "gentleness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for humility and grace."
+    },
+    {
+      "name": "Inner Child",
+      "properties": [
+        "playfulness",
+        "joy",
+        "creativity",
+        "happiness",
+        "lightness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for playful energy."
+    },
+    {
+      "name": "Into the Future",
+      "properties": [
+        "vision",
+        "manifestation",
+        "clarity",
+        "purpose",
+        "direction"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye. Diffuse for vision."
+    },
+    {
+      "name": "Joy (Uplifting Blend)",
+      "properties": [
+        "joy",
+        "happiness",
+        "uplift",
+        "motivation",
+        "positive energy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale for instant mood boost."
+    },
+    {
+      "name": "JuvaFlex",
+      "properties": [
+        "liver support",
+        "detoxification",
+        "cleansing",
+        "purifying",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to liver area. Diffuse for detox support."
+    },
+    {
+      "name": "Lady Sclareol",
+      "properties": [
+        "feminine energy",
+        "confidence",
+        "beauty",
+        "allure",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for feminine confidence."
+    },
+    {
+      "name": "Live with Passion",
+      "properties": [
+        "passion",
+        "excitement",
+        "creativity",
+        "inspiration",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse to ignite passion."
+    },
+    {
+      "name": "Longevity",
+      "properties": [
+        "vitality",
+        "longevity",
+        "wellness",
+        "strength",
+        "resilience"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points. Take internally for vitality."
+    },
+    {
+      "name": "Magnify Your Purpose",
+      "properties": [
+        "purpose",
+        "clarity",
+        "direction",
+        "manifestation",
+        "vision"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to third eye. Diffuse for purpose clarity."
+    },
+    {
+      "name": "M-Grain",
+      "properties": [
+        "tension relief",
+        "comfort",
+        "ease",
+        "relaxation",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to temples and neck for tension relief."
+    },
+    {
+      "name": "Mister",
+      "properties": [
+        "masculine energy",
+        "confidence",
+        "strength",
+        "vitality",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for masculine confidence."
+    },
+    {
+      "name": "Morning Start",
+      "properties": [
+        "awakening",
+        "energy",
+        "vitality",
+        "alertness",
+        "motivation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points in morning. Diffuse for awakening."
+    },
+    {
+      "name": "NingXia Red",
+      "properties": [
+        "vitality",
+        "energy",
+        "wellness",
+        "antioxidant",
+        "strength"
+      ],
+      "usage_methods": [
+        "internal"
+      ],
+      "common_applications": "Take daily for vitality and antioxidant support."
+    },
+    {
+      "name": "Oola Balance",
+      "properties": [
+        "balance",
+        "harmony",
+        "peace",
+        "unity",
+        "wholeness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for balance."
+    },
+    {
+      "name": "Oola Grow",
+      "properties": [
+        "growth",
+        "expansion",
+        "vision",
+        "manifestation",
+        "progress"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for growth mindset."
+    },
+    {
+      "name": "Oola Give",
+      "properties": [
+        "generosity",
+        "compassion",
+        "love",
+        "service",
+        "kindness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for generous spirit."
+    },
+    {
+      "name": "Oola Finance",
+      "properties": [
+        "abundance",
+        "prosperity",
+        "wealth consciousness",
+        "manifestation",
+        "success"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for abundance mindset."
+    },
+    {
+      "name": "Oola Fitness",
+      "properties": [
+        "vitality",
+        "energy",
+        "strength",
+        "endurance",
+        "wellness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply before exercise. Diffuse for energy."
+    },
+    {
+      "name": "Oola Family",
+      "properties": [
+        "togetherness",
+        "love",
+        "harmony",
+        "unity",
+        "connection"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse during family time. Apply to pulse points."
+    },
+    {
+      "name": "Oola Field",
+      "properties": [
+        "purpose",
+        "passion",
+        "fulfillment",
+        "direction",
+        "vision"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for purpose clarity."
+    },
+    {
+      "name": "Oola Friends",
+      "properties": [
+        "friendship",
+        "connection",
+        "harmony",
+        "unity",
+        "togetherness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse during social gatherings. Apply to pulse points."
+    },
+    {
+      "name": "Oola Faith",
+      "properties": [
+        "faith",
+        "spiritual connection",
+        "trust",
+        "peace",
+        "devotion"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for spiritual connection."
+    },
+    {
+      "name": "PanAway",
+      "properties": [
+        "soothing",
+        "comfort",
+        "relief",
+        "recovery",
+        "physical ease"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Massage into muscles and joints for soothing comfort."
+    },
+    {
+      "name": "Peace & Calming",
+      "properties": [
+        "peace",
+        "calm",
+        "tranquility",
+        "soothing",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for peaceful calm."
+    },
+    {
+      "name": "Peace & Calming II",
+      "properties": [
+        "peace",
+        "calm",
+        "tranquility",
+        "soothing",
+        "relaxation"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists. Diffuse for peaceful calm."
+    },
+    {
+      "name": "Present Time",
+      "properties": [
+        "presence",
+        "mindfulness",
+        "awareness",
+        "clarity",
+        "focus"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for present moment awareness."
+    },
+    {
+      "name": "Purification",
+      "properties": [
+        "purifying",
+        "cleansing",
+        "fresh",
+        "renewal",
+        "clarity"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to skin. Diffuse for purifying atmosphere."
+    },
+    {
+      "name": "R.C. (Respiratory Blend)",
+      "properties": [
+        "breathing",
+        "respiratory support",
+        "openness",
+        "clarity",
+        "freedom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest and throat. Inhale deeply."
+    },
+    {
+      "name": "Raven",
+      "properties": [
+        "respiratory support",
+        "clarity",
+        "freshness",
+        "renewal",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to chest. Diffuse for respiratory support."
+    },
+    {
+      "name": "Release",
+      "properties": [
+        "release",
+        "letting go",
+        "freedom",
+        "renewal",
+        "emotional healing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale during meditation."
+    },
+    {
+      "name": "Relieve It",
+      "properties": [
+        "soothing",
+        "comfort",
+        "relief",
+        "recovery",
+        "physical ease"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Massage into muscles and joints for soothing comfort."
+    },
+    {
+      "name": "Sacred Mountain",
+      "properties": [
+        "spiritual connection",
+        "grounding",
+        "meditation",
+        "sacred",
+        "wisdom"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse during meditation."
+    },
+    {
+      "name": "Sara",
+      "properties": [
+        "feminine energy",
+        "confidence",
+        "beauty",
+        "allure",
+        "self-love"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for feminine confidence."
+    },
+    {
+      "name": "Sensation",
+      "properties": [
+        "sensuality",
+        "confidence",
+        "beauty",
+        "allure",
+        "feminine energy"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply as natural perfume. Diffuse for sensual atmosphere."
+    },
+    {
+      "name": "Shutran",
+      "properties": [
+        "masculine energy",
+        "confidence",
+        "strength",
+        "vitality",
+        "power"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for masculine confidence."
+    },
+    {
+      "name": "Slique Essence",
+      "properties": [
+        "metabolism support",
+        "energy",
+        "vitality",
+        "wellness",
+        "balance"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to pulse points. Add to water. Diffuse for metabolic support."
+    },
+    {
+      "name": "Stress Away",
+      "properties": [
+        "stress relief",
+        "calm",
+        "relaxation",
+        "peace",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to wrists and neck. Diffuse for stress relief."
+    },
+    {
+      "name": "Surrender",
+      "properties": [
+        "surrender",
+        "release",
+        "letting go",
+        "freedom",
+        "peace"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Inhale during meditation."
+    },
+    {
+      "name": "Thieves",
+      "properties": [
+        "protection",
+        "immune support",
+        "strength",
+        "defense",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic",
+        "internal"
+      ],
+      "common_applications": "Apply to bottom of feet. Diffuse to protect environment. Take internally for immune support."
+    },
+    {
+      "name": "The Gift",
+      "properties": [
+        "gratitude",
+        "appreciation",
+        "love",
+        "generosity",
+        "thankfulness"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for gratitude practice."
+    },
+    {
+      "name": "Three Wise Men",
+      "properties": [
+        "spiritual connection",
+        "wisdom",
+        "meditation",
+        "sacred",
+        "devotion"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse during prayer and meditation."
+    },
+    {
+      "name": "Transformation",
+      "properties": [
+        "transformation",
+        "change",
+        "renewal",
+        "growth",
+        "evolution"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for transformation energy."
+    },
+    {
+      "name": "Trauma Life",
+      "properties": [
+        "emotional healing",
+        "comfort",
+        "soothing",
+        "peace",
+        "renewal"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply over heart. Diffuse for emotional healing."
+    },
+    {
+      "name": "Valor (Courage Blend)",
+      "properties": [
+        "courage",
+        "strength",
+        "confidence",
+        "bravery",
+        "empowerment"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Inhale for courage and strength."
+    },
+    {
+      "name": "White Angelica",
+      "properties": [
+        "protection",
+        "spiritual connection",
+        "peace",
+        "harmony",
+        "divine"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Apply to pulse points. Diffuse for spiritual protection."
+    },
+    {
+      "name": "Winter Nights",
+      "properties": [
+        "warmth",
+        "coziness",
+        "comfort",
+        "peace",
+        "tranquility"
+      ],
+      "usage_methods": [
+        "topical",
+        "aromatic"
+      ],
+      "common_applications": "Diffuse during winter for warm, cozy atmosphere."
+    },
+    {
+      "name": "Wolfberry",
+      "properties": [
+        "vitality",
+        "energy",
+        "wellness",
+        "antioxidant",
+        "strength"
+      ],
+      "usage_methods": [
+        "internal"
+      ],
+      "common_applications": "Take daily for vitality and antioxidant support."
+    },
+    {
+      "name": "Almond Oil (Sweet)",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "gentle",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil for diluting essential oils. Apply for moisturizing."
+    },
+    {
+      "name": "Apricot Kernel Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "gentle",
+        "lightweight"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for facial application."
+    },
+    {
+      "name": "Argan Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "beauty",
+        "radiance"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Apply to face and hair for radiance."
+    },
+    {
+      "name": "Avocado Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "deep conditioning",
+        "rich"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for dry skin."
+    },
+    {
+      "name": "Babassu Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "lightweight",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Similar to coconut oil."
+    },
+    {
+      "name": "Black Cumin Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Take internally for wellness."
+    },
+    {
+      "name": "Black Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Take internally for wellness."
+    },
+    {
+      "name": "Borage Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "skin health",
+        "radiance"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for skin health."
+    },
+    {
+      "name": "Camellia Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "beauty",
+        "radiance"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Apply to face and hair."
+    },
+    {
+      "name": "Castor Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "thick",
+        "rich"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for hair and skin."
+    },
+    {
+      "name": "Coconut Oil (Virgin)",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "gentle",
+        "soothing"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Apply for moisturizing. Add to food."
+    },
+    {
+      "name": "Evening Primrose Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "hormonal balance",
+        "skin health"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Take internally for hormonal support."
+    },
+    {
+      "name": "Grapeseed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "lightweight",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for all skin types."
+    },
+    {
+      "name": "Hazelnut Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "lightweight",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for facial application."
+    },
+    {
+      "name": "Hemp Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Take internally for wellness."
+    },
+    {
+      "name": "Jojoba Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "balanced",
+        "versatile"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for all skin types."
+    },
+    {
+      "name": "Kukui Nut Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "beauty",
+        "radiance"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for skin and hair."
+    },
+    {
+      "name": "Macadamia Nut Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "rich",
+        "luxurious"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for dry skin."
+    },
+    {
+      "name": "Meadowfoam Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "stable",
+        "long-lasting"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for extended wear."
+    },
+    {
+      "name": "Moringa Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "wellness",
+        "vitality"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for skin health."
+    },
+    {
+      "name": "Olive Oil (Extra Virgin)",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "rich",
+        "traditional"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Add to food."
+    },
+    {
+      "name": "Pomegranate Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "antioxidant",
+        "beauty"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for anti-aging."
+    },
+    {
+      "name": "Rosehip Seed Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "skin health",
+        "radiance"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for facial application."
+    },
+    {
+      "name": "Safflower Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "lightweight",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for all skin types."
+    },
+    {
+      "name": "Sesame Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "warming",
+        "traditional"
+      ],
+      "usage_methods": [
+        "topical",
+        "internal"
+      ],
+      "common_applications": "Use as carrier oil. Add to food."
+    },
+    {
+      "name": "Sunflower Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "lightweight",
+        "gentle"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for all skin types."
+    },
+    {
+      "name": "Tamanu Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "healing",
+        "skin health"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for skin healing."
+    },
+    {
+      "name": "Wheat Germ Oil",
+      "properties": [
+        "carrier oil",
+        "moisturizing",
+        "nourishing",
+        "vitamin E",
+        "antioxidant"
+      ],
+      "usage_methods": [
+        "topical"
+      ],
+      "common_applications": "Use as carrier oil. Great for anti-aging."
+    }
   ]
 }
