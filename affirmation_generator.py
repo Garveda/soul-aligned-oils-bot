@@ -144,6 +144,16 @@ class AffirmationGenerator:
         'portal': ['Vetiver', 'Balance', 'Peace & Calming', 'Frankincense', 'Cedarwood']
     }
     
+    # Most commonly used oils - alternative oil should always be from this list
+    COMMONLY_USED_OILS = [
+        'Lavender', 'Peppermint', 'Lemon', 'Frankincense', 'Wild Orange',
+        'Eucalyptus', 'Tea Tree (Melaleuca)', 'Cedarwood', 'Bergamot', 'Rosemary',
+        'Ginger', 'Cinnamon Bark', 'Balance (Grounding Blend)', 'Breathe (Respiratory Blend)',
+        'On Guard (Protective Blend)', 'Deep Blue (Soothing Blend)', 'DigestZen (Digestive Blend)',
+        'Serenity (Restful Blend)', 'Peace (Reassuring Blend)', 'Elevation (Joyful Blend)',
+        'Grapefruit', 'Lime', 'Clary Sage', 'Ylang Ylang', 'Vetiver', 'Sandalwood'
+    ]
+    
     def __init__(self, db=None, lunar_calendar=None):
         """Initialize the affirmation generator."""
         self.client = OpenAI(api_key=Config.OPENAI_API_KEY)
@@ -387,12 +397,13 @@ WICHTIG:
                 message_type = special_day_info.get('message_type', 'regular')
             
             # Create appropriate prompt
+            common_oils_str = ', '.join(self.COMMONLY_USED_OILS[:15])  # First 15 for brevity
             if message_type == 'portal':
-                prompt = self._create_portal_prompt(language, special_day_info)
+                prompt = self._create_portal_prompt(language, special_day_info, common_oils_str)
             elif message_type == 'full_moon':
-                prompt = self._create_full_moon_prompt(language, special_day_info)
+                prompt = self._create_full_moon_prompt(language, special_day_info, common_oils_str)
             elif message_type == 'new_moon':
-                prompt = self._create_new_moon_prompt(language, special_day_info)
+                prompt = self._create_new_moon_prompt(language, special_day_info, common_oils_str)
             else:
                 prompt = self._create_prompt(language, exclude_oils)
             
@@ -430,13 +441,14 @@ WICHTIG:
         season = self._get_current_season()
         seasonal_oils = self.SEASONAL_OILS.get(season, [])
         oil_list = self._get_oil_list_string(exclude_oils)
+        common_oils_str = ', '.join(self.COMMONLY_USED_OILS[:15])  # First 15 for brevity
         
         if language == 'de':
-            return self._create_german_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
+            return self._create_german_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
         elif language == 'hu':
-            return self._create_hungarian_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
+            return self._create_hungarian_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
         else:
-            return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
+            return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
     
     def _get_oil_list_string(self, exclude_oils: List[str] = None) -> str:
         """Create a formatted string of available oils for the prompt."""
@@ -450,11 +462,11 @@ WICHTIG:
                 oil_strings.append(f"- {oil['name']} ({properties})")
         return '\n'.join(oil_strings)
     
-    def _create_portal_prompt(self, language: str, special_day_info: Dict) -> str:
+    def _create_portal_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
         """Create prompt for portal days."""
         # Simplified for now - can be expanded
         if language == 'de':
-            return """WICHTIG: Heute ist ein Portaltag mit erhöhter Energie!
+            return f"""WICHTIG: Heute ist ein Portaltag mit erhöhter Energie!
 
 Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
 - Erdung und Schutz
@@ -470,7 +482,9 @@ STRUKTUR:
 
 🌿 Deine Öl-Begleiter:
 - [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+
+WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
@@ -480,7 +494,7 @@ STRUKTUR:
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
-            return """IMPORTANT: Today is a Portal Day with heightened energy!
+            return f"""IMPORTANT: Today is a Portal Day with heightened energy!
 
 Create a SHORT message in English focused on:
 - Grounding and protection
@@ -496,7 +510,9 @@ STRUCTURE:
 
 🌿 Your Oil Companions:
 - [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+
+IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
 
 ✨ Your Ritual:
 [Simple instruction]
@@ -506,7 +522,7 @@ STRUCTURE:
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
-            return """FONTOS: Ma egy Portál nap fokozott energiával!
+            return f"""FONTOS: Ma egy Portál nap fokozott energiával!
 
 Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
 - Földelés és védelem
@@ -522,7 +538,9 @@ STRUKTÚRA:
 
 🌿 Mai illóolaj társaid:
 - [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+
+FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
@@ -541,10 +559,10 @@ Create a SHORT message focused on:
 
 [Follow same structure as English]"""
     
-    def _create_full_moon_prompt(self, language: str, special_day_info: Dict) -> str:
+    def _create_full_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
         """Create prompt for full moon days."""
         if language == 'de':
-            return """WICHTIG: Heute ist Vollmond! 🌕
+            return f"""WICHTIG: Heute ist Vollmond! 🌕
 
 Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
 - Loslassen und Befreiung
@@ -560,7 +578,9 @@ STRUKTUR:
 
 🌿 Deine Öl-Begleiter:
 - [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+
+WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
@@ -570,7 +590,7 @@ STRUKTUR:
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
-            return """IMPORTANT: Today is Full Moon! 🌕
+            return f"""IMPORTANT: Today is Full Moon! 🌕
 
 Create a SHORT message in English focused on:
 - Release and liberation
@@ -586,7 +606,9 @@ STRUCTURE:
 
 🌿 Your Oil Companions:
 - [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+
+IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
 
 ✨ Your Ritual:
 [Simple instruction]
@@ -596,7 +618,7 @@ STRUCTURE:
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
-            return """FONTOS: Ma Telihold van! 🌕
+            return f"""FONTOS: Ma Telihold van! 🌕
 
 Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
 - Elengedés és felszabadulás
@@ -612,7 +634,9 @@ STRUKTÚRA:
 
 🌿 Mai illóolaj társaid:
 - [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+
+FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
@@ -626,10 +650,10 @@ Szeretettel, Soul Aligned Oils 💜"""
 
 Create a SHORT message about release and manifestation."""
     
-    def _create_new_moon_prompt(self, language: str, special_day_info: Dict) -> str:
+    def _create_new_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
         """Create prompt for new moon days."""
         if language == 'de':
-            return """WICHTIG: Heute ist Neumond! 🌑
+            return f"""WICHTIG: Heute ist Neumond! 🌑
 
 Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
 - Neue Anfänge und Absichten
@@ -645,7 +669,9 @@ STRUKTUR:
 
 🌿 Deine Öl-Begleiter:
 - [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+
+WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
@@ -655,7 +681,7 @@ STRUKTUR:
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
-            return """IMPORTANT: Today is New Moon! 🌑
+            return f"""IMPORTANT: Today is New Moon! 🌑
 
 Create a SHORT message in English focused on:
 - New beginnings and intentions
@@ -671,7 +697,9 @@ STRUCTURE:
 
 🌿 Your Oil Companions:
 - [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+
+IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
 
 ✨ Your Ritual:
 [Simple instruction]
@@ -681,7 +709,7 @@ STRUCTURE:
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
-            return """FONTOS: Ma Újhold van! 🌑
+            return f"""FONTOS: Ma Újhold van! 🌑
 
 Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
 - Új kezdetek és szándékok
@@ -697,7 +725,9 @@ STRUKTÚRA:
 
 🌿 Mai illóolaj társaid:
 - [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+
+FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
@@ -713,7 +743,7 @@ Create a SHORT message about new beginnings."""
     
     def _create_german_prompt(self, day_name: str, month_name: str, date_string: str, 
                              day_energy: dict, month_info: dict, oil_list: str,
-                             season: str, seasonal_oils: List[str]) -> str:
+                             season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
         """Create German version of the prompt - SHORT and PRACTICAL."""
         day_names_de = {
             'Monday': 'Montag', 'Tuesday': 'Dienstag', 'Wednesday': 'Mittwoch',
@@ -765,7 +795,9 @@ STRUKTUR (EXAKT befolgen, komplett auf DEUTSCH):
 
 🌿 Deine Öl-Begleiter für heute:
 - [Haupt-Öl Name]: [EIN Satz Nutzen für die heutige Energie]
-- Alternativ: [Alternatives Öl Name]: [EIN Satz Nutzen]
+- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [EIN Satz Nutzen]
+
+WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
 
 ✨ Dein Ritual:
 [1-2 Sätze mit einfacher, umsetzbarer Anleitung]
@@ -794,7 +826,7 @@ WICHTIG:
     
     def _create_english_prompt(self, day_name: str, month_name: str, date_string: str, 
                               day_energy: dict, month_info: dict, oil_list: str,
-                              season: str, seasonal_oils: List[str]) -> str:
+                              season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
         """Create English version of the prompt - SHORT and PRACTICAL."""
         seasonal_oils_str = ', '.join(seasonal_oils[:5]) if seasonal_oils else ''
         
@@ -822,7 +854,9 @@ STRUCTURE (follow EXACTLY):
 
 🌿 Your Oil Companions for Today:
 - [Primary Oil Name]: [ONE sentence benefit for today's energy]
-- Alternative: [Alternative Oil Name]: [ONE sentence benefit]
+- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [ONE sentence benefit]
+
+IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
 
 ✨ Your Ritual:
 [1-2 sentences with simple, actionable instruction]
@@ -849,7 +883,7 @@ IMPORTANT:
     
     def _create_hungarian_prompt(self, day_name: str, month_name: str, date_string: str, 
                                 day_energy: dict, month_info: dict, oil_list: str,
-                                season: str, seasonal_oils: List[str]) -> str:
+                                season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
         """Create Hungarian version of the prompt - SHORT and PRACTICAL."""
         # Hungarian translations for day and month names
         day_names_hu = {
@@ -902,7 +936,9 @@ STRUKTÚRA (PONTOSAN kövesd, teljesen MAGYARUL):
 
 🌿 Mai illóolaj társaid:
 - [Fő olaj neve]: [EGY mondat előny a mai energiához]
-- Alternatíva: [Alternatív olaj neve]: [EGY mondat előny]
+- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [EGY mondat előny]
+
+FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
 
 ✨ A te rituáléd:
 [1-2 mondat egyszerű, megvalósítható instrukcióval]
