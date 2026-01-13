@@ -401,6 +401,8 @@ WICHTIG:
             # Customize system message based on language
             if language == 'de':
                 system_content = "Du bist ein mitfühlender Wellness-Guide, der KURZE, PRAKTISCHE tägliche Affirmationen erstellt. WICHTIG: Antworte IMMER auf DEUTSCH. Halte die Nachricht KURZ und PRÄGNANT (maximal 3-4 Absätze). Schreibe die GESAMTE Nachricht auf Deutsch."
+            elif language == 'hu':
+                system_content = "Te egy együttérző wellness útmutató vagy, aki RÖVID, GYAKORLATI napi megerősítéseket hoz létre. FONTOS: Válaszolj MINDIG MAGYARUL. Tartsd az üzenetet RÖVIDEN és TÖMÖREN (maximum 3-4 bekezdés). Írd meg a TELJES üzenetet magyarul."
             else:
                 system_content = "You are a compassionate wellness guide who creates SHORT, PRACTICAL daily affirmations. Keep messages BRIEF and CONCISE (maximum 3-4 paragraphs)."
             
@@ -431,6 +433,8 @@ WICHTIG:
         
         if language == 'de':
             return self._create_german_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
+        elif language == 'hu':
+            return self._create_hungarian_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
         else:
             return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils)
     
@@ -465,14 +469,17 @@ STRUKTUR:
 [2-3 Sätze über Erdung und Schutz an diesem besonderen Tag]
 
 🌿 Deine Öl-Begleiter:
-- [Öl]: [Nutzen]
-- Alternativ: [Öl]: [Nutzen]
+- [Haupt-Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name]: [Nutzen]
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
 
+💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+
 Mit Liebe, Soul Aligned Oils 💜"""
-        else:
+        elif language == 'en':
             return """IMPORTANT: Today is a Portal Day with heightened energy!
 
 Create a SHORT message in English focused on:
@@ -482,7 +489,57 @@ Create a SHORT message in English focused on:
 
 Recommended oils: Vetiver, Balance, Peace & Calming, Frankincense
 
-[Follow same structure as German]"""
+STRUCTURE:
+✨ Portal Day - Good Morning
+
+[2-3 sentences about grounding and protection on this special day]
+
+🌿 Your Oil Companions:
+- [Primary Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name]: [Benefit]
+
+✨ Your Ritual:
+[Simple instruction]
+
+💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+
+With love, Soul Aligned Oils 💜"""
+        elif language == 'hu':
+            return """FONTOS: Ma egy Portál nap fokozott energiával!
+
+Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
+- Földelés és védelem
+- Gyengéd öngondoskodás
+- Transzformáció
+
+Ajánlott olajok: Vetiver, Balance, Peace & Calming, Frankincense
+
+STRUKTÚRA:
+✨ Portál nap - Jó reggelt
+
+[2-3 mondat a földelésről és védelemről ezen a különleges napon]
+
+🌿 Mai illóolaj társaid:
+- [Fő olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve]: [Előny]
+
+✨ A te rituáléd:
+[Egyszerű instrukció]
+
+💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+
+Szeretettel, Soul Aligned Oils 💜"""
+        else:
+            return """IMPORTANT: Today is a Portal Day with heightened energy!
+
+Create a SHORT message focused on:
+- Grounding and protection
+- Gentle self-care
+- Transformation
+
+[Follow same structure as English]"""
     
     def _create_full_moon_prompt(self, language: str, special_day_info: Dict) -> str:
         """Create prompt for full moon days."""
@@ -502,13 +559,68 @@ STRUKTUR:
 [2-3 Sätze über Loslassen und Manifestation]
 
 🌿 Deine Öl-Begleiter:
-- [Öl]: [Nutzen]
-- Alternativ: [Öl]: [Nutzen]
+- [Haupt-Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name]: [Nutzen]
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
 
+💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+
 Mit Liebe, Soul Aligned Oils 💜"""
+        elif language == 'en':
+            return """IMPORTANT: Today is Full Moon! 🌕
+
+Create a SHORT message in English focused on:
+- Release and liberation
+- Manifestation
+- Gratitude
+
+Recommended oils: Lavender, Clary Sage, Ylang Ylang, Bergamot
+
+STRUCTURE:
+🌕 Full Moon - Good Morning
+
+[2-3 sentences about release and manifestation]
+
+🌿 Your Oil Companions:
+- [Primary Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name]: [Benefit]
+
+✨ Your Ritual:
+[Simple instruction]
+
+💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+
+With love, Soul Aligned Oils 💜"""
+        elif language == 'hu':
+            return """FONTOS: Ma Telihold van! 🌕
+
+Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
+- Elengedés és felszabadulás
+- Megnyilvánulás
+- Háláság
+
+Ajánlott olajok: Lavender, Clary Sage, Ylang Ylang, Bergamot
+
+STRUKTÚRA:
+🌕 Telihold - Jó reggelt
+
+[2-3 mondat az elengedésről és megnyilvánulásról]
+
+🌿 Mai illóolaj társaid:
+- [Fő olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve]: [Előny]
+
+✨ A te rituáléd:
+[Egyszerű instrukció]
+
+💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+
+Szeretettel, Soul Aligned Oils 💜"""
         else:
             return """IMPORTANT: Today is Full Moon! 🌕
 
@@ -532,13 +644,68 @@ STRUKTUR:
 [2-3 Sätze über neue Anfänge]
 
 🌿 Deine Öl-Begleiter:
-- [Öl]: [Nutzen]
-- Alternativ: [Öl]: [Nutzen]
+- [Haupt-Öl Name]: [Nutzen]
+- Alternativ: [Alternatives Öl Name]: [Nutzen]
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
 
+💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+
 Mit Liebe, Soul Aligned Oils 💜"""
+        elif language == 'en':
+            return """IMPORTANT: Today is New Moon! 🌑
+
+Create a SHORT message in English focused on:
+- New beginnings and intentions
+- Planting seeds
+- Fresh energy
+
+Recommended oils: Frankincense, Sandalwood, Cedarwood, Balance
+
+STRUCTURE:
+🌑 New Moon - Good Morning
+
+[2-3 sentences about new beginnings]
+
+🌿 Your Oil Companions:
+- [Primary Oil Name]: [Benefit]
+- Alternative: [Alternative Oil Name]: [Benefit]
+
+✨ Your Ritual:
+[Simple instruction]
+
+💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+
+With love, Soul Aligned Oils 💜"""
+        elif language == 'hu':
+            return """FONTOS: Ma Újhold van! 🌑
+
+Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít:
+- Új kezdetek és szándékok
+- Magok ültetése
+- Friss energia
+
+Ajánlott olajok: Frankincense, Sandalwood, Cedarwood, Balance
+
+STRUKTÚRA:
+🌑 Újhold - Jó reggelt
+
+[2-3 mondat az új kezdetekről]
+
+🌿 Mai illóolaj társaid:
+- [Fő olaj neve]: [Előny]
+- Alternatíva: [Alternatív olaj neve]: [Előny]
+
+✨ A te rituáléd:
+[Egyszerű instrukció]
+
+💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+
+Szeretettel, Soul Aligned Oils 💜"""
         else:
             return """IMPORTANT: Today is New Moon! 🌑
 
@@ -603,7 +770,8 @@ STRUKTUR (EXAKT befolgen, komplett auf DEUTSCH):
 ✨ Dein Ritual:
 [1-2 Sätze mit einfacher, umsetzbarer Anleitung]
 
-💡 Tipp: Schreib "Info [Ölname]" für mehr Details oder "Alternative" für eine andere Empfehlung.
+💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
 
 Mit Liebe,
 Soul Aligned Oils 💜
@@ -648,20 +816,21 @@ CRITICAL REQUIREMENTS:
 
 STRUCTURE (follow EXACTLY):
 
-🌙 Guten Morgen
+🌙 Good Morning
 
 [2-3 sentence affirmation connected to {day_name}'s {day_energy['planet']} energy theme: {day_energy['theme']}]
 
-🌿 Deine Öl-Begleiter für heute:
+🌿 Your Oil Companions for Today:
 - [Primary Oil Name]: [ONE sentence benefit for today's energy]
-- Alternativ: [Alternative Oil Name]: [ONE sentence benefit]
+- Alternative: [Alternative Oil Name]: [ONE sentence benefit]
 
-✨ Dein Ritual:
+✨ Your Ritual:
 [1-2 sentences with simple, actionable instruction]
 
-💡 Tipp: Schreib "Info [Ölname]" für mehr Details oder "Alternative" für eine andere Empfehlung.
+💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
 
-Mit Liebe,
+With love,
 Soul Aligned Oils 💜
 
 AVAILABLE OILS:
@@ -676,5 +845,87 @@ IMPORTANT:
 - Ritual: 1-2 sentences, simple and doable
 - Use emojis ONLY as shown in structure
 - Keep tone warm but CONCISE
+"""
+    
+    def _create_hungarian_prompt(self, day_name: str, month_name: str, date_string: str, 
+                                day_energy: dict, month_info: dict, oil_list: str,
+                                season: str, seasonal_oils: List[str]) -> str:
+        """Create Hungarian version of the prompt - SHORT and PRACTICAL."""
+        # Hungarian translations for day and month names
+        day_names_hu = {
+            'Monday': 'Hétfő', 'Tuesday': 'Kedd', 'Wednesday': 'Szerda',
+            'Thursday': 'Csütörtök', 'Friday': 'Péntek', 'Saturday': 'Szombat', 'Sunday': 'Vasárnap'
+        }
+        month_names_hu = {
+            'January': 'Január', 'February': 'Február', 'March': 'Március', 'April': 'Április',
+            'May': 'Május', 'June': 'Június', 'July': 'Július', 'August': 'Augusztus',
+            'September': 'Szeptember', 'October': 'Október', 'November': 'November', 'December': 'December'
+        }
+        planet_names_hu = {
+            'Moon': 'Hold', 'Mars': 'Mars', 'Mercury': 'Merkúr', 'Jupiter': 'Jupiter',
+            'Venus': 'Vénusz', 'Saturn': 'Szaturnusz', 'Sun': 'Nap'
+        }
+        season_names_hu = {
+            'winter': 'Tél', 'spring': 'Tavasz', 'summer': 'Nyár', 'autumn': 'Ősz'
+        }
+        
+        day_name_hu = day_names_hu.get(day_name, day_name)
+        month_name_hu = month_names_hu.get(month_name, month_name)
+        planet_hu = planet_names_hu.get(day_energy['planet'], day_energy['planet'])
+        season_hu = season_names_hu.get(season, season)
+        
+        seasonal_oils_str = ', '.join(seasonal_oils[:5]) if seasonal_oils else ''
+        
+        return f"""FONTOS: Válaszolj KIZÁRÓLAG MAGYARUL! RÖVID és GYAKORLATI!
+
+Te egy holisztikus wellness útmutató vagy. Hozz létre egy RÖVID, GYAKORLATI napi üzenetet MAGYARUL.
+
+MA: {day_name_hu} ({planet_hu} Energia) - {date_string}
+Hétnap témája: {day_energy['theme']}
+Hétnap fókusza: {day_energy['focus']}
+
+HÓNAP: {month_name_hu} - {month_info['theme']}
+ÉVSZAK: {season_hu}
+{season_hu}-i illóolajok: {seasonal_oils_str}
+
+KRITIKUS KÖVETELMÉNYEK:
+1. RÖVIDEN - Maximum 3-4 rövid bekezdés
+2. GYAKORLATI - Be kell illeszkednie a mindennapi életbe
+3. KÉT OLAJ - Fő + Alternatív ajánlás (előnyben részesítsd a {season_hu}-i olajokat, ha megfelelőek)
+4. EGYSZERŰ RITUÁLÉ - Maximum 1-2 mondat
+
+STRUKTÚRA (PONTOSAN kövesd, teljesen MAGYARUL):
+
+🌙 Jó reggelt
+
+[2-3 mondatos megerősítés kapcsolódva a {day_name_hu} {planet_hu} energiájához: {day_energy['theme']}]
+
+🌿 Mai illóolaj társaid:
+- [Fő olaj neve]: [EGY mondat előny a mai energiához]
+- Alternatíva: [Alternatív olaj neve]: [EGY mondat előny]
+
+✨ A te rituáléd:
+[1-2 mondat egyszerű, megvalósítható instrukcióval]
+
+💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+
+Szeretettel,
+Soul Aligned Oils 💜
+
+ELÉRHETŐ OLAJOK:
+{oil_list}
+
+FONTOS:
+- Maximum 3-4 rövid bekezdés összesen
+- Megerősítés: 2-3 mondat, összhangban a {day_name_hu} {planet_hu} energiájával
+- KÉT olaj, amely illeszkedik a {day_name_hu} témájához: {day_energy['theme']}
+- Előnyben részesítsd a {season_hu}-i olajokat, ha illeszkednek a témához
+- Olaj előnyök: MINDEGYIK EGY mondat
+- Rituálé: 1-2 mondat, egyszerű és megvalósítható
+- Emojikat CSAK a struktúrában látható módon használd
+- Hangvétel meleg, de TÖMÖR
+- A TELJES üzenet MAGYARUL
+- NINCSEN angol szó, kivéve "Soul Aligned Oils"
 """
 

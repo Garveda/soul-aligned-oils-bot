@@ -114,6 +114,20 @@ class Database:
                 )
             """)
             
+            # Interaction attempts table (for strict Info-only model)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS interaction_attempts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id TEXT NOT NULL,
+                    attempted_command TEXT,
+                    was_allowed BOOLEAN,
+                    oil_requested TEXT,
+                    daily_primary_oil TEXT,
+                    daily_alternative_oil TEXT,
+                    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+            
             # Daily messages cache (store today's message per user)
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS daily_messages (
@@ -376,6 +390,45 @@ class Database:
                 """, (user_id, command, parameters, 1 if response_sent else 0))
         except Exception as e:
             logger.error(f"Error logging command: {e}")
+    
+    # ============= INTERACTION ATTEMPTS =============
+    
+    def log_interaction_attempt(
+        self,
+        user_id: str,
+        attempted_command: str,
+        was_allowed: bool,
+        oil_requested: str = None,
+        daily_primary_oil: str = None,
+        daily_alternative_oil: str = None,
+    ):
+        """Log an interaction attempt for analytics (e.g., disallowed commands)."""
+        try:
+            with self._get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """
+                    INSERT INTO interaction_attempts (
+                        user_id,
+                        attempted_command,
+                        was_allowed,
+                        oil_requested,
+                        daily_primary_oil,
+                        daily_alternative_oil
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        user_id,
+                        attempted_command,
+                        1 if was_allowed else 0,
+                        oil_requested,
+                        daily_primary_oil,
+                        daily_alternative_oil,
+                    ),
+                )
+        except Exception as e:
+            logger.error(f"Error logging interaction attempt: {e}")
     
     # ============= DAILY MESSAGES CACHE =============
     

@@ -35,24 +35,30 @@ class CommandHandler:
         # Normalize command
         cmd_lower = text.lower()
         
-        # Help command
-        if cmd_lower in ['hilfe', 'help', '?', '/help', '/hilfe']:
-            return self._handle_help(language)
-        
-        # Repeat command
-        if cmd_lower.startswith('repeat') or re.match(r'repeat\s+\d+', cmd_lower):
+        # Repeat command - allow scheduling message repeats
+        if cmd_lower.startswith('repeat'):
             return self._handle_repeat(user_id, text, language)
         
-        # Alternative command
-        if cmd_lower in ['alternative', 'alternativ', 'alt']:
-            return self._handle_alternative(user_id, language)
-        
-        # Info command
+        # Info command - only allow for today's primary/alternative oils
         if cmd_lower.startswith('info'):
             return self._handle_info(user_id, text, language)
         
-        # Unknown command
-        self.db.log_command(user_id, 'unknown', text, False)
+        # Log disallowed/unknown commands for analytics, but do not reply verbosely
+        self.db.log_command(user_id, 'unknown_or_blocked', text, False)
+        try:
+            self.db.log_interaction_attempt(
+                user_id=user_id,
+                attempted_command=text,
+                was_allowed=False,
+                oil_requested=None,
+                daily_primary_oil=None,
+                daily_alternative_oil=None,
+            )
+        except Exception:
+            # Logging should never break command processing
+            logger.debug("Failed to log interaction attempt", exc_info=True)
+        
+        # Optionally return a very gentle hint; to stay minimal we return None (silent ignore)
         return None
     
     def _handle_reaction(self, user_id: str, reaction: str) -> str:
@@ -113,6 +119,8 @@ Soul Aligned Oils 💜"""
             self.db.log_command(user_id, 'repeat', text, False)
             if language == 'de':
                 return "❌ Bitte gib die Zeit im Format HH:MM an, z.B. 'Repeat 14:30'"
+            elif language == 'hu':
+                return "❌ Kérjük, add meg az időt HH:MM formátumban, pl. 'Repeat 14:30'"
             else:
                 return "❌ Please provide time in HH:MM format, e.g. 'Repeat 14:30'"
         
@@ -135,6 +143,8 @@ Soul Aligned Oils 💜"""
                 self.db.log_command(user_id, 'repeat', text, False)
                 if language == 'de':
                     return "❌ Diese Zeit ist bereits vorbei. Bitte wähle eine Zeit in der Zukunft."
+                elif language == 'hu':
+                    return "❌ Ez az idő már elmúlt. Kérjük, válassz egy jövőbeli időpontot."
                 else:
                     return "❌ This time has already passed. Please choose a future time."
             
@@ -144,12 +154,16 @@ Soul Aligned Oils 💜"""
             
             if language == 'de':
                 return f"✅ Ich schicke dir die heutige Nachricht nochmal um {hour:02d}:{minute:02d} Uhr 🔄"
+            elif language == 'hu':
+                return f"✅ Újra elküldöm a mai üzenetet {hour:02d}:{minute:02d}-kor 🔄"
             else:
                 return f"✅ I'll send you today's message again at {hour:02d}:{minute:02d} 🔄"
         except ValueError as e:
             self.db.log_command(user_id, 'repeat', text, False)
             if language == 'de':
                 return "❌ Ungültige Zeit. Bitte verwende das Format HH:MM (z.B. 14:30)"
+            elif language == 'hu':
+                return "❌ Érvénytelen idő. Kérjük, használd a HH:MM formátumot (pl. 14:30)"
             else:
                 return "❌ Invalid time. Please use HH:MM format (e.g. 14:30)"
     
@@ -188,45 +202,86 @@ Soul Aligned Oils 💜"""
                 return "❌ Error generating alternative recommendation. Please try again later."
     
     def _handle_info(self, user_id: str, text: str, language: str) -> Optional[str]:
-        """Handle info command for oil information."""
+        """Handle info command for oil information (only today's oils allowed)."""
+        from datetime import date as _date_cls  # local import to avoid circular issues in type hints
+        
         # Extract oil name from command
         parts = text.split(maxsplit=1)
         if len(parts) < 2:
             self.db.log_command(user_id, 'info', text, False)
-            if language == 'de':
-                return "❌ Bitte gib einen Ölnamen an, z.B. 'Info Lavendel'"
-            else:
-                return "❌ Please provide an oil name, e.g. 'Info Lavender'"
+            # No explicit error message to keep interaction minimal
+            return None
         
         oil_query = parts[1].strip()
         
-        # Try to find the oil
-        oil_data = self.db.get_oil(oil_query)
+        # Get today's primary/alternative oils from cached daily message
+        today = _date_cls.today()
+        daily_msg = self.db.get_daily_message(user_id, today)
+        
+        primary_oil = daily_msg.get('primary_oil') if daily_msg else None
+        alternative_oil = daily_msg.get('alternative_oil') if daily_msg else None
+        
+        primary_lower = primary_oil.lower() if primary_oil else None
+        alternative_lower = alternative_oil.lower() if alternative_oil else None
+        requested_lower = oil_query.lower()
+        
+        # Check if requested oil matches today's primary or alternative
+        is_primary = primary_lower and requested_lower == primary_lower
+        is_alternative = alternative_lower and requested_lower == alternative_lower
+        
+        # Log interaction attempt
+        try:
+            self.db.log_interaction_attempt(
+                user_id=user_id,
+                attempted_command=text,
+                was_allowed=bool(is_primary or is_alternative),
+                oil_requested=oil_query,
+                daily_primary_oil=primary_oil,
+                daily_alternative_oil=alternative_oil,
+            )
+        except Exception:
+            logger.debug("Failed to log interaction attempt for info", exc_info=True)
+        
+        if not (is_primary or is_alternative):
+            # Politely restrict to today's oils only
+            self.db.log_command(user_id, 'info_rejected', oil_query, False)
+            if primary_oil or alternative_oil:
+                if language == 'de':
+                    return f"Ich kann dir heute nur Details zu {primary_oil or ''} oder {alternative_oil or ''} geben 🌿"
+                elif language == 'hu':
+                    return f"Ma csak {primary_oil or ''} vagy {alternative_oil or ''} részleteit tudom megadni 🌿"
+                else:
+                    return f"Today I can only provide details about {primary_oil or ''} or {alternative_oil or ''} 🌿"
+            else:
+                # No cached oils for today yet
+                if language == 'de':
+                    return "Ich kann dir Details geben, sobald du die heutige Morgennachricht erhalten hast 🌿"
+                elif language == 'hu':
+                    return "Amint megkapod a mai reggeli üzenetet, tudok részleteket adni 🌿"
+                else:
+                    return "I can share details once you have received today's morning message 🌿"
+        
+        # At this point we know the user requested today's primary or alternative oil
+        oil_name_to_fetch = primary_oil if is_primary else alternative_oil
+        oil_data = self.db.get_oil(oil_name_to_fetch)
         
         if not oil_data:
-            # Try fuzzy search
-            all_oils = self.db.search_oils(oil_query, limit=5)
-            if all_oils:
-                self.db.log_command(user_id, 'info', text, False)
-                if language == 'de':
-                    suggestions = '\n'.join([f"- {oil}" for oil in all_oils])
-                    return f"❌ Öl '{oil_query}' nicht gefunden. Meintest du vielleicht:\n{suggestions}"
-                else:
-                    suggestions = '\n'.join([f"- {oil}" for oil in all_oils])
-                    return f"❌ Oil '{oil_query}' not found. Did you mean:\n{suggestions}"
+            self.db.log_command(user_id, 'info_missing_oil_data', oil_name_to_fetch, False)
+            # Fall back to a simple message if the oil is not in the database yet
+            if language == 'de':
+                return f"Ich habe leider noch keine detaillierten Daten zu {oil_name_to_fetch} gespeichert 🌿"
+            elif language == 'hu':
+                return f"Sajnos még nincsenek részletes adataim erről az olajról: {oil_name_to_fetch} 🌿"
             else:
-                self.db.log_command(user_id, 'info', text, False)
-                if language == 'de':
-                    return f"❌ Das Öl '{oil_query}' kenne ich noch nicht. Schreib 'Hilfe' für verfügbare Befehle."
-                else:
-                    return f"❌ I don't know the oil '{oil_query}' yet. Write 'Help' for available commands."
+                return f"Unfortunately I don't have detailed data stored yet for {oil_name_to_fetch} 🌿"
         
-        # Build info message
-        self.db.log_command(user_id, 'info', oil_query, True)
-        return self._format_oil_info(oil_data, language)
+        # Build detailed info message (multi-language template)
+        self.db.log_command(user_id, 'info', oil_name_to_fetch, True)
+        return self._format_detailed_oil_info(oil_data, language)
     
     def _format_oil_info(self, oil_data: Dict, language: str) -> str:
         """Format oil information for display."""
+        # Legacy compact formatter (kept for backward compatibility if needed)
         if language == 'de':
             msg = f"🌿 *{oil_data['oil_name']}*\n\n"
             
@@ -287,3 +342,109 @@ Soul Aligned Oils 💜"""
             
             msg += "\n💜 Soul Aligned Oils"
             return msg
+
+    def _format_detailed_oil_info(self, oil_data: Dict, language: str) -> str:
+        """Format detailed oil information using structured, multi-language templates."""
+        # Common pieces
+        oil_name = oil_data.get('oil_name', '')
+        botanical_name = ""  # Placeholder until extended schema is available
+        energetic = oil_data.get('energetic_effects', '')
+        interesting = oil_data.get('interesting_facts', '')
+        contraindications = oil_data.get('contraindications', '')
+        components = oil_data.get('main_components') or []
+        best_uses = oil_data.get('best_uses') or []
+
+        # Format components list (up to 3 for brevity)
+        components_lines = []
+        for comp in components[:3]:
+            if isinstance(comp, dict):
+                name = comp.get('name', '')
+                percentage = comp.get('percentage', '')
+                effect = comp.get('effect', '') or comp.get('effect_en', '')
+                if percentage:
+                    components_lines.append(f"- {name} ({percentage}): {effect}")
+                else:
+                    components_lines.append(f"- {name}: {effect}")
+            else:
+                components_lines.append(f"- {comp}")
+        components_block = "\n".join(components_lines) if components_lines else ""
+
+        # Format best uses as bullet list
+        uses_block = "\n".join(f"- {u}" for u in best_uses) if best_uses else ""
+
+        if language == 'hu':
+            # Hungarian template (headings HU, content from current DB fields)
+            msg = f"🌿 {oil_name}\n{botanical_name}\n\n"
+            if energetic:
+                msg += "✨ ENERGETIKAI HATÁS\n"
+                msg += f"{energetic}\n\n"
+            msg += "💚 ÉRZELMI ELŐNYÖK\n"
+            if energetic:
+                msg += f"- {energetic}\n\n"
+            else:
+                msg += "- (adat feltöltés alatt)\n\n"
+            if components_block:
+                msg += "🔬 FŐ ÖSSZETEVŐK\n"
+                msg += f"{components_block}\n\n"
+            if interesting:
+                msg += "📖 ÉRDEKES TÉNYEK\n"
+                msg += f"{interesting}\n\n"
+            if uses_block:
+                msg += "💧 ALKALMAZÁS\n"
+                msg += f"{uses_block}\n\n"
+            if contraindications:
+                msg += "⚠️ BIZTONSÁGI MEGJEGYZÉSEK\n"
+                msg += f"{contraindications}\n\n"
+            msg += "---\nSoul Aligned Oils 💜"
+            return msg
+
+        if language == 'en':
+            # English template
+            msg = f"🌿 {oil_name}\n{botanical_name}\n\n"
+            if energetic:
+                msg += "✨ ENERGETIC EFFECTS\n"
+                msg += f"{energetic}\n\n"
+            msg += "💚 EMOTIONAL BENEFITS\n"
+            if energetic:
+                msg += f"- {energetic}\n\n"
+            else:
+                msg += "- (data will be expanded soon)\n\n"
+            if components_block:
+                msg += "🔬 MAIN COMPONENTS\n"
+                msg += f"{components_block}\n\n"
+            if interesting:
+                msg += "📖 INTERESTING FACTS\n"
+                msg += f"{interesting}\n\n"
+            if uses_block:
+                msg += "💧 APPLICATION\n"
+                msg += f"{uses_block}\n\n"
+            if contraindications:
+                msg += "⚠️ SAFETY NOTES\n"
+                msg += f"{contraindications}\n\n"
+            msg += "---\nSoul Aligned Oils 💜"
+            return msg
+
+        # Default to German template
+        msg = f"🌿 {oil_name}\n{botanical_name}\n\n"
+        if energetic:
+            msg += "✨ ENERGETISCHE WIRKUNG\n"
+            msg += f"{energetic}\n\n"
+        msg += "💚 EMOTIONALE VORTEILE\n"
+        if energetic:
+            msg += f"- {energetic}\n\n"
+        else:
+            msg += "- (Daten werden noch ergänzt)\n\n"
+        if components_block:
+            msg += "🔬 HAUPTINHALTSSTOFFE\n"
+            msg += f"{components_block}\n\n"
+        if interesting:
+            msg += "📖 WISSENSWERTES\n"
+            msg += f"{interesting}\n\n"
+        if uses_block:
+            msg += "💧 ANWENDUNG\n"
+            msg += f"{uses_block}\n\n"
+        if contraindications:
+            msg += "⚠️ SICHERHEITSHINWEISE\n"
+            msg += f"{contraindications}\n\n"
+        msg += "---\nSoul Aligned Oils 💜"
+        return msg
