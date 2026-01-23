@@ -2,6 +2,8 @@
 
 A Python-based automation system that sends daily personalized affirmations with doTerra essential oil recommendations via Telegram at a scheduled time.
 
+<!-- Pipeline test: Updated on 2026-01-23 -->
+
 ## ✨ Features
 
 - 🌅 **Daily Scheduling**: Automatically sends messages at your chosen time
