@@ -92,14 +92,20 @@ class DailyScheduler:
             # Generate and send messages
             results = self.sender.send_personalized_messages_sync(self.generator, test_mode, special_day_info)
             
-            # Save messages to database and extract oil names
+            # Save messages to database with programmatically selected oils
             for result in results:
                 if result.get('success') and result.get('message'):
                     user_id = result['chat_id']
                     message = result['message']
                     
-                    # Extract oil names
-                    primary_oil, alternative_oil = self.generator._extract_oil_names(message)
+                    # Use programmatically selected oils directly (more reliable than extraction)
+                    primary_oil = result.get('primary_oil')
+                    alternative_oil = result.get('alternative_oil')
+                    
+                    # Fallback to extraction if oils weren't provided (backward compatibility)
+                    if not primary_oil or not alternative_oil:
+                        logger.warning(f"Oils not provided in result, falling back to extraction for user {user_id}")
+                        primary_oil, alternative_oil = self.generator._extract_oil_names(message)
                     
                     # Save to database
                     self.db.save_daily_message(
@@ -110,6 +116,9 @@ class DailyScheduler:
                         alternative_oil=alternative_oil,
                         message_type=message_type
                     )
+                    
+                    if primary_oil and alternative_oil:
+                        logger.info(f"Saved message for {user_id}: Primary={primary_oil}, Alternative={alternative_oil}")
             
             successful = sum(1 for r in results if r['success'])
             total = len(results)

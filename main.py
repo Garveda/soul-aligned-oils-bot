@@ -142,15 +142,21 @@ def generate_test_message():
     
     try:
         generator = AffirmationGenerator()
-        message = generator.generate_daily_message()
+        result_data = generator.generate_daily_message()
         
-        if message:
+        if result_data and result_data.get('message'):
+            message = result_data['message']
+            primary_oil = result_data.get('primary_oil', 'N/A')
+            alternative_oil = result_data.get('alternative_oil', 'N/A')
+            
             print("\n" + "="*60)
             print("GENERATED MESSAGE")
             print("="*60 + "\n")
             print(message)
-            print("\n" + "="*60 + "\n")
-            logger.info("Test message generated successfully")
+            print("\n" + "="*60)
+            print(f"Selected Oils: Primary={primary_oil}, Alternative={alternative_oil}")
+            print("="*60 + "\n")
+            logger.info(f"Test message generated successfully: Primary={primary_oil}, Alternative={alternative_oil}")
         else:
             print("✗ Failed to generate message")
             logger.error("Failed to generate test message")

@@ -6,6 +6,7 @@ with doTerra essential oil recommendations in multiple languages.
 
 import json
 import logging
+import random
 from datetime import datetime
 from typing import Dict, List, Optional
 from openai import OpenAI
@@ -294,34 +295,40 @@ IMPORTANT:
         month_name_de = month_names_de.get(month_name, month_name)
         planet_de = planet_names_de.get(day_energy['planet'], day_energy['planet'])
         
-        return f"""WICHTIG: Antworte AUSSCHLIESSLICH auf DEUTSCH! KURZ und PRAKTISCH!
+        return f"""Erstelle eine WARMHERZIGE, EINFÜHLSAME tägliche Affirmation auf DEUTSCH.
 
-Du bist ein ganzheitlicher Wellness-Guide. Erstelle eine KURZE, PRAKTISCHE Nachricht auf DEUTSCH.
+KONTEXT FÜR HEUTE:
+📅 {day_name_de} ({planet_de}-Energie) - {date_string}
+💫 Wochentag-Energie: {day_energy['theme']}
+🎯 Fokus: {day_energy['focus']}
+📆 Monat: {month_name_de} - {month_info['theme']}
 
-HEUTE: {day_name_de} ({planet_de}-Energie) - {date_string}
-Wochentag-Thema: {day_energy['theme']}
-Wochentag-Fokus: {day_energy['focus']}
+DEINE AUFGABE:
+Erstelle eine Nachricht, die sich anfühlt wie ein warmes Gespräch mit einer Freundin. 
+Die Affirmation soll:
+- EMOTIONAL berühren und Mut machen
+- PRAKTISCH sein und in den Alltag passen
+- INTELLIGENT die heutige Energie nutzen
+- NATÜRLICH fließen, nicht steif wirken
+- KURZ bleiben (3-4 Absätze), aber substanziell sein
 
-MONAT: {month_name_de} - {month_info['theme']}
-
-KRITISCHE ANFORDERUNGEN:
-1. KURZ HALTEN - Maximal 3-4 kurze Absätze
-2. PRAKTISCH - Muss in den Alltag passen
-3. ZWEI ÖLE - Haupt + Alternative Empfehlung
-4. EINFACHES RITUAL - Maximal 1-2 Sätze
-
-STRUKTUR (EXAKT befolgen, komplett auf DEUTSCH):
+STRUKTUR:
 
 🌙 Guten Morgen
 
-[2-3 Sätze Affirmation verbunden mit der {day_name_de}-{planet_de}-Energie: {day_energy['theme']}]
+[2-3 Sätze Affirmation - warm, persönlich, verbunden mit der {day_name_de}-{planet_de}-Energie. 
+Sprich die Person direkt an, sei einfühlsam und ermutigend. Nutze die Energie von {day_energy['theme']} 
+und verbinde sie mit {month_info['theme']}.]
 
 🌿 Deine Öl-Begleiter für heute:
-- [Haupt-Öl Name]: [EIN Satz Nutzen für die heutige Energie]
-- Alternativ: [Alternatives Öl Name]: [EIN Satz Nutzen]
+{f"- {selected_primary}: [Ein warmer, persönlicher Satz über den Nutzen - wie es sich anfühlt, nicht nur was es tut]" if selected_primary else "- [Haupt-Öl Name]: [Ein warmer Satz über den Nutzen]"}
+{f"- Alternativ: {selected_alternative}: [Ein warmer, persönlicher Satz über den Nutzen]" if selected_alternative else "- Alternativ: [Alternatives Öl Name]: [Ein warmer Satz über den Nutzen]"}
+
+{"⚠️ WICHTIG: Verwende GENAU diese beiden Öle: {selected_primary} (Haupt) und {selected_alternative} (Alternativ). Öl-Namen IMMER auf ENGLISCH!" if selected_primary and selected_alternative else ""}
 
 ✨ Dein Ritual:
-[1-2 Sätze mit einfacher, umsetzbarer Anleitung]
+[1-2 Sätze - eine einfache, einladende Anleitung, die sich gut anfühlt und leicht umsetzbar ist. 
+Formuliere es wie eine freundliche Einladung, nicht wie eine Anweisung.]
 
 Mit Liebe,
 Soul Aligned Oils 💜
@@ -329,16 +336,16 @@ Soul Aligned Oils 💜
 VERFÜGBARE ÖLE:
 {oil_list}
 
-WICHTIG:
-- Maximal 3-4 kurze Absätze insgesamt
-- Affirmation: 2-3 Sätze, abgestimmt auf {day_name_de}s {planet_de}-Energie
-- ZWEI Öle die zum {day_name_de}-Thema passen: {day_energy['theme']}
-- Öl-Nutzen: JE EIN Satz
-- Ritual: 1-2 Sätze, einfach und machbar
-- Emojis NUR wie in der Struktur gezeigt
-- Ton warm aber PRÄGNANT
+WICHTIG FÜR DEN TON:
+- Schreibe wie eine vertraute Freundin, die wirklich zuhört und versteht
+- Sei warm, aber nicht übertrieben - authentisch und echt
+- Nutze die Energie von {day_energy['theme']} intelligent, nicht mechanisch
+- Verbinde {month_info['theme']} natürlich mit dem heutigen Tag
+- Formuliere Öl-Nutzen persönlich: "Wie es sich anfühlt" statt nur "Was es tut"
+- Ritual als freundliche Einladung, nicht als Pflicht
+- Maximal 3-4 Absätze, aber jede Zeile soll Bedeutung haben
 - Die GESAMTE Nachricht auf DEUTSCH
-- KEINE englischen Wörter außer "Soul Aligned Oils"
+- ÖL-NAMEN: IMMER auf ENGLISCH (originale doTerra-Namen) - NIE übersetzen!
 """
     
     def _extract_oil_names(self, message: str) -> tuple:
@@ -375,17 +382,101 @@ WICHTIG:
         
         return primary_oil, alternative_oil
     
+    def _select_oils_programmatically(self, exclude_oils: List[str] = None, day_energy: Dict = None, 
+                                      season: str = None, message_type: str = 'regular') -> tuple:
+        """Programmatically select primary and alternative oils that haven't been used recently.
+        
+        Returns:
+            tuple: (primary_oil_name, alternative_oil_name) or (None, None) if selection fails
+        """
+        if exclude_oils is None:
+            exclude_oils = []
+        
+        # Get available oils (excluding recently used ones)
+        available_oils = [oil for oil in self.oils if oil['name'] not in exclude_oils]
+        
+        if not available_oils:
+            logger.warning(f"No available oils after excluding {len(exclude_oils)} oils. Using all oils.")
+            available_oils = self.oils
+        
+        # Filter oils based on day energy and season if provided
+        suitable_oils = []
+        for oil in available_oils:
+            # Check if oil properties match day energy theme
+            oil_props = ' '.join(oil.get('properties', [])).lower()
+            if day_energy:
+                theme_words = day_energy.get('theme', '').lower().split()
+                focus_words = day_energy.get('focus', '').lower().split()
+                # Check if any property matches the theme
+                matches_theme = any(word in oil_props for word in theme_words + focus_words if len(word) > 3)
+                if matches_theme or len(suitable_oils) < 10:  # Keep at least 10 options
+                    suitable_oils.append(oil)
+            else:
+                suitable_oils.append(oil)
+        
+        if not suitable_oils:
+            suitable_oils = available_oils
+        
+        # Select primary oil (random from suitable oils)
+        if suitable_oils:
+            primary_oil = random.choice(suitable_oils)
+        else:
+            primary_oil = random.choice(available_oils) if available_oils else None
+        
+        # Select alternative oil from commonly used oils (excluding primary and recently used)
+        # First try commonly used oils, but ensure variety by shuffling
+        alternative_candidates = [
+            oil for oil in available_oils 
+            if oil['name'] in self.COMMONLY_USED_OILS and oil['name'] != primary_oil['name']
+        ]
+        
+        # Shuffle to ensure better randomization
+        if alternative_candidates:
+            random.shuffle(alternative_candidates)
+            alternative_oil = alternative_candidates[0]
+            logger.info(f"Alternative oil selected from {len(alternative_candidates)} commonly used candidates")
+        else:
+            # Fallback: any available oil that's not the primary (shuffled for variety)
+            fallback = [oil for oil in available_oils if oil['name'] != primary_oil['name']]
+            if fallback:
+                random.shuffle(fallback)
+                alternative_oil = fallback[0]
+                logger.warning(f"Alternative oil selected from fallback pool ({len(fallback)} oils available)")
+            else:
+                alternative_oil = None
+        
+        if primary_oil and alternative_oil:
+            logger.info(f"Programmatically selected oils: Primary={primary_oil['name']}, Alternative={alternative_oil['name']}")
+            return primary_oil['name'], alternative_oil['name']
+        
+        return None, None
+    
     def generate_daily_message(self, language: str = 'en', exclude_oils: List[str] = None,
-                              special_day_info: Dict = None) -> Optional[str]:
+                              special_day_info: Dict = None, user_id: str = None) -> Dict:
         """Generate the complete daily affirmation message.
         
         Args:
             language: Language code ('de' or 'en')
             exclude_oils: List of oil names to exclude from recommendations
             special_day_info: Dict with 'message_type', 'moon_phase', 'is_portal_day' if applicable
+            user_id: Optional user ID to automatically exclude recently used oils
+            
+        Returns:
+            Dict with 'message', 'primary_oil', 'alternative_oil' keys, or None if generation fails
         """
         try:
             check_date = datetime.now()
+            
+            # If user_id is provided and we have database access, get recently used oils
+            recently_used = []
+            if user_id and self.db:
+                recently_used = self.db.get_recently_used_oils(user_id, days=14)
+                if exclude_oils is None:
+                    exclude_oils = []
+                # Combine with provided exclude_oils, removing duplicates
+                exclude_oils = list(set(exclude_oils + recently_used))
+                if recently_used:
+                    logger.info(f"Excluding {len(recently_used)} recently used oils for user {user_id}: {recently_used[:5]}...")
             
             # Check for special days if lunar_calendar is available
             if special_day_info is None and self.lunar_calendar:
@@ -396,26 +487,86 @@ WICHTIG:
             if special_day_info:
                 message_type = special_day_info.get('message_type', 'regular')
             
-            # Create appropriate prompt
+            # Get day info for oil selection
+            day_name, month_name, date_string, day_energy, month_info = self._get_current_day_info(check_date)
+            season = self._get_current_season(check_date)
+            
+            # Programmatically select oils BEFORE generating message
+            selected_primary, selected_alternative = self._select_oils_programmatically(
+                exclude_oils=exclude_oils,
+                day_energy=day_energy,
+                season=season,
+                message_type=message_type
+            )
+            
+            # Create appropriate prompt with selected oils
             common_oils_str = ', '.join(self.COMMONLY_USED_OILS[:15])  # First 15 for brevity
             if message_type == 'portal':
-                prompt = self._create_portal_prompt(language, special_day_info, common_oils_str)
+                prompt = self._create_portal_prompt(language, special_day_info, common_oils_str, exclude_oils, selected_primary, selected_alternative)
             elif message_type == 'full_moon':
-                prompt = self._create_full_moon_prompt(language, special_day_info, common_oils_str)
+                prompt = self._create_full_moon_prompt(language, special_day_info, common_oils_str, exclude_oils, selected_primary, selected_alternative)
             elif message_type == 'new_moon':
-                prompt = self._create_new_moon_prompt(language, special_day_info, common_oils_str)
+                prompt = self._create_new_moon_prompt(language, special_day_info, common_oils_str, exclude_oils, selected_primary, selected_alternative)
             else:
-                prompt = self._create_prompt(language, exclude_oils)
+                prompt = self._create_prompt(language, exclude_oils, selected_primary, selected_alternative)
             
             logger.info(f"Requesting affirmation from OpenAI API (language: {language}, type: {message_type})")
             
-            # Customize system message based on language
+            # Customize system message based on language - smarter and more comfortable
             if language == 'de':
-                system_content = "Du bist ein mitfühlender Wellness-Guide, der KURZE, PRAKTISCHE tägliche Affirmationen erstellt. WICHTIG: Antworte IMMER auf DEUTSCH. Halte die Nachricht KURZ und PRÄGNANT (maximal 3-4 Absätze). Schreibe die GESAMTE Nachricht auf Deutsch."
+                system_content = """Du bist ein einfühlsamer, weiser Wellness-Guide mit tiefem Verständnis für menschliche Bedürfnisse. 
+Du erstellst tägliche Affirmationen, die:
+- WARM und EINLADEND sind, wie von einer vertrauten Freundin
+- EMOTIONAL RESONANT sind und sich authentisch anfühlen
+- PRAKTISCH und UMSETZBAR sind, ohne überwältigend zu wirken
+- INTELLIGENT die Tagesenergie und Jahreszeit berücksichtigen
+- KURZ bleiben (3-4 Absätze), aber trotzdem substanziell
+
+🚨 KRITISCH - SICHERHEIT:
+- ALLE Öl-Empfehlungen sind AUSSCHLIESSLICH für EXTERNE Anwendung
+- NIEMALS vorschlagen, Öle zu trinken, zu schlucken, zu essen oder intern einzunehmen
+- NIEMALS vorschlagen, Öle zu Wasser, Essen oder Getränken hinzuzufügen
+- NIEMALS interne Einnahme, Kapseln oder orale Anwendung erwähnen
+- NUR externe Anwendung: topisch (auf die Haut), aromatisch (Diffuser), oder in Trägeröl verdünnt
+
+WICHTIG: Antworte IMMER auf DEUTSCH. Schreibe natürlich und fließend, nicht steif oder roboterhaft. 
+KRITISCH: Öl-Namen müssen IMMER auf ENGLISCH sein (originale doTerra-Namen) - NIE übersetzen!"""
             elif language == 'hu':
-                system_content = "Te egy együttérző wellness útmutató vagy, aki RÖVID, GYAKORLATI napi megerősítéseket hoz létre. FONTOS: Válaszolj MINDIG MAGYARUL. Tartsd az üzenetet RÖVIDEN és TÖMÖREN (maximum 3-4 bekezdés). Írd meg a TELJES üzenetet magyarul."
+                system_content = """Te egy empátiával teli, bölcs wellness útmutató vagy, aki mélyen érti az emberi szükségleteket.
+Olyan napi megerősítéseket hozol létre, amelyek:
+- MELEGEK és MEGNYERŐEK, mintha egy megbízható barátnő írná
+- ÉRZELMILEG REZONÁLNAK és autentikusnak érződnek
+- GYAKORLATIAK és MEGVALÓSÍTHATÓAK, anélkül hogy túlterhelőek lennének
+- OKOSAN figyelembe veszik a nap energiáját és az évszakot
+- RÖVIDEK maradnak (3-4 bekezdés), de mégis lényegretörőek
+
+🚨 KRITIKUS - BIZTONSÁG:
+- MINDEN olaj ajánlás KIZÁRÓLAG KÜLSŐ használatra szól
+- SOHA ne javasolj olajok ivását, lenyelését, evését vagy belső fogyasztását
+- SOHA ne javasolj olajok hozzáadását vízhez, ételhez vagy italhoz
+- SOHA ne említs belső szedést, kapszulákat vagy orális alkalmazást
+- CSAK külső használat: topikálisan (bőrre), aromatikusan (diffúzor), vagy hordozóolajban hígítva
+
+FONTOS: Válaszolj MINDIG MAGYARUL. Írj természetesen és folyékonyan, ne mereven vagy robotikusan.
+KRITIKUS: Az olajneveknek MINDIG ANGOLUL kell lenniük (eredeti doTerra nevek) - SOHA ne fordítsd le!"""
             else:
-                system_content = "You are a compassionate wellness guide who creates SHORT, PRACTICAL daily affirmations. Keep messages BRIEF and CONCISE (maximum 3-4 paragraphs)."
+                system_content = """You are an empathetic, wise wellness guide with deep understanding of human needs.
+You create daily affirmations that are:
+- WARM and INVITING, like from a trusted friend
+- EMOTIONALLY RESONANT and feel authentic
+- PRACTICAL and ACTIONABLE without being overwhelming
+- INTELLIGENTLY consider the day's energy and season
+- SHORT (3-4 paragraphs) yet still substantial
+
+🚨 CRITICAL - SAFETY:
+- ALL oil recommendations are EXCLUSIVELY for EXTERNAL use only
+- NEVER suggest drinking, swallowing, eating, or ingesting oils
+- NEVER suggest adding oils to water, food, or beverages
+- NEVER mention internal consumption, capsules, or oral application
+- ONLY external use: topically (on skin), aromatically (diffuser), or diluted in carrier oil
+
+Write naturally and fluidly, not stiff or robotic.
+CRITICAL: Oil names must ALWAYS be in English (original doTerra names)."""
             
             response = self.client.chat.completions.create(
                 model=Config.OPENAI_MODEL,
@@ -428,14 +579,127 @@ WICHTIG:
             )
             
             message = response.choices[0].message.content.strip()
+            
+            # CRITICAL SAFETY: Validate message for internal consumption suggestions
+            unsafe_phrases = [
+                'drink', 'ingest', 'consume', 'take internally', 'swallow', 
+                'add to water', 'add to food', 'add to drink', 'oral', 
+                'internally', 'capsule', 'kapsel', 'trinken', 'einnehmen',
+                'belső', 'ivás', 'lenyel', 'kapszula', 'orális'
+            ]
+            
+            message_lower = message.lower()
+            detected_unsafe = [phrase for phrase in unsafe_phrases if phrase in message_lower]
+            
+            # Regenerate if unsafe phrases detected (max 3 attempts)
+            max_attempts = 3
+            attempt = 1
+            
+            while detected_unsafe and attempt < max_attempts:
+                logger.warning(f"⚠️ SAFETY ALERT: Detected unsafe phrases in generated message: {detected_unsafe}. Regenerating (attempt {attempt}/{max_attempts})...")
+                
+                # Add stronger safety constraint to prompt
+                safety_note = ""
+                if language == 'de':
+                    safety_note = "\n\n🚨 KRITISCH: Die vorherige Nachricht enthielt unsichere Formulierungen. Erstelle eine NEUE Nachricht, die AUSSCHLIESSLICH externe Anwendung erwähnt (topisch, aromatisch, in Trägeröl). NIEMALS interne Einnahme!"
+                elif language == 'hu':
+                    safety_note = "\n\n🚨 KRITIKUS: Az előző üzenet nem biztonságos kifejezéseket tartalmazott. Hozz létre egy ÚJ üzenetet, amely KIZÁRÓLAG külső használatot említ (topikális, aromatikus, hordozóolajban). SOHA ne belső szedés!"
+                else:
+                    safety_note = "\n\n🚨 CRITICAL: Previous message contained unsafe phrasing. Create a NEW message that mentions EXCLUSIVELY external use (topical, aromatic, in carrier oil). NEVER internal consumption!"
+                
+                response = self.client.chat.completions.create(
+                    model=Config.OPENAI_MODEL,
+                    messages=[
+                        {"role": "system", "content": system_content},
+                        {"role": "user", "content": prompt + safety_note}
+                    ],
+                    temperature=0.8,
+                    max_tokens=600
+                )
+                
+                message = response.choices[0].message.content.strip()
+                message_lower = message.lower()
+                detected_unsafe = [phrase for phrase in unsafe_phrases if phrase in message_lower]
+                attempt += 1
+            
+            # If still unsafe after max attempts, use safe fallback
+            if detected_unsafe:
+                logger.error(f"⚠️ SAFETY ERROR: Unable to generate safe message after {max_attempts} attempts. Using safe fallback.")
+                if language == 'de':
+                    message = f"""🌙 Guten Morgen
+
+Heute begleiten dich {selected_primary or 'deine Öle'} und {selected_alternative or 'deine Alternative'} auf deinem Weg.
+
+🌿 Deine Öl-Begleiter für heute:
+- {selected_primary or 'Haupt-Öl'}: Unterstützt dich heute in deiner Energie
+- Alternativ: {selected_alternative or 'Alternatives Öl'}: Eine wunderbare Ergänzung
+
+✨ Dein Ritual:
+Nimm dir einen Moment für dich und nutze die Öle topisch oder aromatisch.
+
+⚠️ Wichtig: Alle Öle sind ausschließlich für externe Anwendung. Niemals ohne professionelle Anleitung einnehmen.
+
+Mit Liebe,
+Soul Aligned Oils 💜"""
+                elif language == 'hu':
+                    message = f"""🌙 Jó reggelt
+
+Ma {selected_primary or 'az olajaid'} és {selected_alternative or 'az alternatíváid'} kísérnek az úton.
+
+🌿 Mai illóolaj társaid:
+- {selected_primary or 'Fő olaj'}: Ma támogat az energiádban
+- Alternatíva: {selected_alternative or 'Alternatív olaj'}: Csodálatos kiegészítés
+
+✨ A te rituáléd:
+Szánj magadra egy pillanatot és használd az olajokat topikálisan vagy aromatikusan.
+
+⚠️ Fontos: Minden olaj kizárólag külső használatra. Soha ne fogyassz belsőleg professzionális útmutatás nélkül.
+
+Szeretettel,
+Soul Aligned Oils 💜"""
+                else:
+                    message = f"""🌙 Good Morning
+
+Today {selected_primary or 'your oils'} and {selected_alternative or 'your alternative'} accompany you on your path.
+
+🌿 Your Oil Companions for Today:
+- {selected_primary or 'Primary Oil'}: Supports you in today's energy
+- Alternative: {selected_alternative or 'Alternative Oil'}: A wonderful complement
+
+✨ Your Ritual:
+Take a moment for yourself and use the oils topically or aromatically.
+
+⚠️ Important: All oils are for external use only. Never ingest without professional guidance.
+
+With love,
+Soul Aligned Oils 💜"""
+            
+            # Add safety disclaimer to every message
+            safety_disclaimer = ""
+            if language == 'de':
+                safety_disclaimer = "\n\n⚠️ Wichtig: Alle Öle sind ausschließlich für externe Anwendung. Niemals ohne professionelle Anleitung einnehmen."
+            elif language == 'hu':
+                safety_disclaimer = "\n\n⚠️ Fontos: Minden olaj kizárólag külső használatra. Soha ne fogyassz belsőleg professzionális útmutatás nélkül."
+            else:
+                safety_disclaimer = "\n\n⚠️ Important: All oils are for external use only. Never ingest essential oils without professional guidance."
+            
+            message = message + safety_disclaimer
+            
             logger.info(f"Successfully generated daily message in {language} (type: {message_type})")
-            return message
+            
+            # Return message along with selected oils for database storage
+            return {
+                'message': message,
+                'primary_oil': selected_primary,
+                'alternative_oil': selected_alternative
+            }
             
         except Exception as e:
             logger.error(f"Error generating affirmation: {e}", exc_info=True)
             return None
     
-    def _create_prompt(self, language: str = 'en', exclude_oils: List[str] = None) -> str:
+    def _create_prompt(self, language: str = 'en', exclude_oils: List[str] = None, 
+                      selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create the GPT prompt for generating the daily message."""
         day_name, month_name, date_string, day_energy, month_info = self._get_current_day_info()
         season = self._get_current_season()
@@ -444,11 +708,11 @@ WICHTIG:
         common_oils_str = ', '.join(self.COMMONLY_USED_OILS[:15])  # First 15 for brevity
         
         if language == 'de':
-            return self._create_german_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
+            return self._create_german_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str, selected_primary, selected_alternative)
         elif language == 'hu':
-            return self._create_hungarian_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
+            return self._create_hungarian_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str, selected_primary, selected_alternative)
         else:
-            return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str)
+            return self._create_english_prompt(day_name, month_name, date_string, day_energy, month_info, oil_list, season, seasonal_oils, common_oils_str, selected_primary, selected_alternative)
     
     def _get_oil_list_string(self, exclude_oils: List[str] = None) -> str:
         """Create a formatted string of available oils for the prompt."""
@@ -462,63 +726,87 @@ WICHTIG:
                 oil_strings.append(f"- {oil['name']} ({properties})")
         return '\n'.join(oil_strings)
     
-    def _create_portal_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
+    def _create_portal_prompt(self, language: str, special_day_info: Dict, common_oils_str: str, 
+                             exclude_oils: List[str] = None, selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create prompt for portal days."""
-        # Simplified for now - can be expanded
+        if exclude_oils is None:
+            exclude_oils = []
+        
+        exclude_note = ""
+        if exclude_oils:
+            exclude_list = ', '.join(exclude_oils[:5])  # Show first 5
+            if language == 'de':
+                exclude_note = f"\n\nWICHTIG: Vermeide diese kürzlich verwendeten Öle: {exclude_list}"
+            elif language == 'hu':
+                exclude_note = f"\n\nFONTOS: Kerüld ezeket a nemrég használt olajokat: {exclude_list}"
+            else:
+                exclude_note = f"\n\nIMPORTANT: Avoid these recently used oils: {exclude_list}"
+        
+        # Enhanced with warmer, smarter tone
         if language == 'de':
-            return f"""WICHTIG: Heute ist ein Portaltag mit erhöhter Energie!
+            return f"""Heute ist ein besonderer Portaltag mit erhöhter Energie! ✨
 
-Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
-- Erdung und Schutz
-- Sanfte Selbstfürsorge
-- Transformation
+Erstelle eine WARMHERZIGE, EINFÜHLSAME Nachricht auf DEUTSCH, die:
+- Die besondere Energie dieses Tages respektiert und würdigt
+- Erdung und Schutz als sanfte Unterstützung anbietet
+- Transformation als natürlichen Prozess darstellt
+- Sich anfühlt wie eine vertrauensvolle Begleitung
 
-Empfohlene Öle: Vetiver, Balance, Peace & Calming, Frankincense
+Empfohlene Öle: Vetiver, Balance, Peace & Calming, Frankincense{exclude_note}
 
 STRUKTUR:
+
 ✨ Portaltag - Guten Morgen
 
-[2-3 Sätze über Erdung und Schutz an diesem besonderen Tag]
+[2-3 Sätze - warm, einfühlsam, die besondere Energie dieses Tages würdigend. 
+Sprich über Erdung und Schutz als sanfte Unterstützung, nicht als Warnung. 
+Sei ermutigend und präsent.]
 
 🌿 Deine Öl-Begleiter:
-- [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+{f"- {selected_primary}: [Ein warmer, persönlicher Satz - wie es sich anfühlt, dich zu erden und zu schützen]" if selected_primary else "- [Haupt-Öl Name]: [Ein warmer Satz über Erdung/Schutz]"}
+{f"- Alternativ: {selected_alternative}: [Ein warmer, persönlicher Satz über den Nutzen]" if selected_alternative else "- Alternativ: [Alternatives Öl Name]: [Ein warmer Satz]"}
 
-WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
+{"⚠️ WICHTIG: Verwende GENAU diese beiden Öle: {selected_primary} und {selected_alternative}. Öl-Namen IMMER auf ENGLISCH!" if selected_primary and selected_alternative else f"WICHTIG: Verwende eines dieser häufig verwendeten Öle: {common_oils_str}. ÖL-NAMEN IMMER AUF ENGLISCH!"}
 
 ✨ Dein Ritual:
-[Einfache Anleitung]
+[1-2 Sätze - eine sanfte, einladende Anleitung für Erdung und Selbstfürsorge. 
+Formuliere es als freundliche Einladung zur Selbstpflege.]
 
 💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
-🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30")
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
-            return f"""IMPORTANT: Today is a Portal Day with heightened energy!
+            return f"""Today is a special Portal Day with heightened energy! ✨
 
-Create a SHORT message in English focused on:
-- Grounding and protection
-- Gentle self-care
-- Transformation
+Create a WARM, EMPATHETIC message in English that:
+- Honors and acknowledges the special energy of this day
+- Offers grounding and protection as gentle support
+- Presents transformation as a natural process
+- Feels like trusted companionship
 
-Recommended oils: Vetiver, Balance, Peace & Calming, Frankincense
+Recommended oils: Vetiver, Balance, Peace & Calming, Frankincense{exclude_note}
 
 STRUCTURE:
+
 ✨ Portal Day - Good Morning
 
-[2-3 sentences about grounding and protection on this special day]
+[2-3 sentences - warm, empathetic, honoring the special energy of this day.
+Speak about grounding and protection as gentle support, not as a warning.
+Be encouraging and present.]
 
 🌿 Your Oil Companions:
-- [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+{f"- {selected_primary}: [A warm, personal sentence - how it feels to ground and protect you]" if selected_primary else "- [Primary Oil Name]: [A warm sentence about grounding/protection]"}
+{f"- Alternative: {selected_alternative}: [A warm, personal sentence about the benefit]" if selected_alternative else "- Alternative: [Alternative Oil Name]: [A warm sentence]"}
 
-IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
+{"⚠️ IMPORTANT: Use EXACTLY these two oils: {selected_primary} and {selected_alternative}. Oil names ALWAYS in English!" if selected_primary and selected_alternative else f"IMPORTANT: Use one of these commonly used oils: {common_oils_str}. Oil names ALWAYS in English!"}
 
 ✨ Your Ritual:
-[Simple instruction]
+[1-2 sentences - a gentle, inviting instruction for grounding and self-care.
+Frame it as a friendly invitation to self-nurturing.]
 
 💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
-🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30")
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
@@ -529,7 +817,7 @@ Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít
 - Gyengéd öngondoskodás
 - Transzformáció
 
-Ajánlott olajok: Vetiver, Balance, Peace & Calming, Frankincense
+Ajánlott olajok: Vetiver, Balance, Peace & Calming, Frankincense{exclude_note}
 
 STRUKTÚRA:
 ✨ Portál nap - Jó reggelt
@@ -537,16 +825,16 @@ STRUKTÚRA:
 [2-3 mondat a földelésről és védelemről ezen a különleges napon]
 
 🌿 Mai illóolaj társaid:
-- [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+{f"- {selected_primary}: [Előny]" if selected_primary else "- [Fő olaj neve]: [Előny]"}
+{f"- Alternatíva: {selected_alternative}: [Előny]" if selected_alternative else "- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]"}
 
-FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
+{"⚠️ KRITIKUS: Ezt a két olajat KELL használnod: {selected_primary} (Fő) és {selected_alternative} (Alternatív). NINCSEN más olaj! Az olajneveknek PONTOSAN ANGOLUL kell lenniük, ahogy itt van - SOHA ne fordítsd le!" if selected_primary and selected_alternative else f"FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}. OLAJNEVEK MINDIG ANGOLUL!"}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
 
 💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
-🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - példa idő, bármilyen időre beállítható 23:59-ig)
 
 Szeretettel, Soul Aligned Oils 💜"""
         else:
@@ -559,8 +847,22 @@ Create a SHORT message focused on:
 
 [Follow same structure as English]"""
     
-    def _create_full_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
+    def _create_full_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str, 
+                                exclude_oils: List[str] = None, selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create prompt for full moon days."""
+        if exclude_oils is None:
+            exclude_oils = []
+        
+        exclude_note = ""
+        if exclude_oils:
+            exclude_list = ', '.join(exclude_oils[:5])  # Show first 5
+            if language == 'de':
+                exclude_note = f"\n\nWICHTIG: Vermeide diese kürzlich verwendeten Öle: {exclude_list}"
+            elif language == 'hu':
+                exclude_note = f"\n\nFONTOS: Kerüld ezeket a nemrég használt olajokat: {exclude_list}"
+            else:
+                exclude_note = f"\n\nIMPORTANT: Avoid these recently used oils: {exclude_list}"
+        
         if language == 'de':
             return f"""WICHTIG: Heute ist Vollmond! 🌕
 
@@ -569,7 +871,7 @@ Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
 - Manifestation
 - Dankbarkeit
 
-Empfohlene Öle: Lavender, Clary Sage, Ylang Ylang, Bergamot
+Empfohlene Öle: Lavender, Clary Sage, Ylang Ylang, Bergamot{exclude_note}
 
 STRUKTUR:
 🌕 Vollmond - Guten Morgen
@@ -577,16 +879,16 @@ STRUKTUR:
 [2-3 Sätze über Loslassen und Manifestation]
 
 🌿 Deine Öl-Begleiter:
-- [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+{f"- {selected_primary}: [Nutzen]" if selected_primary else "- [Haupt-Öl Name]: [Nutzen]"}
+{f"- Alternativ: {selected_alternative}: [Nutzen]" if selected_alternative else "- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]"}
 
-WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
+{"⚠️ KRITISCH: Du MUSST diese beiden Öle verwenden: {selected_primary} und {selected_alternative}. KEINE anderen Öle! Die Öl-Namen müssen GENAU so auf ENGLISCH geschrieben werden - NIE übersetzen!" if selected_primary and selected_alternative else f"WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}. ÖL-NAMEN IMMER AUF ENGLISCH!"}
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
 
 💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
-🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Beispielzeit, kann auf beliebige Zeit bis 23:59 eingestellt werden)
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
@@ -597,7 +899,7 @@ Create a SHORT message in English focused on:
 - Manifestation
 - Gratitude
 
-Recommended oils: Lavender, Clary Sage, Ylang Ylang, Bergamot
+Recommended oils: Lavender, Clary Sage, Ylang Ylang, Bergamot{exclude_note}
 
 STRUCTURE:
 🌕 Full Moon - Good Morning
@@ -605,16 +907,16 @@ STRUCTURE:
 [2-3 sentences about release and manifestation]
 
 🌿 Your Oil Companions:
-- [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+{f"- {selected_primary}: [Benefit]" if selected_primary else "- [Primary Oil Name]: [Benefit]"}
+{f"- Alternative: {selected_alternative}: [Benefit]" if selected_alternative else "- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]"}
 
-IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
+{"⚠️ CRITICAL: You MUST use these two oils EXACTLY as written: {selected_primary} and {selected_alternative}. NO other oils! Use the EXACT English doTerra names - never translate or modify!" if selected_primary and selected_alternative else f"IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}. Use EXACT English doTerra names."}
 
 ✨ Your Ritual:
 [Simple instruction]
 
 💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
-🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - example time, you can set any time until 23:59)
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
@@ -625,7 +927,7 @@ Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít
 - Megnyilvánulás
 - Háláság
 
-Ajánlott olajok: Lavender, Clary Sage, Ylang Ylang, Bergamot
+Ajánlott olajok: Lavender, Clary Sage, Ylang Ylang, Bergamot{exclude_note}
 
 STRUKTÚRA:
 🌕 Telihold - Jó reggelt
@@ -633,16 +935,16 @@ STRUKTÚRA:
 [2-3 mondat az elengedésről és megnyilvánulásról]
 
 🌿 Mai illóolaj társaid:
-- [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+{f"- {selected_primary}: [Előny]" if selected_primary else "- [Fő olaj neve]: [Előny]"}
+{f"- Alternatíva: {selected_alternative}: [Előny]" if selected_alternative else "- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]"}
 
-FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
+{"⚠️ KRITIKUS: Ezt a két olajat KELL használnod: {selected_primary} (Fő) és {selected_alternative} (Alternatív). NINCSEN más olaj! Az olajneveknek PONTOSAN ANGOLUL kell lenniük, ahogy itt van - SOHA ne fordítsd le!" if selected_primary and selected_alternative else f"FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}. OLAJNEVEK MINDIG ANGOLUL!"}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
 
 💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
-🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - példa idő, bármilyen időre beállítható 23:59-ig)
 
 Szeretettel, Soul Aligned Oils 💜"""
         else:
@@ -650,8 +952,22 @@ Szeretettel, Soul Aligned Oils 💜"""
 
 Create a SHORT message about release and manifestation."""
     
-    def _create_new_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str) -> str:
+    def _create_new_moon_prompt(self, language: str, special_day_info: Dict, common_oils_str: str, 
+                               exclude_oils: List[str] = None, selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create prompt for new moon days."""
+        if exclude_oils is None:
+            exclude_oils = []
+        
+        exclude_note = ""
+        if exclude_oils:
+            exclude_list = ', '.join(exclude_oils[:5])  # Show first 5
+            if language == 'de':
+                exclude_note = f"\n\nWICHTIG: Vermeide diese kürzlich verwendeten Öle: {exclude_list}"
+            elif language == 'hu':
+                exclude_note = f"\n\nFONTOS: Kerüld ezeket a nemrég használt olajokat: {exclude_list}"
+            else:
+                exclude_note = f"\n\nIMPORTANT: Avoid these recently used oils: {exclude_list}"
+        
         if language == 'de':
             return f"""WICHTIG: Heute ist Neumond! 🌑
 
@@ -660,7 +976,7 @@ Erstelle eine KURZE Nachricht auf DEUTSCH mit Fokus auf:
 - Pflanzung von Samen
 - Frische Energie
 
-Empfohlene Öle: Frankincense, Sandalwood, Cedarwood, Balance
+Empfohlene Öle: Frankincense, Sandalwood, Cedarwood, Balance{exclude_note}
 
 STRUKTUR:
 🌑 Neumond - Guten Morgen
@@ -668,16 +984,16 @@ STRUKTUR:
 [2-3 Sätze über neue Anfänge]
 
 🌿 Deine Öl-Begleiter:
-- [Haupt-Öl Name]: [Nutzen]
-- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]
+{f"- {selected_primary}: [Nutzen]" if selected_primary else "- [Haupt-Öl Name]: [Nutzen]"}
+{f"- Alternativ: {selected_alternative}: [Nutzen]" if selected_alternative else "- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [Nutzen]"}
 
-WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
+{"⚠️ KRITISCH: Du MUSST diese beiden Öle verwenden: {selected_primary} und {selected_alternative}. KEINE anderen Öle! Die Öl-Namen müssen GENAU so auf ENGLISCH geschrieben werden - NIE übersetzen!" if selected_primary and selected_alternative else f"WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}. ÖL-NAMEN IMMER AUF ENGLISCH!"}
 
 ✨ Dein Ritual:
 [Einfache Anleitung]
 
 💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
-🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Beispielzeit, kann auf beliebige Zeit bis 23:59 eingestellt werden)
 
 Mit Liebe, Soul Aligned Oils 💜"""
         elif language == 'en':
@@ -688,7 +1004,7 @@ Create a SHORT message in English focused on:
 - Planting seeds
 - Fresh energy
 
-Recommended oils: Frankincense, Sandalwood, Cedarwood, Balance
+Recommended oils: Frankincense, Sandalwood, Cedarwood, Balance{exclude_note}
 
 STRUCTURE:
 🌑 New Moon - Good Morning
@@ -696,16 +1012,16 @@ STRUCTURE:
 [2-3 sentences about new beginnings]
 
 🌿 Your Oil Companions:
-- [Primary Oil Name]: [Benefit]
-- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]
+{f"- {selected_primary}: [Benefit]" if selected_primary else "- [Primary Oil Name]: [Benefit]"}
+{f"- Alternative: {selected_alternative}: [Benefit]" if selected_alternative else "- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [Benefit]"}
 
-IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
+{"⚠️ CRITICAL: You MUST use these two oils EXACTLY as written: {selected_primary} and {selected_alternative}. NO other oils! Use the EXACT English doTerra names - never translate or modify!" if selected_primary and selected_alternative else f"IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}. Use EXACT English doTerra names."}
 
 ✨ Your Ritual:
 [Simple instruction]
 
 💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
-🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - example time, you can set any time until 23:59)
 
 With love, Soul Aligned Oils 💜"""
         elif language == 'hu':
@@ -716,7 +1032,7 @@ Hozz létre egy RÖVID üzenetet MAGYARUL, amely a következőkre összpontosít
 - Magok ültetése
 - Friss energia
 
-Ajánlott olajok: Frankincense, Sandalwood, Cedarwood, Balance
+Ajánlott olajok: Frankincense, Sandalwood, Cedarwood, Balance{exclude_note}
 
 STRUKTÚRA:
 🌑 Újhold - Jó reggelt
@@ -724,16 +1040,16 @@ STRUKTÚRA:
 [2-3 mondat az új kezdetekről]
 
 🌿 Mai illóolaj társaid:
-- [Fő olaj neve]: [Előny]
-- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]
+{f"- {selected_primary}: [Előny]" if selected_primary else "- [Fő olaj neve]: [Előny]"}
+{f"- Alternatíva: {selected_alternative}: [Előny]" if selected_alternative else "- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [Előny]"}
 
-FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
+{"⚠️ KRITIKUS: Ezt a két olajat KELL használnod: {selected_primary} (Fő) és {selected_alternative} (Alternatív). NINCSEN más olaj! Az olajneveknek PONTOSAN ANGOLUL kell lenniük, ahogy itt van - SOHA ne fordítsd le!" if selected_primary and selected_alternative else f"FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}. OLAJNEVEK MINDIG ANGOLUL!"}
 
 ✨ A te rituáléd:
 [Egyszerű instrukció]
 
 💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
-🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - példa idő, bármilyen időre beállítható 23:59-ig)
 
 Szeretettel, Soul Aligned Oils 💜"""
         else:
@@ -743,7 +1059,8 @@ Create a SHORT message about new beginnings."""
     
     def _create_german_prompt(self, day_name: str, month_name: str, date_string: str, 
                              day_energy: dict, month_info: dict, oil_list: str,
-                             season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
+                             season: str, seasonal_oils: List[str], common_oils_str: str,
+                             selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create German version of the prompt - SHORT and PRACTICAL."""
         day_names_de = {
             'Monday': 'Montag', 'Tuesday': 'Dienstag', 'Wednesday': 'Mittwoch',
@@ -794,16 +1111,16 @@ STRUKTUR (EXAKT befolgen, komplett auf DEUTSCH):
 [2-3 Sätze Affirmation verbunden mit der {day_name_de}-{planet_de}-Energie: {day_energy['theme']}]
 
 🌿 Deine Öl-Begleiter für heute:
-- [Haupt-Öl Name]: [EIN Satz Nutzen für die heutige Energie]
-- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [EIN Satz Nutzen]
+{f"- {selected_primary}: [EIN Satz Nutzen für die heutige Energie]" if selected_primary else "- [Haupt-Öl Name]: [EIN Satz Nutzen für die heutige Energie]"}
+{f"- Alternativ: {selected_alternative}: [EIN Satz Nutzen]" if selected_alternative else "- Alternativ: [Alternatives Öl Name AUS DEN HÄUFIG VERWENDETEN ÖLEN]: [EIN Satz Nutzen]"}
 
-WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}
+{"⚠️ KRITISCH: Du MUSST diese beiden Öle verwenden: {selected_primary} (Haupt) und {selected_alternative} (Alternativ). KEINE anderen Öle!" if selected_primary and selected_alternative else f"WICHTIG FÜR ALTERNATIVES ÖL: Verwende IMMER eines dieser häufig verwendeten Öle: {common_oils_str}"}
 
 ✨ Dein Ritual:
 [1-2 Sätze mit einfacher, umsetzbarer Anleitung]
 
 💡 Für mehr Details: "Info [Haupt-Öl Name]" oder "Info [Alternatives Öl Name]"
-🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Zeit frei wählbar)
+🔄 Wiederholung: "Repeat [Zeit]" (z.B. "Repeat 14:30" - Beispielzeit, kann auf beliebige Zeit bis 23:59 eingestellt werden)
 
 Mit Liebe,
 Soul Aligned Oils 💜
@@ -822,47 +1139,54 @@ WICHTIG:
 - Ton warm aber PRÄGNANT
 - Die GESAMTE Nachricht auf DEUTSCH
 - KEINE englischen Wörter außer "Soul Aligned Oils"
+- ÖL-NAMEN: IMMER auf ENGLISCH (originale doTerra-Namen wie "Lavender", "Frankincense", etc.) - NIE übersetzen!
 """
     
     def _create_english_prompt(self, day_name: str, month_name: str, date_string: str, 
                               day_energy: dict, month_info: dict, oil_list: str,
-                              season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
+                              season: str, seasonal_oils: List[str], common_oils_str: str,
+                              selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create English version of the prompt - SHORT and PRACTICAL."""
         seasonal_oils_str = ', '.join(seasonal_oils[:5]) if seasonal_oils else ''
         
-        return f"""You are a holistic wellness guide. Create a SHORT, PRACTICAL daily message.
+        return f"""Create a WARM, EMPATHETIC daily affirmation in English.
 
-TODAY: {day_name} ({day_energy['planet']} Energy) - {date_string}
-Weekday Theme: {day_energy['theme']}
-Weekday Focus: {day_energy['focus']}
+CONTEXT FOR TODAY:
+📅 {day_name} ({day_energy['planet']} Energy) - {date_string}
+💫 Day Energy: {day_energy['theme']}
+🎯 Focus: {day_energy['focus']}
+📆 Month: {month_name} - {month_info['theme']}
+🌿 Season: {season}
 
-MONTH: {month_name} - {month_info['theme']}
-SEASON: {season}
-Seasonal oils for {season}: {seasonal_oils_str}
+YOUR TASK:
+Create a message that feels like a warm conversation with a trusted friend.
+The affirmation should:
+- EMOTIONALLY resonate and feel authentic
+- Be PRACTICAL and fit naturally into daily life
+- INTELLIGENTLY use today's energy
+- Flow NATURALLY, not feel stiff or robotic
+- Stay SHORT (3-4 paragraphs) but still be substantial
 
-CRITICAL REQUIREMENTS:
-1. KEEP IT SHORT - Maximum 3-4 brief paragraphs
-2. PRACTICAL - Must fit into daily life
-3. TWO OILS - Primary + Alternative recommendation (prefer {season} oils if suitable)
-4. SIMPLE RITUAL - 1-2 sentences maximum
-
-STRUCTURE (follow EXACTLY):
+STRUCTURE:
 
 🌙 Good Morning
 
-[2-3 sentence affirmation connected to {day_name}'s {day_energy['planet']} energy theme: {day_energy['theme']}]
+[2-3 sentences affirmation - warm, personal, connected to {day_name}'s {day_energy['planet']} energy.
+Speak directly to the person, be empathetic and encouraging. Use the energy of {day_energy['theme']} 
+and weave it together with {month_info['theme']}.]
 
 🌿 Your Oil Companions for Today:
-- [Primary Oil Name]: [ONE sentence benefit for today's energy]
-- Alternative: [Alternative Oil Name FROM COMMONLY USED OILS]: [ONE sentence benefit]
+{f"- {selected_primary}: [A warm, personal sentence about the benefit - how it feels, not just what it does]" if selected_primary else "- [Primary Oil Name]: [A warm sentence about the benefit]"}
+{f"- Alternative: {selected_alternative}: [A warm, personal sentence about the benefit]" if selected_alternative else "- Alternative: [Alternative Oil Name]: [A warm sentence about the benefit]"}
 
-IMPORTANT FOR ALTERNATIVE OIL: ALWAYS use one of these commonly used oils: {common_oils_str}
+{"⚠️ IMPORTANT: Use EXACTLY these two oils: {selected_primary} (Primary) and {selected_alternative} (Alternative). Oil names ALWAYS in English!" if selected_primary and selected_alternative else ""}
 
 ✨ Your Ritual:
-[1-2 sentences with simple, actionable instruction]
+[1-2 sentences - a simple, inviting instruction that feels good and is easy to implement.
+Frame it as a friendly invitation, not a command.]
 
 💡 For more details: "Info [Primary Oil Name]" or "Info [Alternative Oil Name]"
-🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - time is flexible)
+🔄 Repeat message: "Repeat [time]" (e.g. "Repeat 14:30" - example time, you can set any time until 23:59)
 
 With love,
 Soul Aligned Oils 💜
@@ -870,20 +1194,21 @@ Soul Aligned Oils 💜
 AVAILABLE OILS:
 {oil_list}
 
-IMPORTANT:
-- Maximum 3-4 short paragraphs total
-- Affirmation: 2-3 sentences, aligned with {day_name}'s {day_energy['planet']} energy
-- TWO oils that match {day_name}'s theme: {day_energy['theme']}
-- Prefer {season} oils if they fit the theme
-- Oil benefits: ONE sentence each
-- Ritual: 1-2 sentences, simple and doable
-- Use emojis ONLY as shown in structure
-- Keep tone warm but CONCISE
+IMPORTANT FOR TONE:
+- Write like a trusted friend who truly listens and understands
+- Be warm but not overdone - authentic and real
+- Use the energy of {day_energy['theme']} intelligently, not mechanically
+- Weave {month_info['theme']} naturally with today's energy
+- Frame oil benefits personally: "How it feels" rather than just "What it does"
+- Ritual as friendly invitation, not obligation
+- Maximum 3-4 paragraphs, but every line should have meaning
+- Oil names ALWAYS in English (original doTerra names)
 """
     
     def _create_hungarian_prompt(self, day_name: str, month_name: str, date_string: str, 
                                 day_energy: dict, month_info: dict, oil_list: str,
-                                season: str, seasonal_oils: List[str], common_oils_str: str) -> str:
+                                season: str, seasonal_oils: List[str], common_oils_str: str,
+                                selected_primary: str = None, selected_alternative: str = None) -> str:
         """Create Hungarian version of the prompt - SHORT and PRACTICAL."""
         # Hungarian translations for day and month names
         day_names_hu = {
@@ -910,41 +1235,44 @@ IMPORTANT:
         
         seasonal_oils_str = ', '.join(seasonal_oils[:5]) if seasonal_oils else ''
         
-        return f"""FONTOS: Válaszolj KIZÁRÓLAG MAGYARUL! RÖVID és GYAKORLATI!
+        return f"""Hozz létre egy MELEG, EGYÜTTÉRZŐ napi megerősítést MAGYARUL.
 
-Te egy holisztikus wellness útmutató vagy. Hozz létre egy RÖVID, GYAKORLATI napi üzenetet MAGYARUL.
+KONTEXTUS MA:
+📅 {day_name_hu} ({planet_hu} Energia) - {date_string}
+💫 Nap energiája: {day_energy['theme']}
+🎯 Fókusz: {day_energy['focus']}
+📆 Hónap: {month_name_hu} - {month_info['theme']}
+🌿 Évszak: {season_hu}
 
-MA: {day_name_hu} ({planet_hu} Energia) - {date_string}
-Hétnap témája: {day_energy['theme']}
-Hétnap fókusza: {day_energy['focus']}
+A FELADATOD:
+Hozz létre egy üzenetet, ami úgy érződik, mintha egy megbízható barátnővel beszélnél.
+A megerősítésnek:
+- ÉRZELMILEG rezonálnia kell és autentikusnak kell érződnie
+- GYAKORLATINAK kell lennie és természetesen illeszkednie a mindennapi életbe
+- OKOSAN használnia kell a mai energiát
+- TERMÉSZETESEN kell folynia, ne mereven vagy robotikusan
+- RÖVIDEN kell maradnia (3-4 bekezdés), de mégis lényegretörőnek
 
-HÓNAP: {month_name_hu} - {month_info['theme']}
-ÉVSZAK: {season_hu}
-{season_hu}-i illóolajok: {seasonal_oils_str}
-
-KRITIKUS KÖVETELMÉNYEK:
-1. RÖVIDEN - Maximum 3-4 rövid bekezdés
-2. GYAKORLATI - Be kell illeszkednie a mindennapi életbe
-3. KÉT OLAJ - Fő + Alternatív ajánlás (előnyben részesítsd a {season_hu}-i olajokat, ha megfelelőek)
-4. EGYSZERŰ RITUÁLÉ - Maximum 1-2 mondat
-
-STRUKTÚRA (PONTOSAN kövesd, teljesen MAGYARUL):
+STRUKTÚRA:
 
 🌙 Jó reggelt
 
-[2-3 mondatos megerősítés kapcsolódva a {day_name_hu} {planet_hu} energiájához: {day_energy['theme']}]
+[2-3 mondatos megerősítés - meleg, személyes, kapcsolódva a {day_name_hu} {planet_hu} energiájához.
+Közvetlenül beszélj a személyhez, légy együttérző és bátorító. Használd a {day_energy['theme']} 
+energiáját és fonjad össze a {month_info['theme']} témával.]
 
 🌿 Mai illóolaj társaid:
-- [Fő olaj neve]: [EGY mondat előny a mai energiához]
-- Alternatíva: [Alternatív olaj neve A GYAKRAN HASZNÁLT OLAJOKBÓL]: [EGY mondat előny]
+{f"- {selected_primary}: [Egy meleg, személyes mondat az előnyről - hogyan érződik, nem csak mit csinál]" if selected_primary else "- [Fő olaj neve]: [Egy meleg mondat az előnyről]"}
+{f"- Alternatíva: {selected_alternative}: [Egy meleg, személyes mondat az előnyről]" if selected_alternative else "- Alternatíva: [Alternatív olaj neve]: [Egy meleg mondat az előnyről]"}
 
-FONTOS AZ ALTERNATÍV OLAJHOZ: MINDIG használj egyet ezekből a gyakran használt olajokból: {common_oils_str}
+{"⚠️ FONTOS: Használd PONTOSAN ezt a két olajat: {selected_primary} (Fő) és {selected_alternative} (Alternatív). Olajnevek MINDIG ANGOLUL!" if selected_primary and selected_alternative else ""}
 
 ✨ A te rituáléd:
-[1-2 mondat egyszerű, megvalósítható instrukcióval]
+[1-2 mondat - egy egyszerű, meghívó instrukció, ami jól érződik és könnyen megvalósítható.
+Fogalmazd meg barátságos meghívásként, ne parancsként.]
 
 💡 További részletekért: "Info [Fő olaj neve]" vagy "Info [Alternatív olaj neve]"
-🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - idő szabadon választható)
+🔄 Üzenet ismétlés: "Repeat [idő]" (pl. "Repeat 14:30" - példa idő, bármilyen időre beállítható 23:59-ig)
 
 Szeretettel,
 Soul Aligned Oils 💜
@@ -952,16 +1280,15 @@ Soul Aligned Oils 💜
 ELÉRHETŐ OLAJOK:
 {oil_list}
 
-FONTOS:
-- Maximum 3-4 rövid bekezdés összesen
-- Megerősítés: 2-3 mondat, összhangban a {day_name_hu} {planet_hu} energiájával
-- KÉT olaj, amely illeszkedik a {day_name_hu} témájához: {day_energy['theme']}
-- Előnyben részesítsd a {season_hu}-i olajokat, ha illeszkednek a témához
-- Olaj előnyök: MINDEGYIK EGY mondat
-- Rituálé: 1-2 mondat, egyszerű és megvalósítható
-- Emojikat CSAK a struktúrában látható módon használd
-- Hangvétel meleg, de TÖMÖR
+FONTOS A HANGVÉTELHEZ:
+- Írj úgy, mint egy megbízható barátnő, aki valóban hallgat és megért
+- Légy meleg, de ne túlzásba - autentikus és valódi
+- Használd a {day_energy['theme']} energiáját okosan, ne mechanikusan
+- Fonjad össze a {month_info['theme']} témát természetesen a mai energiával
+- Fogalmazd meg az olaj előnyöket személyesen: "Hogyan érződik" nem csak "Mit csinál"
+- Rituálé barátságos meghívásként, ne kötelezettségként
+- Maximum 3-4 bekezdés, de minden sor legyen értékes
 - A TELJES üzenet MAGYARUL
-- NINCSEN angol szó, kivéve "Soul Aligned Oils"
+- OLAJNEVEK: MINDIG ANGOLUL (eredeti doTerra nevek) - SOHA ne fordítsd le!
 """
 

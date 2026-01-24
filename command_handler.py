@@ -179,16 +179,19 @@ Soul Aligned Oils 💜"""
             else:
                 return "❌ I haven't sent you a message today yet. Please wait for the morning message."
         
-        # Generate alternative message (excluding already sent oils)
+        # Generate alternative message (excluding already sent oils and recently used oils)
         primary_oil = daily_msg.get('primary_oil')
         alternative_oil = daily_msg.get('alternative_oil')
         
-        # Generate new alternative message
-        # This would require updating the generator to exclude specific oils
-        # For now, we'll generate a new message
-        message = self.generator.generate_daily_message(language, exclude_oils=[primary_oil, alternative_oil])
+        # Generate new alternative message, excluding today's oils and recently used oils
+        result_data = self.generator.generate_daily_message(
+            language, 
+            exclude_oils=[primary_oil, alternative_oil],
+            user_id=user_id
+        )
         
-        if message:
+        if result_data and result_data.get('message'):
+            message = result_data['message']
             self.db.log_command(user_id, 'alternative', None, True)
             if language == 'de':
                 return f"🌿 *Alternative Empfehlung für heute:*\n\n{message}"
@@ -369,8 +372,9 @@ Soul Aligned Oils 💜"""
                 components_lines.append(f"- {comp}")
         components_block = "\n".join(components_lines) if components_lines else ""
 
-        # Format best uses as bullet list
-        uses_block = "\n".join(f"- {u}" for u in best_uses) if best_uses else ""
+        # Format best uses as bullet list - EXCLUDE internal use for safety
+        safe_uses = [u for u in best_uses if u and 'internal' not in u.lower() and 'intern' not in u.lower() and 'belső' not in u.lower()]
+        uses_block = "\n".join(f"- {u}" for u in safe_uses) if safe_uses else ""
 
         if language == 'hu':
             # Hungarian template (headings HU, content from current DB fields)
@@ -395,6 +399,7 @@ Soul Aligned Oils 💜"""
             if contraindications:
                 msg += "⚠️ BIZTONSÁGI MEGJEGYZÉSEK\n"
                 msg += f"{contraindications}\n\n"
+            msg += "⚠️ FONTOS: Minden olaj kizárólag külső használatra. Soha ne fogyassz belsőleg professzionális útmutatás nélkül.\n\n"
             msg += "---\nSoul Aligned Oils 💜"
             return msg
 
@@ -421,6 +426,7 @@ Soul Aligned Oils 💜"""
             if contraindications:
                 msg += "⚠️ SAFETY NOTES\n"
                 msg += f"{contraindications}\n\n"
+            msg += "⚠️ IMPORTANT: All oils are for external use only. Never ingest essential oils without professional guidance.\n\n"
             msg += "---\nSoul Aligned Oils 💜"
             return msg
 
@@ -443,8 +449,9 @@ Soul Aligned Oils 💜"""
         if uses_block:
             msg += "💧 ANWENDUNG\n"
             msg += f"{uses_block}\n\n"
-        if contraindications:
-            msg += "⚠️ SICHERHEITSHINWEISE\n"
-            msg += f"{contraindications}\n\n"
-        msg += "---\nSoul Aligned Oils 💜"
-        return msg
+            if contraindications:
+                msg += "⚠️ SICHERHEITSHINWEISE\n"
+                msg += f"{contraindications}\n\n"
+            msg += "⚠️ WICHTIG: Alle Öle sind ausschließlich für externe Anwendung. Niemals ohne professionelle Anleitung einnehmen.\n\n"
+            msg += "---\nSoul Aligned Oils 💜"
+            return msg

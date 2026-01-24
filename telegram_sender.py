@@ -117,20 +117,36 @@ class TelegramSender:
                 language = Config.get_language_for_chat(chat_id)
                 logger.info(f"Generating message for {chat_id} in {language}")
                 
-                message = generator.generate_daily_message(language, special_day_info=special_day_info)
+                # Pass user_id to exclude recently used oils
+                result_data = generator.generate_daily_message(language, special_day_info=special_day_info, user_id=chat_id)
                 
-                if not message:
+                if not result_data or not result_data.get('message'):
                     logger.error(f"Failed to generate message for {chat_id}")
                     results.append({'chat_id': chat_id, 'success': False, 'error': 'Message generation failed', 'language': language})
                     continue
                 
+                message = result_data['message']
+                primary_oil = result_data.get('primary_oil')
+                alternative_oil = result_data.get('alternative_oil')
+                
                 if Config.TESTING_MODE:
                     logger.info(f"TESTING MODE: Would send to {chat_id} ({language})")
-                    results.append({'chat_id': chat_id, 'success': True, 'error': None, 'language': language, 'testing_mode': True, 'message': message})
+                    results.append({
+                        'chat_id': chat_id, 
+                        'success': True, 
+                        'error': None, 
+                        'language': language, 
+                        'testing_mode': True, 
+                        'message': message,
+                        'primary_oil': primary_oil,
+                        'alternative_oil': alternative_oil
+                    })
                 else:
                     result = await self.send_message_to_chat(chat_id, message)
                     result['language'] = language
                     result['message'] = message  # Store message for database
+                    result['primary_oil'] = primary_oil
+                    result['alternative_oil'] = alternative_oil
                     results.append(result)
                     
                     if i < len(target_ids) - 1:

@@ -464,3 +464,39 @@ class Database:
         except Exception as e:
             logger.error(f"Error getting daily message: {e}")
             return None
+    
+    def get_recently_used_oils(self, user_id: str, days: int = 14) -> List[str]:
+        """Get list of oils used by a user in the last N days.
+        
+        Args:
+            user_id: The user's chat ID
+            days: Number of days to look back (default 14)
+            
+        Returns:
+            List of unique oil names (primary and alternative) used in the period
+        """
+        try:
+            from datetime import timedelta
+            cutoff_date = (date.today() - timedelta(days=days)).isoformat()
+            
+            with self._get_connection() as conn:
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT DISTINCT primary_oil, alternative_oil
+                    FROM daily_messages
+                    WHERE user_id = ? AND message_date >= ? 
+                    AND (primary_oil IS NOT NULL OR alternative_oil IS NOT NULL)
+                """, (user_id, cutoff_date))
+                
+                rows = cursor.fetchall()
+                oils = set()
+                for row in rows:
+                    if row['primary_oil']:
+                        oils.add(row['primary_oil'])
+                    if row['alternative_oil']:
+                        oils.add(row['alternative_oil'])
+                
+                return list(oils)
+        except Exception as e:
+            logger.error(f"Error getting recently used oils: {e}")
+            return []
